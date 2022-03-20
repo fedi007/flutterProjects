@@ -21,6 +21,8 @@ class APIService {
       test = false;
     }
   }
+  
+
   static Register(username, email, password) async {
     var headers = {'Content-Type': 'application/json'};
     var request =
