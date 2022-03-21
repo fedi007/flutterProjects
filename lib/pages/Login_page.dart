@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:iblaze/pages/Register.dart';
+import 'package:iblaze/pages/Register_page.dart';
 import 'package:iblaze/pages/welcome_page.dart';
 import '../services/Api_services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -159,22 +159,23 @@ class _LoginPageState extends State<LoginPage> {
                   height: 54.h,
                   width: 600.h,
                   child: ElevatedButton(
-                    onPressed: () async {
-                      await APIService.login(userName, password);
+                    onPressed: () /*async*/ {
+                      //await APIService.login(userName, password);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Welcome()),
+                      );
 
-                      if (test) {
-                        Incorrect = "";
-                        Invisible = Color.fromARGB(0, 255, 255, 255);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Welcome()),
-                        );
-                      } else {
+                      /* if (test) {
+                        
+          
+                      } 
+                      else {
                         print('hello');
                         Invisible = Colors.red;
                         Incorrect = "Username/Password is incorrect";
                       }
-                      ;
+                      ;*/
                     },
                     child: Text(
                       "LOGIN",
