@@ -35,17 +35,53 @@ class _WelcomeState extends State<Welcome> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(
+                            left: 20.w,
+                            right: 20.w,
+                            top: 20.h,
+                            bottom: 20.h,
+                          ),
+                          margin: EdgeInsets.only(
+                            left: 20.w,
+                            right: 20.w,
+                            top: 20.h,
+                            bottom: 20.h,
+                          ),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Colors.red,
+                              color: Colors.white,
                             ),
                           ),
                           child: Image.asset(
                             "images/truck.png",
-                            height: 100.h,
-                            width: 100.w,
+                            height: 120.h,
+                            width: 120.w,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(
+                            left: 20.w,
+                            right: 20.w,
+                            top: 20.h,
+                            bottom: 20.h,
+                          ),
+                          margin: EdgeInsets.only(
+                            left: 20.w,
+                            right: 20.w,
+                            top: 20.h,
+                            bottom: 20.h,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: Image.asset(
+                            "images/excavator.png",
+                            height: 120.h,
+                            width: 120.w,
                           ),
                         )
                       ],
