@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iblaze/pages/Client_page.dart';
 import 'package:iblaze/pages/Splash_screen.dart';
-import 'package:iblaze/pages/welcome_page.dart';
+import 'package:iblaze/pages/TruckMachine_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Welcome(),
+      home: SplashScreen(title:''),
     );
   }
 }

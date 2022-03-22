@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:iblaze/pages/Register_page.dart';
-import 'package:iblaze/pages/welcome_page.dart';
+import 'package:iblaze/pages/TruckMachine_page.dart';
 import '../services/Api_services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
                   padding: EdgeInsets.only(left: 20.w, right: 20.h),
-                  height: 54.h,
+                  height: 40.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.grey[200],
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
                   padding: EdgeInsets.only(left: 20.w, right: 20.h),
-                  height: 54.h,
+                  height: 40.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: Color(0xffEEEEEE),
@@ -156,21 +156,21 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   margin: EdgeInsets.only(top: 70.h),
                   padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                  height: 54.h,
+                  height: 40.h,
                   width: 600.h,
                   child: ElevatedButton(
-                    onPressed: () /*async*/ {
-                      //await APIService.login(userName, password);
+                    onPressed: () async {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Welcome()),
+                        MaterialPageRoute(builder: (context) => TruckMachine()),
                       );
 
+                      //await APIService.login(userName, password);
+
                       /* if (test) {
-                        
-          
-                      } 
-                      else {
+                      
+                      }*/
+                      /*else {
                         print('hello');
                         Invisible = Colors.red;
                         Incorrect = "Username/Password is incorrect";

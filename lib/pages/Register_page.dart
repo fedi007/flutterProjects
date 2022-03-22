@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iblaze/pages/Login_page.dart';
+import 'package:iblaze/pages/TruckMachine_page.dart';
 import 'package:http/http.dart' as http;
 import '../services/Api_services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'Login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -53,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       margin:
                           EdgeInsets.only(left: 20.w, right: 20.w, top: 70.h),
                       padding: EdgeInsets.only(left: 20.w, right: 20.r),
-                      height: 54.h,
+                      height: 40.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         color: Colors.grey[200],
@@ -85,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       margin:
                           EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
                       padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                      height: 54.h,
+                      height: 40.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         color: Colors.grey[200],
@@ -117,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       margin:
                           EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
                       padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                      height: 54.h,
+                      height: 40.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         color: Color(0xffEEEEEE),
@@ -159,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Container(
                       margin: EdgeInsets.only(top: 50.h),
                       padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                      height: 54.h,
+                      height: 40.h,
                       width: 600.h,
                       child: ElevatedButton(
                         onPressed: () async {

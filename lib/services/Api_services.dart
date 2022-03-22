@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 bool test = false;
+String Email ="";
+String Name = "";
+
 
 class APIService {
   static login(username, password) async {
@@ -15,13 +18,15 @@ class APIService {
 
     if (response.statusCode == 200) {
       test = true;
-      print(await response.stream.bytesToString());
+      var data = await response.stream.bytesToString();
+      var l = data.split('"');
+      Email = l[13];
+      Name = l[9];
     } else {
       print(response.reasonPhrase);
       test = false;
     }
   }
-  
 
   static Register(username, email, password) async {
     var headers = {'Content-Type': 'application/json'};
