@@ -25,7 +25,7 @@ class DrawerItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 icon,
-                size: 20,
+                size: 15,
                 color: Colors.white,
               ),
             ),
@@ -34,7 +34,7 @@ class DrawerItem extends StatelessWidget {
             ),
             Text(
               name,
-              style: const TextStyle(fontSize: 20, color: Colors.white),
+              style: const TextStyle(fontSize: 15, color: Colors.white),
             )
           ],
         ),

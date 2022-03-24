@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:iblaze/pages/Register_page.dart';
-import 'package:iblaze/pages/TruckMachine_page.dart';
+
 import '../services/Api_services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'Client/TruckMachine_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

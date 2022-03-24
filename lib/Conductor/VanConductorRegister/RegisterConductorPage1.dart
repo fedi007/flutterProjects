@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import '../services/Api_services.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'Login_page.dart';
+import '../../services/Api_services.dart';
+import 'RegisterConductorPage2.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class RegisterConductorPage extends StatefulWidget {
+  const RegisterConductorPage({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterConductorPage> createState() => _RegisterConductorPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterConductorPageState extends State<RegisterConductorPage> {
   bool passwordObscured = true;
   var email;
   var password;
@@ -164,19 +165,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 40.h,
                       width: 600.h,
                       child: ElevatedButton(
-                        onPressed: () async {
-                          await APIService.Register(userName, email, password);
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterConductorPageTruckModel()),
+                          );
 
-                          if (test) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
-                            );
-                          }
                         },
                         child: Text(
-                          "REGISTER",
+                          "Next",
                           style: TextStyle(color: Colors.white),
                         ),
                         style: ButtonStyle(
@@ -191,28 +189,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(" Already Member ?  "),
-                          GestureDetector(
-                            child: Text(
-                              "Login Now",
-                              style: TextStyle(color: Color(0xFF005b71)),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
-                                  ));
-                            },
-                          )
-                        ],
-                      ),
-                    )
                   ],
                 )),
               ),

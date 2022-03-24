@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Client_page.dart';
 
-class TruckMachine extends StatefulWidget {
-  const TruckMachine({Key? key}) : super(key: key);
+import 'VanConductorRegister/RegisterConductorPage1.dart';
+
+class TruckMachineRegister extends StatefulWidget {
+  const TruckMachineRegister({Key? key}) : super(key: key);
 
   @override
-  State<TruckMachine> createState() => _TruckMachineState();
+  State<TruckMachineRegister> createState() => _TruckMachineRegisterState();
 }
 
-class _TruckMachineState extends State<TruckMachine> {
+class _TruckMachineRegisterState extends State<TruckMachineRegister> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -23,18 +24,18 @@ class _TruckMachineState extends State<TruckMachine> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ClientPage()),
+                        MaterialPageRoute(builder: (context) => RegisterConductorPage()),
                       );
                     },
                     child: Container(
                         height: MediaQuery.of(context).size.height / 2,
                         decoration: BoxDecoration(
-                          color: Color(0xFF007097),
+                          color: Color(0xFF005b71),
                           /* gradient: LinearGradient(
                               begin: Alignment.centerRight,
                               end: Alignment.centerLeft,
                               colors: [
-                                Color(0xFF007097),
+                                Color(0xFF005b71),
                                 Color(0xFFFFFFFF),
                               ]),*/
                           borderRadius: BorderRadius.only(
@@ -64,12 +65,12 @@ class _TruckMachineState extends State<TruckMachine> {
                               BorderRadius.only(bottomLeft: Radius.circular(100)),*/
                                 ),
                                 child: Image.asset(
-                                  "images/Van.png",
+                                  "images/van.png",
                                   height: 140.h,
                                   width: 140.w,
                                 ),
                               ),
-                              Text("Removal Van",
+                              Text("Register As a Van Driver",
                                   style: TextStyle(
                                       fontSize: 25,
                                       color: Colors.white,
@@ -86,7 +87,7 @@ class _TruckMachineState extends State<TruckMachine> {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                              Color(0xFF007097),
+                              Color(0xFF005b71),
                               Color(0xFFFFFFFF),
                             ]),
                         color: Colors.white,
@@ -112,12 +113,12 @@ class _TruckMachineState extends State<TruckMachine> {
                                 bottom: 20.h,
                               ),
                               decoration: BoxDecoration(
-                                /*color: Color(0xFF007097),
+                                /*color: Color(0xFF005b71),
                                 gradient: LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
-                                      Color(0xFF007097),
+                                      Color(0xFF005b71),
                                       Color(0xFFFFFFFF),
                                     ]),*/
                                 shape: BoxShape.circle,
@@ -128,10 +129,10 @@ class _TruckMachineState extends State<TruckMachine> {
                                 width: 140.w,
                               ),
                             ),
-                            Text("Construction Machine",
+                            Text("Register As a construction machine Driver",
                                 style: TextStyle(
                                     fontSize: 25,
-                                    color: Color(0xFF007097),
+                                    color: Color(0xFF005b71),
                                     fontWeight: FontWeight.bold))
                           ],
                         ),

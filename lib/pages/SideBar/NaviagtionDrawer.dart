@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../Conductor/VanConductorRegister/RegisterConductorPage1.dart';
 import '../../services/Api_services.dart';
+import '../Login_page.dart';
 import '../Sidebar_pages/RentHistory.dart';
 import '../Sidebar_pages/about.dart';
 import '../Sidebar_pages/promotions.dart';
@@ -20,58 +22,69 @@ class NavigationDrawer extends StatelessWidget {
           color: Color(0xFF005b71),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 80, 24, 0),
-            child: Column(children: [
-              headerWidget(
-                onClicked: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => User(
-                      name:Name,email:Email,pic: Image.asset(
-                        "images/Lg.png",
-                        height: 100.h,
-                        width: 100.w,
+            child: Column(
+              children: [
+                headerWidget(
+                  onClicked: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => User(
+                        name: Name,
+                        email: Email,
+                        pic: Image.asset(
+                          "images/Lg.png",
+                          height: 100.h,
+                          width: 100.w,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              const Divider(
-                thickness: 1,
-                height: 10,
-                color: Colors.grey,
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              DrawerItem(
-                name: 'Promotion',
-                icon: Icons.price_check_sharp,
-                onPressed: () => onItemPressed(context, index: 0),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              DrawerItem(
-                  name: 'Rent history',
-                  icon: Icons.lock_clock,
-                  onPressed: () => onItemPressed(context, index: 1)),
-              const SizedBox(
-                height: 30,
-              ),
-              DrawerItem(
-                  name: 'Support',
-                  icon: Icons.contacts_rounded,
-                  onPressed: () => onItemPressed(context, index: 2)),
-              const SizedBox(
-                height: 30,
-              ),
-              DrawerItem(
-                  name: 'About',
-                  icon: Icons.help,
-                  onPressed: () => onItemPressed(context, index: 3)),
-            ]),
+                const SizedBox(
+                  height: 40,
+                ),
+                const Divider(
+                  thickness: 1,
+                  height: 10,
+                  color: Colors.grey,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                DrawerItem(
+                  name: 'Promotion',
+                  icon: Icons.price_check_sharp,
+                  onPressed: () => onItemPressed(context, index: 0),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                DrawerItem(
+                    name: 'Rent history',
+                    icon: Icons.lock_clock,
+                    onPressed: () => onItemPressed(context, index: 1)),
+                const SizedBox(
+                  height: 30,
+                ),
+                DrawerItem(
+                    name: 'Support',
+                    icon: Icons.contacts_rounded,
+                    onPressed: () => onItemPressed(context, index: 2)),
+                const SizedBox(
+                  height: 30,
+                ),
+                DrawerItem(
+                    name: 'About',
+                    icon: Icons.help,
+                    onPressed: () => onItemPressed(context, index: 3)),
+                SizedBox(
+                  height: 50.h,
+                ),
+                BecomeDriver(
+                  onClicked: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RegisterConductorPage())),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -129,6 +142,37 @@ class NavigationDrawer extends StatelessWidget {
                 Text(Email, style: TextStyle(fontSize: 14, color: Colors.white))
               ],
             )
+          ],
+        ),
+      );
+
+  Widget BecomeDriver({
+    required VoidCallback onClicked,
+  }) =>
+      InkWell(
+        hoverColor: Colors.transparent,
+        onTap: onClicked,
+        child: Column(
+          children: [
+            Container(
+              height: 60.h,
+              width: 60.w,
+              child: Center(
+                  child: Text("Become a driver",
+                      style: TextStyle(fontSize: 15, color: Colors.white))),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xFF005b71),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(1, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       );
