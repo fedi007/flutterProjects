@@ -22,7 +22,7 @@ const UserSchema = new Schema({
   },
 });
 
-/**
+/*
  *  Here we are creating and setting an id property and 
     removing _id, __v, and the password hash which we do not need 
     to send back to the client.
