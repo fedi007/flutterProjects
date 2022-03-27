@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../Conductor/RegisterAs.dart';
 import '../../Conductor/VanConductorRegister/RegisterConductorPage1.dart';
 import '../../services/Api_services.dart';
 import '../Login_page.dart';
@@ -30,11 +32,11 @@ class NavigationDrawer extends StatelessWidget {
                       builder: (context) => User(
                         name: Name,
                         email: Email,
-                        pic: Image.asset(
+                        /*pic: Image.asset(
                           "images/Lg.png",
                           height: 100.h,
                           width: 100.w,
-                        ),
+                        ),*/
                       ),
                     ),
                   ),
@@ -52,7 +54,7 @@ class NavigationDrawer extends StatelessWidget {
                 ),
                 DrawerItem(
                   name: 'Promotion',
-                  icon: Icons.price_check_sharp,
+                  icon: FontAwesomeIcons.tag,
                   onPressed: () => onItemPressed(context, index: 0),
                 ),
                 const SizedBox(
@@ -67,21 +69,21 @@ class NavigationDrawer extends StatelessWidget {
                 ),
                 DrawerItem(
                     name: 'Support',
-                    icon: Icons.contacts_rounded,
+                    icon: FontAwesomeIcons.tag,
                     onPressed: () => onItemPressed(context, index: 2)),
                 const SizedBox(
                   height: 30,
                 ),
                 DrawerItem(
                     name: 'About',
-                    icon: Icons.help,
+                    icon: FontAwesomeIcons.heart,
                     onPressed: () => onItemPressed(context, index: 3)),
                 SizedBox(
                   height: 50.h,
                 ),
                 BecomeDriver(
                   onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RegisterConductorPage())),
+                      builder: (context) => TruckMachineRegister())),
                 ),
               ],
             ),
@@ -156,7 +158,7 @@ class NavigationDrawer extends StatelessWidget {
           children: [
             Container(
               height: 60.h,
-              width: 60.w,
+              width: 120.w,
               child: Center(
                   child: Text("Become a driver",
                       style: TextStyle(fontSize: 15, color: Colors.white))),
@@ -166,8 +168,8 @@ class NavigationDrawer extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.white.withOpacity(0.1),
-                    spreadRadius: 5,
-                    blurRadius: 7,
+                    spreadRadius: 1,
+                    blurRadius: 5,
                     offset: Offset(1, 3), // changes position of shadow
                   ),
                 ],

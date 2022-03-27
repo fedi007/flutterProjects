@@ -162,16 +162,15 @@ class _LoginPageState extends State<LoginPage> {
                   width: 600.h,
                   child: ElevatedButton(
                     onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TruckMachine()),
-                      );
+                      await APIService.login(userName, password);
 
-                      //await APIService.login(userName, password);
-
-                      /* if (test) {
-                      
-                      }*/
+                      if (test) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TruckMachine()),
+                        );
+                      }
                       /*else {
                         print('hello');
                         Invisible = Colors.red;

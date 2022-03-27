@@ -29,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Scaffold(
                 resizeToAvoidBottomInset: true,
                 body: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
                     child: Column(
                   children: [
                     SizedBox(height: 20.h),

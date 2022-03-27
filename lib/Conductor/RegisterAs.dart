@@ -24,7 +24,8 @@ class _TruckMachineRegisterState extends State<TruckMachineRegister> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterConductorPage()),
+                        MaterialPageRoute(
+                            builder: (context) => RegisterConductorPage()),
                       );
                     },
                     child: Container(
@@ -70,7 +71,7 @@ class _TruckMachineRegisterState extends State<TruckMachineRegister> {
                                   width: 140.w,
                                 ),
                               ),
-                              Text("Register As a Van Driver",
+                              Text("Van Driver",
                                   style: TextStyle(
                                       fontSize: 25,
                                       color: Colors.white,
@@ -129,7 +130,7 @@ class _TruckMachineRegisterState extends State<TruckMachineRegister> {
                                 width: 140.w,
                               ),
                             ),
-                            Text("Register As a construction machine Driver",
+                            Text("Construction machine Driver",
                                 style: TextStyle(
                                     fontSize: 25,
                                     color: Color(0xFF005b71),

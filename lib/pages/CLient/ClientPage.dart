@@ -32,17 +32,19 @@ class _ClientPageState extends State<ClientPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                      //color: Color(0xFF005b71),
+                    //color: Color(0xFF005b71),
 
-                      child: DropdownButtonHideUnderline(
+                    child: DropdownButtonHideUnderline(
                       child: DropdownButton(
                         isExpanded: true,
-                        hint: Text(
-                          "Choose your freight type",
-                          style: TextStyle(
-                            color: Color(0xFF005b71),
+                        hint: Center(
+                          child: Text(
+                            "Choose your freight type",
+                            style: TextStyle(
+                              color: Color(0xFF005b71),
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                         borderRadius: BorderRadius.circular(20),
                         value: dropdownvalue,
@@ -78,7 +80,7 @@ class _ClientPageState extends State<ClientPage> {
                         },
                       ),
                     ),
-                      ),
+                  ),
                   Visibility(
                     visible: isVisible,
                     child: Container(
