@@ -169,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           await APIService.Register(userName, email, password);
 
                           if (test) {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => LoginPage()),

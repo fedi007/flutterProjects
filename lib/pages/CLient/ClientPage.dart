@@ -15,13 +15,28 @@ class _ClientPageState extends State<ClientPage> {
   String? Response;
 
   bool isVisible = false;
-  var items = ['Type1', 'Type2', 'Type3', 'Type4', 'Type5', 'Other '];
+  var items = ['Furniture', 'ike/bicycle', 'Other '];
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () => SafeArea(
         child: Scaffold(
+            bottomNavigationBar: NavigationBar(
+                backgroundColor: Color(0xFF005b71),
+                destinations: [
+                  NavigationDestination(
+                    icon: Icon(
+                      Icons.home,
+                      color: Colors.white,
+                    ),
+                    label: 'mail',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.email_outlined),
+                    label: 'Your offers',
+                  )
+                ]),
             drawer: const NavigationDrawer(),
             appBar: AppBar(
               backgroundColor: Color(0xFF005b71),

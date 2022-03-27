@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                       await APIService.login(userName, password);
 
                       if (test) {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => TruckMachine()),
@@ -205,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Color(0xFF005b71)),
                         ),
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => RegisterPage(),

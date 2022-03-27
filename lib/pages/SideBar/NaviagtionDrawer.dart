@@ -32,11 +32,11 @@ class NavigationDrawer extends StatelessWidget {
                       builder: (context) => User(
                         name: Name,
                         email: Email,
-                        /*pic: Image.asset(
+                        picture: Image.asset(
                           "images/Lg.png",
                           height: 100.h,
                           width: 100.w,
-                        ),*/
+                        ),
                       ),
                     ),
                   ),
@@ -69,17 +69,17 @@ class NavigationDrawer extends StatelessWidget {
                 ),
                 DrawerItem(
                     name: 'Support',
-                    icon: FontAwesomeIcons.tag,
+                    icon: FontAwesomeIcons.user,
                     onPressed: () => onItemPressed(context, index: 2)),
                 const SizedBox(
                   height: 30,
                 ),
                 DrawerItem(
                     name: 'About',
-                    icon: FontAwesomeIcons.heart,
+                    icon: FontAwesomeIcons.exclamation,
                     onPressed: () => onItemPressed(context, index: 3)),
                 SizedBox(
-                  height: 50.h,
+                  height: 180.h,
                 ),
                 BecomeDriver(
                   onClicked: () => Navigator.of(context).push(MaterialPageRoute(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../services/Api_services.dart';
-import 'RegisterConductorPage2.dart';
 
 class RegisterConductorPage extends StatefulWidget {
   const RegisterConductorPage({Key? key}) : super(key: key);
@@ -19,6 +19,9 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
   var email;
   var password;
   var userName;
+  var TruckLicense;
+
+  var TruckModel;
 
   @override
   Widget build(BuildContext context) {
@@ -160,21 +163,78 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                       ),
                     ),
                     Container(
+                      alignment: Alignment.center,
+                      margin:
+                          EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
+                      padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey[200],
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 10),
+                              blurRadius: 50,
+                              color: Color(0xffEEEEEE)),
+                        ],
+                      ),
+                      child: TextField(
+                        cursorColor: Color(0xFF005b71),
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            FontAwesomeIcons.truck,
+                            color: Color(0xFF005b71),
+                          ),
+                          hintText: "Truck Model",
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
+                        onChanged: (value) {
+                          TruckModel = value;
+                        },
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      margin:
+                          EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
+                      padding: EdgeInsets.only(left: 20.w, right: 20.w),
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.grey[200],
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 10),
+                              blurRadius: 50,
+                              color: Color(0xffEEEEEE)),
+                        ],
+                      ),
+                      child: TextField(
+                        cursorColor: Color(0xFF005b71),
+                        decoration: InputDecoration(
+                          icon: Image.asset(
+                            "images/plate.png",
+                            color: Color(0xFF005b71),
+                          ),
+                          hintText: "Truck License",
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
+                        onChanged: (value) {
+                          TruckLicense = value;
+                        },
+                      ),
+                    ),
+                    Container(
                       margin: EdgeInsets.only(top: 50.h),
                       padding: EdgeInsets.only(left: 20.w, right: 20.w),
                       height: 40.h,
                       width: 600.h,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterConductorPageTruckModel()),
-                          );
-
-                        },
+                        onPressed: () {},
                         child: Text(
-                          "Next",
+                          "REGISTER",
                           style: TextStyle(color: Colors.white),
                         ),
                         style: ButtonStyle(
