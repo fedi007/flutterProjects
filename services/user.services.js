@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const auth = require("../middlewares/auth.js");
 
-
+//ff
 async function login({ username, password }, callback) {
   const user = await User.findOne({ username });
 
