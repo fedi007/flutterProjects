@@ -1,6 +1,5 @@
 const Offer = require("../models/offer.model");
 async function register(params, callback) {
-    console.log("params")
     if (params.deliveryType === undefined) {
       return callback(
         {
