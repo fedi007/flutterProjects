@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const userServices = require("../services/user.services");
+const User = require("../models/user.model");
 
 
 /**
@@ -38,6 +39,18 @@ exports.login = (req, res, next) => {
     });
   });
 };
+
+exports.update=('/update',  async (req, res) => {
+  try{
+    const upuser=await User.updateOne({username:req.body.lastusername},{username: req.body.username})
+    if (upuser.modifiedCount==1)
+    res.json(req.body.username)
+    else 
+    res.status(300).json("can't update")
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
+})
 
 exports.userProfile = (req, res, next) => {
 
