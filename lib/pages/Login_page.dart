@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:iblaze/Widgets/button_widget.dart';
 import 'package:iblaze/pages/Register_page.dart';
 
 import '../services/Api_services.dart';
@@ -160,38 +161,19 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.only(left: 20.w, right: 20.w),
                   height: 40.h,
                   width: 600.h,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await APIService.login(userName, password);
+                  child:ButtonWidget (text:"LOGIN",onClicked: () async{  
+                     await APIService.login(userName, password);
 
-                      if (test) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TruckMachine()),
-                        );
-                      }
-                      /*else {
-                        print('hello');
-                        Invisible = Colors.red;
-                        Incorrect = "Username/Password is incorrect";
-                      }
-                      ;*/
-                    },
-                    child: Text(
-                      "LOGIN",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xFF005b71),
-                      ),
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0))),
-                    ),
+                          if (test) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TruckMachine()) 
+                            );
+                          }
+                  }
                   ),
+                  
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 10.h),

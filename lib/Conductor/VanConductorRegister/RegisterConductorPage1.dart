@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../Widgets/button_widget.dart';
 import '../../services/Api_services.dart';
 
 class RegisterConductorPage extends StatefulWidget {
@@ -231,23 +232,10 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                       padding: EdgeInsets.only(left: 20.w, right: 20.w),
                       height: 40.h,
                       width: 600.h,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "REGISTER",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Color(0xFF005b71),
-                          ),
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0))),
-                        ),
-                      ),
+                      child:  ButtonWidget(
+                          text: "REGISTER",
+                          onClicked: () async {
+                          }),
                     ),
                   ],
                 )),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iblaze/pages/Sidebar_pages/user_profile.dart';
 
+import '../../Widgets/button_widget.dart';
 import '../../services/Api_services.dart';
 
 class ChangeName extends StatefulWidget {
@@ -13,6 +14,7 @@ class ChangeName extends StatefulWidget {
 
 class _ChangeNameState extends State<ChangeName> {
   bool isvisible = false;
+
   var NewName;
   @override
   Widget build(BuildContext context) {
@@ -48,36 +50,23 @@ class _ChangeNameState extends State<ChangeName> {
               padding: EdgeInsets.only(left: 20.w, right: 20.w),
               height: 40.h,
               width: 600.h,
-              child: ElevatedButton(
-                onPressed: () async {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => User(
-                          name: Name,
-                          email: Email,
-                          picture: Image.asset(
-                            "images/Lg.png",
-                            height: 100.h,
-                            width: 100.w,
+              child: ButtonWidget(
+                  text: "REGISTER",
+                  onClicked: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => User(
+                            name: Name,
+                            email: Email,
+                            picture: Image.asset(
+                              "images/Lg.png",
+                              height: 100.h,
+                              width: 100.w,
+                            ),
                           ),
-                        ),
-                      ));
-                },
-                child: Text(
-                  "Save",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Color(0xFF005b71),
-                  ),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0))),
-                ),
-              ),
+                        ));
+                  }),
             ),
           ),
         ],

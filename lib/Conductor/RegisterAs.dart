@@ -32,7 +32,6 @@ class _TruckMachineRegisterState extends State<TruckMachineRegister> {
                         height: MediaQuery.of(context).size.height / 2,
                         decoration: BoxDecoration(
                           color: Color(0xFF005b71),
-                      
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(75),
                               bottomRight: Radius.circular(75)),
@@ -48,14 +47,13 @@ class _TruckMachineRegisterState extends State<TruckMachineRegister> {
                                   top: 30.h,
                                   bottom: 30.h,
                                 ),
-                             
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   /*borderRadius:
                               BorderRadius.only(bottomLeft: Radius.circular(100)),*/
                                 ),
                                 child: Image.asset(
-                                  "images/van.png",
+                                  "images/Van.png",
                                   height: 140.h,
                                   width: 140.w,
                                 ),
