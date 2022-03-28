@@ -48,21 +48,14 @@ app.use(
         methods: ["POST"]
       },
       {
-        url: "/users/login/conductor",
-        methods: ["POST"]
-      },
-      {
-        url: "/users/register/conductor",
-        methods: ["POST"]
-      },
-      {
-        url: "/users/register/conductor",
-        methods: ["POST"]
-      },
-      {
         url: "/users/update",
         methods: ["PATCH"]
       },
+      {
+        url: "/conducteur/register",
+        methods: ["POST"]
+      },
+
     ],
   })
 );
@@ -71,6 +64,8 @@ app.use(express.json());
 
 // initialize routes
 app.use("/users", require("./routes/users.routes"));
+
+app.use("/conducteur", require("./routes/conducteur.routes"));
 
 // middleware for error responses
 app.use(errors.errorHandler);

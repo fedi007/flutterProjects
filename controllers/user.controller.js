@@ -50,12 +50,4 @@ exports.update=('/update',  async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
-})
-
-exports.userProfile = (req, res, next) => {
-
-  return res.status(401).json({
-    message: "Authorized User!!",
 });
-};
-
