@@ -39,16 +39,30 @@ mongoose
 auth.authenticateToken.unless = unless;
 app.use(
   auth.authenticateToken.unless({
-    path: [
-      { url: "/users/login", methods: ["POST"] },
-      { url: "/users/register", methods: ["POST"] },
-        {
-          url: "/users/login/conductor",
-          methods: ["POST"]
-        }, {
-          url: "/users/register/conductor",
-          methods: ["POST"]
-        },
+    path: [{
+        url: "/users/login",
+        methods: ["POST"]
+      },
+      {
+        url: "/users/register",
+        methods: ["POST"]
+      },
+      {
+        url: "/users/login/conductor",
+        methods: ["POST"]
+      },
+      {
+        url: "/users/register/conductor",
+        methods: ["POST"]
+      },
+      {
+        url: "/users/register/conductor",
+        methods: ["POST"]
+      },
+      {
+        url: "/users/update",
+        methods: ["PATCH"]
+      },
     ],
   })
 );
@@ -62,6 +76,6 @@ app.use("/users", require("./routes/users.routes"));
 app.use(errors.errorHandler);
 
 // listen for requests
-app.listen(process.env.port || 4000, function () {
+app.listen(4000, () => {
   console.log("Ready to Go!");
 });
