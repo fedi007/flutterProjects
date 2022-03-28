@@ -40,7 +40,7 @@ exports.login = (req, res, next) => {
   });
 };
 
-exports.update=('/update',  async (req, res) => {
+exports.update=(async (req, res) => {
   try{
     const upuser=await User.updateOne({username:req.body.lastusername},{username: req.body.username})
     if (upuser.modifiedCount==1)

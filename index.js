@@ -55,7 +55,14 @@ app.use(
         url: "/conducteur/register",
         methods: ["POST"]
       },
-
+      {
+        url: "/conducteur/login",
+        methods: ["POST"]
+      },
+      {
+        url: "/conducteur/update",
+        methods: ["PATCH"]
+      },
     ],
   })
 );
