@@ -63,6 +63,10 @@ app.use(
         url: "/conducteur/update",
         methods: ["PATCH"]
       },
+      {
+        url: "/offer/register",
+        methods: ["POST"]
+      },
     ],
   })
 );
@@ -73,6 +77,8 @@ app.use(express.json());
 app.use("/users", require("./routes/users.routes"));
 
 app.use("/conducteur", require("./routes/conducteur.routes"));
+
+app.use("/offer", require("./routes/offer.routes"));
 
 // middleware for error responses
 app.use(errors.errorHandler);

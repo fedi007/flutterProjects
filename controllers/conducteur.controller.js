@@ -3,8 +3,6 @@ const conducteurServices = require("../services/conducteur.services");
 const Conducteur = require("../models/conducteur.model");
 
 
-
-
 exports.login = (req, res, next) => {
   const { username, password } = req.body;
 
