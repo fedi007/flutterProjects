@@ -83,6 +83,14 @@ app.use(
         url: "/users/offer/update",
         methods: ["PATCH"]
       },
+      {
+        url: "/users/deliveryType/getall",
+        methods: ["GET"]
+      },
+      {
+        url: "/users/deliveryType/register",
+        methods: ["POST"]
+      },
     ],
   })
 );
@@ -95,7 +103,11 @@ app.use("/users", require("./routes/users.routes"));
 app.use("/conducteur", require("./routes/conducteur.routes"));
 
 app.use("/users/offer", require("./routes/offer.routes"));
+
 app.use("/conducteur/offer", require("./routes/offer.routes"));
+
+app.use("/users/deliveryType", require("./routes/deliveryType.routes"));
+
 
 // middleware for error responses
 app.use(errors.errorHandler);

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const uniqueValidator = require("mongoose-unique-validator");
 
-const CamionSchema = new Schema({
+const DeliveryTypeSchema = new Schema({
   deliveryType: {
     type: String,
     required: true,
@@ -14,7 +14,7 @@ const CamionSchema = new Schema({
     removing _id, __v, and the password hash which we do not need 
     to send back to the client.
  */
-CamionSchema.set("toJSON", {
+DeliveryTypeSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -25,10 +25,10 @@ CamionSchema.set("toJSON", {
 });
 
 /**
- * 1. The camionSchema.plugin(uniqueValidator) method won’t let duplicate email id to be stored in the database.
+ * 1. The deliveryTypeSchema.plugin(uniqueValidator) method won’t let duplicate email id to be stored in the database.
  * 2. The unique: true property in email schema does the internal optimization to enhance the performance.
  */
-CamionSchema.plugin(uniqueValidator, { message: "Email already in use." });
+DeliveryTypeSchema.plugin(uniqueValidator, { message: "Email already in use." });
 
-const Camion = mongoose.model("camion", CamionSchema);
-module.exports = Camion;
+const DeliveryType = mongoose.model("deliveryType", DeliveryTypeSchema);
+module.exports = DeliveryType;
