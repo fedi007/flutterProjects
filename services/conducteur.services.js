@@ -4,7 +4,7 @@ const auth = require("../middlewares/auth.js");
 
 
 
-
+// Login
 async function login({ username, password }, callback) {
   const conducteur = await Conducteur.findOne({ username });
 
@@ -25,7 +25,7 @@ async function login({ username, password }, callback) {
   }
 }
 
-
+// Creating one
 async function register(params, callback) {
     if (params.username === undefined) {
       return callback(

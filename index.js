@@ -6,7 +6,7 @@ const dbConfig = require("./config/db.config");
 const auth = require("./middlewares/auth.js");
 const errors = require("./middlewares/errors.js");
 const unless = require("express-unless");
-
+var id;
 // connect to mongodb
 
 /**
@@ -64,8 +64,24 @@ app.use(
         methods: ["PATCH"]
       },
       {
-        url: "/offer/register",
+        url: "/users/offer/register",
         methods: ["POST"]
+      },
+      {
+        url: "/conducteur/offer/getall",
+        methods: ["GET"]
+      },
+      {
+        url: "/users/offer/delete",
+        methods: ["DELETE"]
+      },
+      {
+        url: "/users/offer/getbyuser",
+        methods: ["POST"]
+      },
+      {
+        url: "/users/offer/update",
+        methods: ["PATCH"]
       },
     ],
   })
@@ -78,7 +94,8 @@ app.use("/users", require("./routes/users.routes"));
 
 app.use("/conducteur", require("./routes/conducteur.routes"));
 
-app.use("/offer", require("./routes/offer.routes"));
+app.use("/users/offer", require("./routes/offer.routes"));
+app.use("/conducteur/offer", require("./routes/offer.routes"));
 
 // middleware for error responses
 app.use(errors.errorHandler);

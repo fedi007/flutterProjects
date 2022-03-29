@@ -3,14 +3,26 @@ const { Schema } = mongoose;
 const uniqueValidator = require("mongoose-unique-validator");
 
 const OfferSchema = new Schema({
+  depart: {
+    type: String,
+    required: true,
+  },
+  arrivee: {
+    type: String,
+    required: true,
+  },
   deliveryType: {
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+  },
+
   load: {
     type: Boolean,
     default:false,
-
   },
 
   date: {

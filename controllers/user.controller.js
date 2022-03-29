@@ -8,6 +8,7 @@ const User = require("../models/user.model");
  * 2. In the SignIn API, we are checking whether the assigned and retrieved passwords are the same or not using the bcrypt.compare() method.
  * 3. In the SignIn API, we set the JWT token expiration time. Token will be expired within the defined duration.
  */
+// Creating one
 exports.register = (req, res, next) => {
   const { password } = req.body;
 
@@ -25,7 +26,7 @@ exports.register = (req, res, next) => {
     });
   });
 };
-
+  //Login
 exports.login = (req, res, next) => {
   const { username, password } = req.body;
 
@@ -39,7 +40,7 @@ exports.login = (req, res, next) => {
     });
   });
 };
-
+// Updating One
 exports.update=(async (req, res) => {
   try{
     const upuser=await User.updateOne({username:req.body.lastusername},{username: req.body.username})

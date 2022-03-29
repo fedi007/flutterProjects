@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const conducteurServices = require("../services/conducteur.services");
 const Conducteur = require("../models/conducteur.model");
 
-
+//Login
 exports.login = (req, res, next) => {
   const { username, password } = req.body;
 
@@ -17,7 +17,7 @@ exports.login = (req, res, next) => {
   });
 };
 
-
+// Creating one
 exports.register = (req, res, next) => {
   const { password } = req.body;
 
@@ -35,7 +35,7 @@ exports.register = (req, res, next) => {
     });
   });
 };
-
+// Updating One
 exports.update=(async (req, res) => {
   try{
     const upconducteur=await Conducteur.updateOne({username:req.body.lastusername},{username: req.body.username})
