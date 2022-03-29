@@ -45,5 +45,26 @@ class APIService {
       test = false;
     }
   }
+
+  static Update(Lastusername, Username) async {
+    var headers = {'Content-Type': 'application/json'};
+    var request =
+        http.Request('PATCH', Uri.parse('http://10.0.2.2:4000/users/update'));
+    request.body =
+        json.encode({"username": Username, "lastusername": Lastusername});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      test = true;
+      var data = await response.stream.bytesToString();
+      var l = data.split('"');
+      Name = l[1];
+    } else {
+      print(response.reasonPhrase);
+      test = false;
+    }
+  }
 }
 
