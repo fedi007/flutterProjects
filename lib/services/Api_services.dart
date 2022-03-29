@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 bool test = false;
 String Email = "";
 String Name = "";
+String Nam = "";
 
 class APIService {
   static login(username, password) async {
@@ -45,3 +46,4 @@ class APIService {
     }
   }
 }
+
