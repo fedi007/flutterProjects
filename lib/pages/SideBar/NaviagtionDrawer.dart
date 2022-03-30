@@ -34,8 +34,8 @@ class NavigationDrawer extends StatelessWidget {
                         email: Email,
                         picture: Image.asset(
                           "images/Lg.png",
-                          height: 100.h,
-                          width: 100.w,
+                          height: 100,
+                          width: 100,
                         ),
                       ),
                     ),
@@ -79,7 +79,7 @@ class NavigationDrawer extends StatelessWidget {
                     icon: FontAwesomeIcons.exclamation,
                     onPressed: () => onItemPressed(context, index: 3)),
                 SizedBox(
-                  height: 180.h,
+                  height: 100,
                 ),
                 BecomeDriver(
                   onClicked: () => Navigator.of(context).push(MaterialPageRoute(
@@ -170,7 +170,7 @@ class NavigationDrawer extends StatelessWidget {
                     color: Colors.white.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 5,
-                    offset: Offset(1, 3), // changes position of shadow
+                    offset: Offset(1, 3),
                   ),
                 ],
               ),

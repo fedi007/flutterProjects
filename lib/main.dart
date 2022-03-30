@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iblaze/pages/CLient/ClientPage.dart';
+import 'package:iblaze/pages/CLient/TruckMachine_page.dart';
 
 import 'package:iblaze/pages/Splash_screen.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(title: 'Flutter'),
+      home: TruckMachine(),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 bool test = false;
 String Email = "";
 String Name = "";
+var x;
 
 class APIService {
   static login(username, password) async {
@@ -59,10 +60,31 @@ class APIService {
       test = true;
       var data = await response.stream.bytesToString();
       var l = data.split('"');
+      print(data.runtimeType);
       Name = l[1];
     } else {
       print(response.reasonPhrase);
       test = false;
+    }
+  }
+
+  static GetFreight() async {
+    var request = http.Request(
+        'GET', Uri.parse('http://10.0.2.2:4000/users/deliveryType/getall'));
+
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      x = json.decode(await response.stream.bytesToString());
+
+      print(x.runtimeType);
+      print(x[0]);
+      print(x[1]);
+      print(x[2]);
+      print(x[3]);
+
+      //
+    } else {
+      print(response.reasonPhrase);
     }
   }
 }

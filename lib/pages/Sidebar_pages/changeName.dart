@@ -16,6 +16,11 @@ class _ChangeNameState extends State<ChangeName> {
   bool isvisible = false;
   var userName;
   var LastuserName;
+  Image pic = Image.asset(
+    "images/Lg.png",
+    height: 100.h,
+    width: 100.w,
+  );
 
   var NewName;
   @override
@@ -61,15 +66,8 @@ class _ChangeNameState extends State<ChangeName> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => User(
-                              name: Name,
-                              email: Email,
-                              picture: Image.asset(
-                                "images/Lg.png",
-                                height: 100.h,
-                                width: 100.w,
-                              ),
-                            ),
+                            builder: (context) =>
+                                User(name: Name, email: Email, picture: pic),
                           ));
                     }
                   }),

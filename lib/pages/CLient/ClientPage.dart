@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../SideBar/NaviagtionDrawer.dart';
+import 'HomePage.dart';
+import 'offers.dart';
 
 class ClientPage extends StatefulWidget {
   const ClientPage({Key? key}) : super(key: key);
@@ -11,173 +13,48 @@ class ClientPage extends StatefulWidget {
 }
 
 class _ClientPageState extends State<ClientPage> {
-  String? dropdownvalue;
-  String? Response;
-
-  bool isVisible = false;
-  var items = ['Furniture', 'ike/bicycle', 'Other '];
+  int index = 0;
+  final screens = [HomePage(), Offers()];
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () => SafeArea(
         child: Scaffold(
-            bottomNavigationBar: NavigationBar(
+          body: screens[index],
+          bottomNavigationBar: NavigationBarTheme(
+            data: NavigationBarThemeData(
+              height: 45.h,
+              indicatorColor: Colors.transparent,
+              labelTextStyle: MaterialStateProperty.all(TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white)),
+              labelBehavior:
+                  NavigationDestinationLabelBehavior.onlyShowSelected,
+            ),
+            child: NavigationBar(
                 backgroundColor: Color(0xFF005b71),
+                selectedIndex: index,
+                //animationDuration: Duration(seconds: 2),
+                onDestinationSelected: (index) =>
+                    setState(() => this.index = index),
                 destinations: [
                   NavigationDestination(
-                    icon: Icon(
-                      Icons.home,
-                      color: Colors.white,
-                    ),
-                    label: 'mail',
+                    icon: Icon(Icons.home, color: Colors.white, size: 25),
+                    label: 'Home',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.email_outlined),
+                    icon: Icon(Icons.email, color: Colors.white, size: 25),
                     label: 'Your offers',
                   )
                 ]),
-            drawer: const NavigationDrawer(),
-            appBar: AppBar(
-              backgroundColor: Color(0xFF005b71),
-            ),
-            body: Builder(builder: (context) {
-              return Center(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    //color: Color(0xFF005b71),
-
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        isExpanded: true,
-                        hint: Center(
-                          child: Text(
-                            "Choose your freight type",
-                            style: TextStyle(
-                              color: Color(0xFF005b71),
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        value: dropdownvalue,
-                        icon: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Color(0xFF005b71),
-                        ),
-                        items: items.map((
-                          String items,
-                        ) {
-                          return DropdownMenuItem(
-                              value: items,
-                              child: Container(
-                                width: double.infinity,
-                                child: Text(
-                                  items,
-                                  style: TextStyle(
-                                    color: Color(0xFF005b71),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ));
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownvalue = newValue;
-                            if (dropdownvalue == items.last) {
-                              isVisible = true;
-                            } else {
-                              isVisible = false;
-                            }
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Visibility(
-                    visible: isVisible,
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: 20.w, vertical: 10.h),
-                      width: double.infinity,
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                            hintText: 'Specify Your freight type ',
-                            hintStyle: TextStyle(
-                                //   fontSize: 20,
-                                ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF005b71),
-                              ),
-                            )),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.h),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Delivering And Unloading",
-                            style: TextStyle(
-                              color: Color(0xFF005b71),
-                            ),
-                          ),
-                          Radio(
-                              value: "yes",
-                              groupValue: Response,
-                              onChanged: (String? val) {
-                                setState(() {
-                                  Response = val;
-                                });
-                              }),
-                          Text(
-                            "Only Delivering ",
-                            style: TextStyle(
-                              color: Color(0xFF005b71),
-                            ),
-                          ),
-                          Radio(
-                              value: "NO",
-                              groupValue: Response,
-                              onChanged: (String? val) {
-                                setState(() {
-                                  Response = val;
-                                });
-                              })
-                        ]),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 70.h),
-                    padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                    height: 40.h,
-                    width: 600.h,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Look for offers",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          Color(0xFF005b71),
-                        ),
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0))),
-                      ),
-                    ),
-                  )
-                ],
-              ));
-            })),
+          ),
+          drawer: const NavigationDrawer(),
+          appBar: AppBar(
+            backgroundColor: Color(0xFF005b71),
+          ),
+        ),
       ),
     );
   }
