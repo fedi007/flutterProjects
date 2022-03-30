@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:iblaze/Widgets/button_widget.dart';
 import 'package:iblaze/pages/Register_page.dart';
 
-import '../services/Api_services.dart';
+import '../services/Api_service.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Client/TruckMachine_page.dart';

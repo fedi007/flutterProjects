@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iblaze/pages/Sidebar_pages/user_profile.dart';
 
 import '../../Widgets/button_widget.dart';
-import '../../services/Api_services.dart';
+import '../../services/Api_service.dart';
 
 class ChangeName extends StatefulWidget {
   const ChangeName({Key? key}) : super(key: key);

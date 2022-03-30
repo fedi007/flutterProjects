@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iblaze/pages/CLient/offers.dart';
 
 import '../../Widgets/button_widget.dart';
-import '../../services/Api_services.dart';
+import '../../services/Api_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
