@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:iblaze/services/Api_service.dart';
 
 import 'ClientPage.dart';
 
@@ -40,6 +40,8 @@ class _TruckMachineState extends State<TruckMachine> {
                   children: [
                     GestureDetector(
                       onTap: ()  {
+                        //await APIService.GetFreight();
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => ClientPage()),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iblaze/pages/Sidebar_pages/user_profile.dart';
 
 import '../../Widgets/button_widget.dart';
@@ -69,6 +70,26 @@ class _ChangeNameState extends State<ChangeName> {
                             builder: (context) =>
                                 User(name: Name, email: Email, picture: pic),
                           ));
+                    } else if (NewName == null) {
+                      Fluttertoast.showToast(
+                        msg: "Username Can't Be Empty",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Color(0xFF007097),
+                        textColor: Colors.white,
+                        fontSize: 16,
+                      );
+                    } else {
+                      Fluttertoast.showToast(
+                        msg: "Username is Taken",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Color(0xFF007097),
+                        textColor: Colors.white,
+                        fontSize: 16,
+                      );
                     }
                   }),
             ),

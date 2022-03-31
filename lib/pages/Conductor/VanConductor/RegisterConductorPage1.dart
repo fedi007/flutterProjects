@@ -5,8 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../Widgets/button_widget.dart';
-import '../../services/Api_service.dart';
+import '../../../Widgets/button_widget.dart';
 
 class RegisterConductorPage extends StatefulWidget {
   const RegisterConductorPage({Key? key}) : super(key: key);
@@ -17,11 +16,10 @@ class RegisterConductorPage extends StatefulWidget {
 
 class _RegisterConductorPageState extends State<RegisterConductorPage> {
   bool passwordObscured = true;
-  var email;
-  var password;
+  var conductorPassword;
+  var conductorEmail;
   var userName;
   var TruckLicense;
-
   var TruckModel;
 
   @override
@@ -115,7 +113,7 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                           focusedBorder: InputBorder.none,
                         ),
                         onChanged: (value) {
-                          email = value;
+                          conductorEmail = value;
                         },
                       ),
                     ),
@@ -159,7 +157,7 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                         ),
                         obscureText: passwordObscured,
                         onChanged: (value) {
-                          password = value;
+                          conductorPassword = value;
                         },
                       ),
                     ),
@@ -232,10 +230,8 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                       padding: EdgeInsets.only(left: 20.w, right: 20.w),
                       height: 40.h,
                       width: 600.h,
-                      child:  ButtonWidget(
-                          text: "REGISTER",
-                          onClicked: () async {
-                          }),
+                      child: ButtonWidget(
+                          text: "REGISTER", onClicked: () async {}),
                     ),
                   ],
                 )),

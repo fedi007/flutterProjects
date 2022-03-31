@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'VanConductorRegister/RegisterConductorPage1.dart';
+import 'VanConductor/RegisterConductorPage1.dart';
+
+
 
 class TruckMachineRegister extends StatefulWidget {
   const TruckMachineRegister({Key? key}) : super(key: key);
