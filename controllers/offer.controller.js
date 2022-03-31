@@ -18,7 +18,7 @@ exports.register = (req, res, next) => {
     try {
       offer = await Offer.findById(req.body.id)
       await offer.remove()
-      res.json({ message: 'Deleted Subscriber' })
+      res.json({ message: 'Deleted Offer' })
     } catch (err) {
       res.status(500).json({ message: err.message })
     }

@@ -43,7 +43,7 @@ exports.login = (req, res, next) => {
 // Updating One
 exports.update=(async (req, res) => {
   try{
-    if(req.body.username==""){
+    if(req.body.username=="" || req.body.username==null ){
     res.status(300).json("username can't be empty")
     }else{
     const upuser=await User.updateOne({username:req.body.lastusername},{username: req.body.username})
