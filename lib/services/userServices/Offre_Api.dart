@@ -54,12 +54,12 @@ class APIOffre {
       // print(await response.stream.bytesToString());
       items = json.decode(await response.stream.bytesToString());
       items.forEach((e) {
-        getDepart = items.add(e["depart"]);
-        getArrivee = items.add(e["arrivee"]);
-        getResponse = items.add(e["load"]);
-        getDeliveryTime = items.add(e["time"]);
-        getFreightType = items.add(e["deliveryType"]);
-        getQuantity = items.add(e["quantity"]);
+        getDepart.add(e["depart"]);
+        getArrivee.add(e["arrivee"]);
+        getResponse.add(e["load"]);
+        getDeliveryTime.add(e["time"]);
+        getFreightType.add(e["deliveryType"]);
+        getQuantity.add(e["quantity"]);
       });
     } else {
       print(response.reasonPhrase);
