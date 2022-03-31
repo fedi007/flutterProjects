@@ -17,8 +17,12 @@ exports.register = (req, res, next) => {
   // Getting all
   exports.getAll=( async (req, res) => {
     try {
-      const deliveryType = await DeliveryType.find()
-      res.json(deliveryType)
+        const idList=[];
+      const deliveryType = await DeliveryType.find();
+      deliveryType.forEach(e => idList.push(e.deliveryType));
+      console.log(idList)
+      res.json(idList)
+      
     } catch (err) {
       res.status(500).json({ message: err.message })
     }

@@ -43,11 +43,15 @@ exports.login = (req, res, next) => {
 // Updating One
 exports.update=(async (req, res) => {
   try{
+    if(req.body.username==""){
+    res.status(300).json("username can't be empty")
+    }else{
     const upuser=await User.updateOne({username:req.body.lastusername},{username: req.body.username})
     if (upuser.modifiedCount==1)
     res.json(req.body.username)
     else 
     res.status(300).json("can't update")
+    }
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
