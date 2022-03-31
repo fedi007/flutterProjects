@@ -7,9 +7,11 @@ import 'package:iblaze/Widgets/button_widget.dart';
 import 'package:iblaze/pages/Register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../services/Api_service.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../services/userServices/Offre_Api.dart';
+import '../services/userServices/register_login.dart';
 import 'Client/TruckMachine_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,6 +27,14 @@ class _LoginPageState extends State<LoginPage> {
   var userName;
 
   @override
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
+    
+  
+  }
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () => GestureDetector(

@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iblaze/pages/Sidebar_pages/user_profile.dart';
 
 import '../../Widgets/button_widget.dart';
-import '../../services/Api_service.dart';
+import '../../services/userServices/register_login.dart';
 
 class ChangeName extends StatefulWidget {
   const ChangeName({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _ChangeNameState extends State<ChangeName> {
     width: 100.w,
   );
 
-  var NewName;
+  String? NewName;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,7 +52,7 @@ class _ChangeNameState extends State<ChangeName> {
                 }),
           ),
           Visibility(
-            visible: isvisible,
+            //visible: isvisible,
             child: Container(
               margin: EdgeInsets.only(top: 50.h),
               padding: EdgeInsets.only(left: 20.w, right: 20.w),

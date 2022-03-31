@@ -60,7 +60,7 @@ class APIService {
       test = true;
       var data = await response.stream.bytesToString();
       var l = data.split('"');
-      
+
       Name = l[1];
     } else {
       print(response.reasonPhrase);
@@ -78,7 +78,6 @@ class APIService {
 
   //     print(items.runtimeType);
 
-      
   //   } else {
   //     print(response.reasonPhrase);
   //   }

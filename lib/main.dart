@@ -3,6 +3,7 @@ import 'package:iblaze/pages/CLient/ClientPage.dart';
 import 'package:iblaze/pages/CLient/TruckMachine_page.dart';
 
 import 'package:iblaze/pages/Splash_screen.dart';
+import 'package:iblaze/testing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(title: 'Flutter'),
+       home: SplashScreen(title: 'Flutter'),
+      //home: test(),
     );
   }
 }

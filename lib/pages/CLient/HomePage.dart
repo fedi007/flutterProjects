@@ -6,8 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iblaze/pages/CLient/offers.dart';
 
 import '../../Widgets/button_widget.dart';
-import '../../services/Api_service.dart';
-import '../../services/Offre_Api.dart';
+import '../../services/userServices/register_login.dart';
+import '../../services/userServices/Offre_Api.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,8 +26,6 @@ class _HomePageState extends State<HomePage> {
   String? deliveryTime;
   String? freightType;
   String? quantity;
-  //var items = ['Furniture', 'Bike/bicycle', 'Other '];
-  //List<String> test = ["gfdgf", "kle"];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               //color: Color(0xFF005b71),
 
-              child: /* DropdownButtonHideUnderline(
+              child: DropdownButtonHideUnderline(
                 child: DropdownButton(
                   isExpanded: true,
                   hint: Center(
@@ -61,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                     Icons.keyboard_arrow_down,
                     color: Color(0xFF005b71),
                   ),
-                  items: items.map((
+                  items: dropDownBtnItem.map((
                     String items,
                   ) {
                     return DropdownMenuItem(
@@ -75,19 +73,14 @@ class _HomePageState extends State<HomePage> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                        )
-                        );
+                        ));
                   }).toList(),
-                  onTap: () async {
-                    await APIService.GetFreight();
-                    
-                  },
+                  onTap: () {},
                   onChanged: (String? newValue) {
                     setState(() {
-                      // test.add("louay");
-                      // print(test.runtimeType);
                       dropdownvalue = newValue;
-                      if (dropdownvalue == items.last) {
+                      freightType = newValue;
+                      if (dropdownvalue == dropDownBtnItem.last) {
                         isVisible = true;
                       } else {
                         isVisible = false;
@@ -96,29 +89,27 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-            ),*/
-                  Visibility(
-                //visible: isVisible,
-                child: Container(
-                  margin:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                  width: double.infinity,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        hintText: 'Specify Your freight type ',
-                        hintStyle: TextStyle(
-                            //   fontSize: 20,
-                            ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFF005b71),
+            ),
+            Visibility(
+              visible: isVisible,
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                width: double.infinity,
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      hintText: 'Specify Your freight type ',
+                      hintStyle: TextStyle(
+                          //   fontSize: 20,
                           ),
-                        )),
-                    onChanged: (value) {
-                      freightType = value;
-                    },
-                  ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFF005b71),
+                        ),
+                      )),
+                  onChanged: (value) {
+                    freightType = value;
+                  },
                 ),
               ),
             ),
@@ -274,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                     if (offreCheck) {
                       await APIOffre.getOffers(Name);
                       Fluttertoast.showToast(
-                        msg: " Your Offer Has been Posted !",
+                        msg: " Your Offer Has been Posted ! ",
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,
@@ -285,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                       //offreCheck = false;
                     } else {
                       Fluttertoast.showToast(
-                        msg: " Verify Your offer !",
+                        msg: " Verify Your offer ! ",
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,

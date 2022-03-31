@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'VanConductor/RegisterConductorPage1.dart';
+import 'VanConductorRegister/RegisterConductorPage1.dart';
 
 
 

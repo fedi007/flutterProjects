@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iblaze/Conductor/RegisterAs.dart';
 
 
-import '../../services/Api_service.dart';
-import '../Conductor/RegisterAs.dart';
+import '../../services/userServices/register_login.dart';
+
 import '../Sidebar_pages/RentHistory.dart';
 import '../Sidebar_pages/about.dart';
 import '../Sidebar_pages/promotions.dart';

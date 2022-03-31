@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:iblaze/services/Api_service.dart';
 
+import '../../services/userServices/Offre_Api.dart';
+import '../../services/userServices/register_login.dart';
 import 'ClientPage.dart';
 
 class TruckMachine extends StatefulWidget {
@@ -14,7 +15,15 @@ class TruckMachine extends StatefulWidget {
 
 class _TruckMachineState extends State<TruckMachine> {
   DateTime timeBackPressed = DateTime.now();
+
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
+    dropDownBtnItem.add("other");
+  }
+
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () => WillPopScope(
@@ -39,9 +48,7 @@ class _TruckMachineState extends State<TruckMachine> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: ()  {
-                        //await APIService.GetFreight();
-
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => ClientPage()),

@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 bool offreCheck = false;
-String getDepart = "";
-String getArrivee = "";
-String getResponse = "";
-String getDeliveryTime = "";
-String getFreightType = "";
-String getQuantity = "";
+List getDepart = [];
+List getArrivee = [];
+List getResponse = [];
+List getDeliveryTime = [];
+List getFreightType = [];
+List getQuantity = [];
+var offreCount;
+var items;
+List<String> dropDownBtnItem = [];
 
 class APIOffre {
   static RegisterOffre(depart, arrivee, Response, deliveryTime, freightType,
@@ -48,27 +51,33 @@ class APIOffre {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      
       // print(await response.stream.bytesToString());
-      var data = await response.stream.bytesToString();
-      var l = data.split('"');
-
-      getDepart = l[3];
-      getArrivee = l[7];
-      getFreightType = l[11];
-      //Name
-      getQuantity = l[19];
-      getDeliveryTime = l[23];
-      getResponse = l[27];
-
-      print(getDepart);
-      print(getArrivee);
-      print(getFreightType);
-      print(getQuantity);
-      print(getDeliveryTime);
-      print(getResponse);
+      items = json.decode(await response.stream.bytesToString());
+      items.forEach((e) {
+        getDepart = items.add(e["depart"]);
+        getArrivee = items.add(e["arrivee"]);
+        getResponse = items.add(e["load"]);
+        getDeliveryTime = items.add(e["time"]);
+        getFreightType = items.add(e["deliveryType"]);
+        getQuantity = items.add(e["quantity"]);
+      });
     } else {
-      
+      print(response.reasonPhrase);
+    }
+    offreCount = items.length;
+  }
+
+  static GetFreight() async {
+    var request = http.Request(
+        'GET', Uri.parse('http://10.0.2.2:4000/users/deliveryType/getall'));
+
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      var items = json.decode(await response.stream.bytesToString());
+      items.forEach((e) {
+        dropDownBtnItem.add(e);
+      });
+    } else {
       print(response.reasonPhrase);
     }
   }
