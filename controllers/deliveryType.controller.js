@@ -20,9 +20,7 @@ exports.register = (req, res, next) => {
         const idList=[];
       const deliveryType = await DeliveryType.find();
       deliveryType.forEach(e => idList.push(e.deliveryType));
-      console.log(idList)
       res.json(idList)
-      
     } catch (err) {
       res.status(500).json({ message: err.message })
     }

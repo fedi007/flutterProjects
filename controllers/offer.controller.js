@@ -38,7 +38,8 @@ exports.register = (req, res, next) => {
   exports.getByuser=( async (req, res) => {
     try {
       const offer = await Offer.find({ username:req.body.username });
-      res.json(offer+offer.length)
+      console.log(offer)
+      res.json(offer)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }

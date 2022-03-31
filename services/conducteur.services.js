@@ -11,7 +11,6 @@ async function login({ username, password }, callback) {
   if (conducteur != null) {
     if (bcrypt.compareSync(password, conducteur.password)) {
       const token = auth.generateAccessToken(username);
-      // call toJSON method applied during model instantiation
       return callback(null, { ...conducteur.toJSON(), token });
     } else {
       return callback({
