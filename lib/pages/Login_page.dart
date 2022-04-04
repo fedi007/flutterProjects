@@ -1,15 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/Widgets/button_widget.dart';
 import 'package:iblaze/pages/Register_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../services/userServices/Offre_Api.dart';
 import '../services/userServices/register_login.dart';
 import 'Client/TruckMachine_page.dart';
@@ -23,194 +16,156 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool passwordObscured = true;
+  late TextEditingController emailController, passwordController;
   var password;
   var userName;
 
   @override
-  @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
-    
-  
   }
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: () => GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: SafeArea(
-          child: Scaffold(
-              resizeToAvoidBottomInset: false,
-              body: SingleChildScrollView(
-                  child: Column(
-                children: [
-                  SizedBox(height: 20.h),
-                  Container(
-                    height: 250.h,
-                    child: Center(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          //margin: EdgeInsets.only(top: 10),
-                          child: Image.asset(
-                            "images/Lg.png",
-                            height: 100.h,
-                            width: 100.w,
-                          ),
-                        ),
-                      ],
-                    )),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
-                    padding: EdgeInsets.only(left: 20.w, right: 20.h),
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey[200],
-                      border: Border.all(
-                        color: Color.fromARGB(0, 255, 255, 255),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0, 10),
-                            blurRadius: 50,
-                            color: Color(0xffEEEEEE)),
-                      ],
-                    ),
-                    child: TextField(
-                      cursorColor: Color(0xFF005b71),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.person,
-                          color: Color(0xFF005b71),
-                        ),
-                        hintText: "Username",
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
-                      onChanged: (value) {
-                        userName = value;
-                      },
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
-                    padding: EdgeInsets.only(left: 20.w, right: 20.h),
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Color(0xffEEEEEE),
-                      border: Border.all(
-                        color: Color.fromARGB(0, 255, 255, 255),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(0, 20),
-                            blurRadius: 100,
-                            color: Color(0xffEEEEEE)),
-                      ],
-                    ),
-                    child: TextField(
-                      cursorColor: Color(0xFF005b71),
-                      decoration: InputDecoration(
-                        focusColor: Color(0xFF005b71),
-                        icon: Icon(
-                          Icons.vpn_key,
-                          color: Color(0xFF005b71),
-                        ),
-                        hintText: "Password",
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              passwordObscured = !passwordObscured;
-                            });
-                          },
-                          icon: Icon(passwordObscured
-                              ? Icons.visibility_off
-                              : Icons.visibility),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        password = value;
-                      },
-                      obscureText: passwordObscured,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 25.w),
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Text("Forget Password?",
-                            style: TextStyle(color: Color(0xFF005b71))),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 70.h),
-                    padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                    height: 40.h,
-                    width: 600.h,
-                    child: ButtonWidget(
-                        text: "LOGIN",
-                        onClicked: () async {
-                          await APIService.login(userName, password);
 
-                          if (test) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TruckMachine()));
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: "Invalid Username/Password!",
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Color(0xFF007097),
-                              textColor: Colors.white,
-                              fontSize: 16,
-                            );
-                          }
-                        }),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Don't Have Any Account ?  "),
-                        GestureDetector(
-                          child: Text(
-                            "Register Now",
-                            style: TextStyle(color: Color(0xFF005b71)),
-                          ),
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RegisterPage(),
-                                ));
-                          },
-                        )
-                      ],
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+          body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Hero(
+                    tag: "blaze",
+                    child:
+                        Image.asset("images/Lg.png", height: 140, width: 140)),
+                SizedBox(height: 80),
+                Center(
+                    child: Center(
+                        child: Container(
+                            child: Text("SIGN IN",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff007097)))))),
+                SizedBox(height: 50),
+                TextFormField(
+                  cursorColor: Color(0xFF005b71),
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      borderSide:
+                          BorderSide(width: 1, color: Color(0xFF005b71)),
                     ),
-                  )
-                ],
-              ))),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    labelText: "Username",
+                    labelStyle: TextStyle(color: Color(0xff007097)),
+                    prefixIcon: Icon(Icons.person, color: Color(0xFF005b71)),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (value) {
+                    userName = value;
+                  },
+                ),
+                SizedBox(height: 15),
+                TextFormField(
+                  cursorColor: Color(0xFF005b71),
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      borderSide:
+                          BorderSide(width: 1, color: Color(0xFF005b71)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    labelText: "Password",
+                    labelStyle: TextStyle(color: Color(0xff007097)),
+                    prefixIcon: Icon(Icons.vpn_key, color: Color(0xFF005b71)),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          passwordObscured = !passwordObscured;
+                        });
+                      },
+                      icon: Icon(
+                          passwordObscured
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Color(0xff007097)),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    password = value;
+                  },
+                  obscureText: passwordObscured,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10, right: 15),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Text("Forget Password?",
+                          style: TextStyle(
+                            color: Color(0xFF005b71),
+                          )),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                ButtonWidget(
+                    text: "LOGIN",
+                    onClicked: () async {
+                      await APIService.login(userName, password);
+
+                      if (test) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TruckMachine()));
+                      } else {
+                        Get.defaultDialog(
+                            title: "Error",
+                            titleStyle: TextStyle(fontSize: 30),
+                            middleText: "Invalid Username/Email !",
+                            middleTextStyle: TextStyle(
+                                color: Color(0xFF005b71), fontSize: 20));
+                      }
+                    }),
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't Have Any Account ?  ",
+                        style: TextStyle(fontSize: 17.5),
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          "Register Now",
+                          style: TextStyle(
+                              color: Color(0xFF005b71), fontSize: 17.5),
+                        ),
+                        onTap: () {
+                          Get.to(() => RegisterPage(),
+                              transition: Transition.leftToRight);
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
+      )),
     );
   }
 }

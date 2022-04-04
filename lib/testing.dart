@@ -24,17 +24,12 @@ class _testState extends State<test> {
             resizeToAvoidBottomInset: false,
             body: SingleChildScrollView(
                 child: Column(children: [
-              Container(
-                margin: EdgeInsets.only(top: 70),
-                padding: EdgeInsets.only(left: 20, right: 20),
-                height: 40,
-                width: 600,
-                child: ButtonWidget(
+                 ButtonWidget(
                     text: "LOGIN",
                     onClicked: () async {
                       await APIOffre.GetFreight();
                     }),
-              ),
+              
             ]))),
       ),
     );

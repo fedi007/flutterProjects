@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../CLient/ClientPage.dart';
+import '../../services/userServices/Register_Login.dart';
 import 'changeName.dart';
 
 class User extends StatefulWidget {
   final String name;
   final String email;
   final Image picture;
+  final String Date;
   const User({
     Key? key,
     required this.name,
     required this.email,
     required this.picture,
+    required this.Date,
   }) : super(key: key);
 
   @override
-  State<User> createState() => _UserState(name, email);
+  State<User> createState() => _UserState(name, email, Date);
 }
 
 class _UserState extends State<User> {
   bool isvisible = false;
   String name;
   String email;
-  _UserState(this.name, this.email);
+  String date;
+  _UserState(this.name, this.email, this.date);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +84,25 @@ class _UserState extends State<User> {
                     child: Text(email,
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20, color: Colors.grey)),
+                  ),
+                  SizedBox(height: 220.h),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 30.w, right: 30.w, top: 15.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Account Created On : ",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 126, 124, 124),
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold)),
+                        Text(date,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.grey, fontSize: 20)),
+                      ],
+                    ),
                   ),
                 ],
               ),

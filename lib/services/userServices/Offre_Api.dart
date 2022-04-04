@@ -9,6 +9,7 @@ List getResponse = [];
 List getDeliveryTime = [];
 List getFreightType = [];
 List getQuantity = [];
+List getId = [];
 var offreCount;
 var items;
 List<String> dropDownBtnItem = [];
@@ -60,6 +61,7 @@ class APIOffre {
         getDeliveryTime.add(e["time"]);
         getFreightType.add(e["deliveryType"]);
         getQuantity.add(e["quantity"]);
+        getId.add(e["id"]);
       });
     } else {
       print(response.reasonPhrase);
@@ -77,6 +79,21 @@ class APIOffre {
       items.forEach((e) {
         dropDownBtnItem.add(e);
       });
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+  static deleteOffre (id) async {
+    var headers = {'Content-Type': 'application/json'};
+    var request =
+        http.Request('DELETE', Uri.parse('http://10.0.2.2:4000/users/offer/delete'));
+    request.body = json.encode({"id": id});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
     }

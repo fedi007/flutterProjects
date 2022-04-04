@@ -50,7 +50,9 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 160.0.w,
               child: Center(
                 child: ClipOval(
-                  child: Image.asset('images/Lg.png'),
+                  child: Hero (
+                    tag : "blaze",
+                    child: Image.asset('images/Lg.png')),
                 ),
               ),
               decoration: BoxDecoration(),

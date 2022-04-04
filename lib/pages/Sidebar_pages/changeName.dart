@@ -67,26 +67,29 @@ class _ChangeNameState extends State<ChangeName> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                User(name: Name, email: Email, picture: pic),
+                            builder: (context) => User(
+                                name: Name,
+                                email: Email,
+                                picture: pic,
+                                Date: creationDate),
                           ));
                     } else if (NewName == null) {
                       Fluttertoast.showToast(
-                        msg: "Username Can't Be Empty",
+                        msg: "Invalid Username",
                         toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
+                        gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Color(0xFF007097),
+                        backgroundColor: Colors.red,
                         textColor: Colors.white,
                         fontSize: 16,
                       );
                     } else {
                       Fluttertoast.showToast(
-                        msg: "Username is Taken",
+                        msg: "Invalid Username",
                         toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
+                        gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Color(0xFF007097),
+                        backgroundColor: Colors.red,
                         textColor: Colors.white,
                         fontSize: 16,
                       );

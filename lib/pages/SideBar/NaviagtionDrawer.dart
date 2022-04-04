@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iblaze/Conductor/RegisterAs.dart';
 
 
 import '../../services/userServices/register_login.dart';
 
+import '../Conductor/RegisterAs.dart';
 import '../Sidebar_pages/RentHistory.dart';
 import '../Sidebar_pages/about.dart';
 import '../Sidebar_pages/promotions.dart';
@@ -30,14 +30,14 @@ class NavigationDrawer extends StatelessWidget {
                   onClicked: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => User(
-                        name: Name,
-                        email: Email,
-                        picture: Image.asset(
-                          "images/Lg.png",
-                          height: 100,
-                          width: 100,
-                        ),
-                      ),
+                          name: Name,
+                          email: Email,
+                          picture: Image.asset(
+                            "images/Lg.png",
+                            height: 100,
+                            width: 100,
+                          ),
+                          Date: creationDate),
                     ),
                   ),
                 ),

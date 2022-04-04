@@ -6,6 +6,7 @@ bool test = false;
 String Email = "";
 String Name = "";
 var items;
+String creationDate = "";
 
 class APIService {
   static login(username, password) async {
@@ -18,10 +19,12 @@ class APIService {
 
     if (response.statusCode == 200) {
       test = true;
-      var data = await response.stream.bytesToString();
-      var l = data.split('"');
-      Email = l[13];
-      Name = l[9];
+      var listclientdata = json.decode(await response.stream.bytesToString());
+      Email = listclientdata["data"]["email"];
+      Name = listclientdata["data"]["username"];
+
+      var d = listclientdata["data"]["date"];
+      for (var i = 0; i < 10; i++) creationDate = creationDate + d[i];
     } else {
       print(response.reasonPhrase);
       test = false;
@@ -67,20 +70,4 @@ class APIService {
       test = false;
     }
   }
-
-  // static GetFreight() async {
-  //   var request = http.Request(
-  //       'GET', Uri.parse('http://10.0.2.2:4000/users/deliveryType/getall'));
-
-  //   http.StreamedResponse response = await request.send();
-  //   if (response.statusCode == 200) {
-  //     items = json.decode(await response.stream.bytesToString());
-
-  //     print(items.runtimeType);
-
-  //   } else {
-  //     print(response.reasonPhrase);
-  //   }
-  // }
-
 }

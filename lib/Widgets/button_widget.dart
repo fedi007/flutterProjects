@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -11,11 +12,15 @@ class ButtonWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ElevatedButton(
+  Widget build(BuildContext context) => Container(
+      // margin: EdgeInsets.only(top: 30),
+      height: 60,
+      width: double.infinity,
+      child: ElevatedButton(
         onPressed: onClicked,
         child: Text(
           text,
-          style: TextStyle(color: Colors.white),
+          style: GoogleFonts.roboto(color: Colors.white, fontSize: 17.5),
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(
@@ -25,5 +30,5 @@ class ButtonWidget extends StatelessWidget {
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0))),
         ),
-      );
+      ));
 }
