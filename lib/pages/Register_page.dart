@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String? validateUsername(String value) {
-    if (value.length < 3) {
+    if (!GetUtils.isUsername(value)) {
       return "Provide a valid Username";
     }
     return null;
@@ -56,6 +56,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String? validatePassword(String value) {
     if (value.length < 4) {
       return "Password must be at least 4 characters";
+    } else if (!GetUtils.hasCapitalletter(value)) {
+      return "Password must contain a capital letter ";
     }
     return null;
   }
@@ -270,7 +272,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             onTap: () {
                               Get.to(() => LoginPage(),
-                                  transition: Transition.rightToLeft);
+                                  transition: Transition.leftToRight);
                             },
                           )
                         ],

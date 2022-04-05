@@ -1,12 +1,9 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:iblaze/pages/CLient/offers.dart';
-
 import '../../Widgets/button_widget.dart';
-import '../../services/userServices/register_login.dart';
+import '../../services/userServices/Register_Login.dart';
 import '../../services/userServices/Offre_Api.dart';
 
 class HomePage extends StatefulWidget {
@@ -263,7 +260,6 @@ class _HomePageState extends State<HomePage> {
                         deliveryTime, freightType, quantity, Name);
 
                     if (offreCheck) {
-                      await APIOffre.getOffers(Name);
                       Fluttertoast.showToast(
                         msg: " Your Offer Has been Posted ! ",
                         toastLength: Toast.LENGTH_LONG,
@@ -273,6 +269,7 @@ class _HomePageState extends State<HomePage> {
                         textColor: Colors.white,
                         fontSize: 16,
                       );
+                      
                       //offreCheck = false;
                     } else {
                       Fluttertoast.showToast(

@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../services/userServices/Register_Login.dart';
 import 'changeName.dart';
 
-class User extends StatefulWidget {
+class UserProfile extends StatefulWidget {
   final String name;
   final String email;
   final Image picture;
   final String Date;
-  const User({
+  const UserProfile({
     Key? key,
     required this.name,
     required this.email,
@@ -18,15 +18,15 @@ class User extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<User> createState() => _UserState(name, email, Date);
+  State<UserProfile> createState() => _UserProfileState(name, email, Date);
 }
 
-class _UserState extends State<User> {
+class _UserProfileState extends State<UserProfile> {
   bool isvisible = false;
   String name;
   String email;
   String date;
-  _UserState(this.name, this.email, this.date);
+  _UserProfileState(this.name, this.email, this.date);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -67,7 +67,7 @@ class _ChangeNameState extends State<ChangeName> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => User(
+                            builder: (context) => UserProfile(
                                 name: Name,
                                 email: Email,
                                 picture: pic,

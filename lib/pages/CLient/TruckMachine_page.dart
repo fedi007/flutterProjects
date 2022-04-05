@@ -20,7 +20,7 @@ class _TruckMachineState extends State<TruckMachine> {
   void initState() {
     super.initState();
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name) );
+        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
     dropDownBtnItem.add("other");
   }
 
@@ -93,8 +93,8 @@ class _TruckMachineState extends State<TruckMachine> {
                                   ),
                                   child: Image.asset(
                                     "images/Van.png",
-                                    height: 140.h,
-                                    width: 140.w,
+                                    height: 200,
+                                    width: 200,
                                   ),
                                 ),
                                 Text("Removal Van",
@@ -133,12 +133,6 @@ class _TruckMachineState extends State<TruckMachine> {
                                   top: 30.h,
                                   bottom: 30.h,
                                 ),
-                                margin: EdgeInsets.only(
-                                  left: 20.w,
-                                  right: 20.w,
-                                  top: 20.h,
-                                  bottom: 20.h,
-                                ),
                                 decoration: BoxDecoration(
                                   /*color: Color(0xFF005b71),
                                   gradient: LinearGradient(
@@ -152,8 +146,8 @@ class _TruckMachineState extends State<TruckMachine> {
                                 ),
                                 child: Image.asset(
                                   "images/bull.png",
-                                  height: 140.h,
-                                  width: 140.w,
+                                  height: 200,
+                                  width: 200,
                                 ),
                               ),
                               Text("Construction Machine",

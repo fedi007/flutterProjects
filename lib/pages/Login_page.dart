@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         onTap: () {
                           Get.to(() => RegisterPage(),
-                              transition: Transition.leftToRight);
+                              transition: Transition.rightToLeft);
                         },
                       )
                     ],

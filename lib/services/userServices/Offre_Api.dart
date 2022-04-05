@@ -2,16 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import '../../Models/offre.dart';
+
 bool offreCheck = false;
-List getDepart = [];
-List getArrivee = [];
-List getResponse = [];
-List getDeliveryTime = [];
-List getFreightType = [];
-List getQuantity = [];
-List getId = [];
-var offreCount;
+
+//var offreCount;
 var items;
+var offre = <OffreModel>[];
 List<String> dropDownBtnItem = [];
 
 class APIOffre {
@@ -42,7 +39,7 @@ class APIOffre {
     }
   }
 
-  static getOffers(name) async {
+  static  getOffers(name) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
         'POST', Uri.parse('http://10.0.2.2:4000/users/offer/getbyuser'));
@@ -52,21 +49,17 @@ class APIOffre {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      // print(await response.stream.bytesToString());
+      
       items = json.decode(await response.stream.bytesToString());
-      items.forEach((e) {
-        getDepart.add(e["depart"]);
-        getArrivee.add(e["arrivee"]);
-        getResponse.add(e["load"]);
-        getDeliveryTime.add(e["time"]);
-        getFreightType.add(e["deliveryType"]);
-        getQuantity.add(e["quantity"]);
-        getId.add(e["id"]);
-      });
+
+      for (var offreJson in items) {
+        offre.add(OffreModel.fromJson(offreJson));
+      }
     } else {
       print(response.reasonPhrase);
     }
-    offreCount = items.length;
+
+    return offre;
   }
 
   static GetFreight() async {
@@ -83,10 +76,11 @@ class APIOffre {
       print(response.reasonPhrase);
     }
   }
-  static deleteOffre (id) async {
+
+  static deleteOffre(id) async {
     var headers = {'Content-Type': 'application/json'};
-    var request =
-        http.Request('DELETE', Uri.parse('http://10.0.2.2:4000/users/offer/delete'));
+    var request = http.Request(
+        'DELETE', Uri.parse('http://10.0.2.2:4000/users/offer/delete'));
     request.body = json.encode({"id": id});
     request.headers.addAll(headers);
 

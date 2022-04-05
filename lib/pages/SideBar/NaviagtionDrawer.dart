@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../services/userServices/register_login.dart';
 
@@ -21,7 +21,7 @@ class NavigationDrawer extends StatelessWidget {
     return ScreenUtilInit(
       builder: () => Drawer(
         child: Material(
-          color: Color(0xFF005b71),
+          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 80, 24, 0),
             child: Column(
@@ -29,7 +29,7 @@ class NavigationDrawer extends StatelessWidget {
                 headerWidget(
                   onClicked: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => User(
+                      builder: (context) => UserProfile(
                           name: Name,
                           email: Email,
                           picture: Image.asset(
@@ -81,9 +81,13 @@ class NavigationDrawer extends StatelessWidget {
                 SizedBox(
                   height: 100,
                 ),
-                BecomeDriver(
-                  onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => TruckMachineRegister())),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: BecomeDriver(
+                    onClicked: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => TruckMachineRegister())),
+                  ),
                 ),
               ],
             ),
@@ -120,33 +124,22 @@ class NavigationDrawer extends StatelessWidget {
     required VoidCallback onClicked,
   }) =>
       InkWell(
-        hoverColor: Colors.transparent,
-        onTap: onClicked,
-        child: Row(
-          children: [
-            Container(
-              child: Image.asset(
-                "images/Lg.png",
-                height: 40.h,
-                width: 40.w,
-              ),
-            ),
-            SizedBox(
-              width: 20.w,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(Name, style: TextStyle(fontSize: 14, color: Colors.white)),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(Email, style: TextStyle(fontSize: 14, color: Colors.white))
-              ],
-            )
-          ],
-        ),
-      );
+          hoverColor: Colors.transparent,
+          onTap: onClicked,
+          child: Column(
+            children: [
+              Text(Name,
+                  style: GoogleFonts.roboto(
+                      fontSize: 25,
+                      color: Color(0xFF005b71),
+                      fontWeight: FontWeight.bold)),
+              // SizedBox(
+              //   height: 10.h,
+              // ),
+              // Text(Email,
+              //     style: TextStyle(fontSize: 20, color: Color(0xFF005b71)))
+            ],
+          ));
 
   Widget BecomeDriver({
     required VoidCallback onClicked,
@@ -161,13 +154,17 @@ class NavigationDrawer extends StatelessWidget {
               width: 120.w,
               child: Center(
                   child: Text("Become a driver",
-                      style: TextStyle(fontSize: 15, color: Colors.white))),
+                      style:
+                          TextStyle(fontSize: 15, color: Color(0xFF005b71)))),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xFF005b71),
+                border: Border.all(
+                  color: Color(0xFF005b71),
+                  width: 1.5,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Color(0xFF005b71).withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 5,
                     offset: Offset(1, 3),
