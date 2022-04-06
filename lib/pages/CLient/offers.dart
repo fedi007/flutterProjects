@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iblaze/Models/offre.dart';
-
 import '../../services/userServices/Offre_Api.dart';
 import '../../services/userServices/Register_Login.dart';
 
@@ -13,18 +12,19 @@ class Offers extends StatefulWidget {
 }
 
 class _OffersState extends State<Offers> {
-  List<OffreModel> buildOffer = [];
-  var x;
+  // List<OffreModel> offre = [];
 
-  void main() async {
-    buildOffer = await APIOffre.getOffers(Name);
-    x = await APIOffre.GetFreight();
-  }
+  // void main() async {
+  //   offre = await APIOffre.getOffers(Name);
+  // }
 
   @override
   void initState() {
     super.initState();
-    main();
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
+
+    //  main();
   }
 
   @override
@@ -33,7 +33,7 @@ class _OffersState extends State<Offers> {
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 197, 188, 188),
         body: ListView.builder(
-            itemCount: buildOffer.length,
+            itemCount: offre.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
                 child: ExpansionTile(
@@ -46,7 +46,7 @@ class _OffersState extends State<Offers> {
                           ),
                           text: 'From '),
                       new TextSpan(
-                          text: buildOffer[index].getArrivee,
+                          text: offre[index].getArrivee,
                           style: new TextStyle(
                               fontSize: 18, color: Color(0xFF005b71))),
                       new TextSpan(
@@ -55,37 +55,35 @@ class _OffersState extends State<Offers> {
                           ),
                           text: ' To '),
                       new TextSpan(
-                          text: buildOffer[index].getDepart,
+                          text: offre[index].getDepart,
                           style: new TextStyle(
                               fontSize: 18, color: Color(0xFF005b71))),
                     ],
                   )),
-                  subtitle: Text(buildOffer[index].getDepart +
-                      " " +
-                      buildOffer[index].getDepart),
+                  subtitle: Text(
+                      offre[index].getDepart + " " + offre[index].getDepart),
                   children: [
                     ListTile(
-                      title: Text("Departure Location : " +
-                          buildOffer[index].getDepart),
-                    ),
-                    ListTile(
                       title: Text(
-                          "Arrival Location : " + buildOffer[index].getArrivee),
-                    ),
-                    ListTile(
-                      title: Text(
-                          "Freight Type : " + buildOffer[index].getFreightType),
+                          "Departure Location : " + offre[index].getDepart),
                     ),
                     ListTile(
                       title:
-                          Text("Quantity : " + buildOffer[index].getQuantity),
+                          Text("Arrival Location : " + offre[index].getArrivee),
                     ),
                     ListTile(
-                      title: Text("delivery time : " +
-                          buildOffer[index].getDeliveryTime),
+                      title:
+                          Text("Freight Type : " + offre[index].getFreightType),
                     ),
                     ListTile(
-                      title: Text(buildOffer[index].getResponse),
+                      title: Text("Quantity : " + offre[index].getQuantity),
+                    ),
+                    ListTile(
+                      title: Text(
+                          "delivery time : " + offre[index].getDeliveryTime),
+                    ),
+                    ListTile(
+                      title: Text(offre[index].getResponse),
                     ),
                     ListTile(
                       title: Text("Edit",
@@ -94,10 +92,10 @@ class _OffersState extends State<Offers> {
                     ),
                     ListTile(
                       onTap: () async {
-                        APIOffre.deleteOffre(buildOffer[index].getId);
+                        APIOffre.deleteOffre(offre[index].getId);
                         if (offreCheck) {
                           setState(() {
-                            buildOffer.remove(buildOffer[index]);
+                            offre.remove(offre[index]);
                           });
                           Fluttertoast.showToast(
                             msg: "Your Offre Has been Deleted",

@@ -19,8 +19,8 @@ class _TruckMachineState extends State<TruckMachine> {
   @override
   void initState() {
     super.initState();
-  //  WidgetsBinding.instance
-  //       ?.addPostFrameCallback((_) => APIOffre.getOffers(Name) );
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
     dropDownBtnItem.add("other");
   }
 
