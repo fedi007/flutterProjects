@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:iblaze/services/userServices/Register_Login.dart';
 
 import '../../Models/offre.dart';
 
 bool offreCheck = false;
-
-var offreCount;
+bool deletedOffre = false;
+var name = Name;
 var items;
 List<String> dropDownBtnItem = [];
 var offre = <OffreModel>[];
@@ -51,7 +52,7 @@ class APIOffre {
 
     if (response.statusCode == 200) {
       items = json.decode(await response.stream.bytesToString());
-      print(items);
+      
       for (var offreJson in items) {
         offre.add(OffreModel.fromJson(offreJson));
       }
@@ -69,7 +70,7 @@ class APIOffre {
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
       var items = json.decode(await response.stream.bytesToString());
-      print(items);
+
       items.forEach((e) {
         dropDownBtnItem.add(e);
       });
@@ -88,10 +89,10 @@ class APIOffre {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      offreCheck = true;
       print(await response.stream.bytesToString());
+      deletedOffre = true;
     } else {
-      offreCheck = false;
+      deletedOffre = false;
       print(response.reasonPhrase);
     }
   }

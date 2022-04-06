@@ -1,8 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/pages/CLient/offers.dart';
 
 import '../../Widgets/button_widget.dart';
@@ -17,15 +17,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TimeOfDay? Time = const TimeOfDay(hour: 12, minute: 12);
   String? dropdownvalue;
-  int index = 0;
   bool isVisible = false;
   String? depart;
   String? arrivee;
   String? response;
-  String? deliveryTime;
+  String? deliveryTime = "12:12";
   String? freightType;
   String? quantity;
+  @override
+  void initState() {
+    setState(() {
+      response = "Only Delivering";
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,263 +42,295 @@ class _HomePageState extends State<HomePage> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              //color: Color(0xFF005b71),
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                //color: Color(0xFF005b71),
 
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  isExpanded: true,
-                  hint: Center(
-                    child: Text(
-                      "Choose your freight type",
-                      style: TextStyle(
-                        color: Color(0xFF005b71),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    isExpanded: true,
+                    hint: Center(
+                      child: Text(
+                        "Choose your freight type",
+                        style: TextStyle(
+                          color: Color(0xFF005b71),
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                  value: dropdownvalue,
-                  icon: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Color(0xFF005b71),
-                  ),
-                  items: dropDownBtnItem.map((
-                    String items,
-                  ) {
-                    return DropdownMenuItem(
-                        value: items,
-                        child: Container(
-                          width: double.infinity,
-                          child: Text(
-                            items,
-                            style: TextStyle(
-                              color: Color(0xFF005b71),
+                    borderRadius: BorderRadius.circular(20),
+                    value: dropdownvalue,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Color(0xFF005b71),
+                    ),
+                    items: dropDownBtnItem.map((
+                      String items,
+                    ) {
+                      return DropdownMenuItem(
+                          value: items,
+                          child: Container(
+                            width: double.infinity,
+                            child: Text(
+                              items,
+                              style: TextStyle(
+                                color: Color(0xFF005b71),
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ));
-                  }).toList(),
-                  onTap: () {},
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownvalue = newValue;
-                      freightType = newValue;
-                      if (dropdownvalue == dropDownBtnItem.last) {
-                        isVisible = true;
-                      } else {
-                        isVisible = false;
-                      }
-                    });
-                  },
+                          ));
+                    }).toList(),
+                    onTap: () {},
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownvalue = newValue;
+                        freightType = newValue;
+                        if (dropdownvalue == dropDownBtnItem.last) {
+                          isVisible = true;
+                        } else {
+                          isVisible = false;
+                        }
+                      });
+                    },
+                  ),
                 ),
               ),
-            ),
-            Visibility(
-              visible: isVisible,
-              child: Container(
+              Visibility(
+                visible: isVisible,
+                child: Container(
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  width: double.infinity,
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide:
+                              BorderSide(width: 1, color: Color(0xFF005b71)),
+                        ),
+                        hintText: 'Specify Your freight type ',
+                        hintStyle: TextStyle(
+                            //   fontSize: 20,
+                            ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF005b71),
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        )),
+                    onChanged: (value) {
+                      freightType = value;
+                    },
+                  ),
+                ),
+              ),
+              Container(
                 margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 width: double.infinity,
                 child: TextField(
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                      hintText: 'Specify Your freight type ',
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderSide:
+                            BorderSide(width: 1, color: Color(0xFF005b71)),
+                      ),
+                      hintText: 'Weight  ( ex : 10kg ) / Quantity ( ex :10 ) ',
                       hintStyle: TextStyle(
                           //   fontSize: 20,
                           ),
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF005b71),
+                          width: 3,
                         ),
+                        borderRadius: BorderRadius.circular(20),
                       )),
                   onChanged: (value) {
-                    freightType = value;
+                    quantity = value;
                   },
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-              width: double.infinity,
-              child: TextField(
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    hintText: 'Weight(ex : 10kg ) / Quantity (ex :10 ) ',
-                    hintStyle: TextStyle(
-                        //   fontSize: 20,
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                width: double.infinity,
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderSide:
+                            BorderSide(width: 1, color: Color(0xFF005b71)),
+                      ),
+                      hintText: ' Departure Location ',
+                      hintStyle: TextStyle(
+                          //   fontSize: 20,
+                          ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFF005b71),
+                          width: 3,
                         ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xFF005b71),
-                      ),
-                    )),
-                onChanged: (value) {
-                  quantity = value;
-                },
+                        borderRadius: BorderRadius.circular(20),
+                      )),
+                  onChanged: (value) {
+                    depart = value;
+                  },
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Text(" From",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF005b71))),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(24.h.w),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                          hintText: 'Tunis ',
-                          hintStyle: TextStyle(),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF005b71),
-                            ),
-                          )),
-                      onChanged: (value) {
-                        depart = value;
-                      },
-                    ),
-                  ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                width: double.infinity,
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderSide:
+                            BorderSide(width: 1, color: Color(0xFF005b71)),
+                      ),
+                      hintText: 'Arrival Location ',
+                      hintStyle: TextStyle(
+                          //   fontSize: 20,
+                          ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFF005b71),
+                          width: 3,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      )),
+                  onChanged: (value) {
+                    arrivee = value;
+                  },
                 ),
-                Text(" To",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF005b71))),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(24.h.w),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                          hintText: 'Manouba ',
-                          hintStyle: TextStyle(),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF005b71),
-                            ),
-                          )),
-                      onChanged: (value) {
-                        arrivee = value;
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(" Delivery Time",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF005b71))),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0.h.w),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                          hintText: 'Specify The Time ',
-                          hintStyle: TextStyle(),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF005b71),
-                            ),
-                          )),
-                      onChanged: (value) {
-                        deliveryTime = value;
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10.h),
-              child: Row(
+              ),
+              Padding(
+                padding: EdgeInsets.all(20.h.w),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Delivering And Unloading",
-                      style: TextStyle(
-                        color: Color(0xFF005b71),
-                        fontWeight: FontWeight.bold,
+                    Text(" Delivery Time :",
+                        style: GoogleFonts.roboto(
+                            fontSize: 20,
+                            // fontWeight: FontWeight.bold,
+                            color: Color(0xFF005b71))),
+                    Padding(
+                      padding: EdgeInsets.only(left: 20.0.w, right: 5.w),
+                      child: Text(
+                        "${Time!.hour.toString()}: ${Time!.minute.toString()}",
+                        style: GoogleFonts.roboto(
+                          fontSize: 20,
+                          //  fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    Radio(
-                        value: "Delivering And Unloading",
-                        groupValue: response,
-                        onChanged: (String? val) {
-                          setState(() {
-                            response = val;
-                          });
-                        }),
-                    Text(
-                      "Only Delivering ",
-                      style: TextStyle(
-                        color: Color(0xFF005b71),
-                        fontWeight: FontWeight.bold,
+                    GestureDetector(
+                        onTap: () async {
+                          TimeOfDay? newTime = await showTimePicker(
+                              context: context, initialTime: Time!);
+                          if (newTime != null) {
+                            setState(() {
+                              Time = newTime;
+                              deliveryTime =
+                                  "${Time!.hour.toString()}: ${Time!.minute.toString()}";
+                            });
+                          }
+                        },
+                        child: Icon(Icons.edit, color: Colors.grey, size: 20)),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10.h),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Delivering And Unloading",
+                        style: TextStyle(
+                          color: Color(0xFF005b71),
+                          //fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Radio(
-                        value: "Only Delivering",
-                        groupValue: response,
-                        onChanged: (String? val) {
-                          setState(() {
-                            response = val;
-                          });
-                        })
-                  ]),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 70.h),
-              padding: EdgeInsets.only(left: 20.w, right: 20.w),
-              height: 40.h,
-              width: 600.h,
-              child: ButtonWidget(
+                      Radio(
+                          value: "Delivering And Unloading",
+                          groupValue: response,
+                          onChanged: (String? val) {
+                            setState(() {
+                              response = val;
+                            });
+                          }),
+                      Text(
+                        "Only Delivering",
+                        style: TextStyle(
+                          color: Color(0xFF005b71),
+                          // fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Radio(
+                          value: "Only Delivering",
+                          groupValue: response,
+                          onChanged: (String? val) {
+                            setState(() {
+                              response = val;
+                            });
+                          })
+                    ]),
+              ),
+              SizedBox(height: 20),
+              ButtonWidget(
                   text: "Look For Offers",
                   onClicked: () async {
-                    await APIOffre.RegisterOffre(depart, arrivee, response,
-                        deliveryTime, freightType, quantity, Name);
-                    setState(() {
-                      offre = [];
-                    });
-                    WidgetsBinding.instance
-                        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
+                    Get.defaultDialog(
+                        title: "Check",
+                        titleStyle:
+                            TextStyle(fontSize: 20, color: Color(0xFF005b71)),
+                        middleText:
+                            " ${quantity} ${freightType}   \n \n Departure Location : ${arrivee} \n \n Departure Location : ${depart} \n \n  ${deliveryTime} \n \n  ${response} \n \n ",
+                        textCancel: "Cancel",
+                        cancelTextColor: Color(0xFF005b71),
+                        textConfirm: "Confirm",
+                        buttonColor: Color(0xff007097),
+                        onConfirm: () async {
+                          await APIOffre.RegisterOffre(
+                              depart,
+                              arrivee,
+                              response,
+                              deliveryTime,
+                              freightType,
+                              quantity,
+                              Name);
+                          setState(() {
+                            offre = [];
+                          });
 
-                    if (offreCheck) {
-                      Fluttertoast.showToast(
-                        msg: " Your Offer Has been Posted ! ",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.green,
-                        textColor: Colors.white,
-                        fontSize: 16,
-                      );
-                      //offreCheck = false;
-                    } else {
-                      Fluttertoast.showToast(
-                        msg: " Verify Your offer ! ",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16,
-                      );
-                    }
-                  }),
-            ),
-          ],
+                          WidgetsBinding.instance?.addPostFrameCallback(
+                              (_) => APIOffre.getOffers(Name));
+
+                          if (offreCheck) {
+                            Get.back();
+                          } else {
+                            Get.defaultDialog(
+                                title: "Error",
+                                titleStyle:
+                                    TextStyle(fontSize: 30, color: Colors.red),
+                                middleText: "Verify Your offer",
+                                middleTextStyle: TextStyle(
+                                    color: Color(0xFF005b71), fontSize: 20));
+                          }
+                          ;
+                        });
+                  })
+            ],
+          ),
         )),
       ),
     );

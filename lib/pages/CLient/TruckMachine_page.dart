@@ -53,6 +53,7 @@ class _TruckMachineState extends State<TruckMachine> {
                           context,
                           MaterialPageRoute(builder: (context) => ClientPage()),
                         );
+                        print(Name);
                       },
                       child: Container(
                           height: MediaQuery.of(context).size.height / 2,

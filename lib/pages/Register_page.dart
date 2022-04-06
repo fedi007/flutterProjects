@@ -47,17 +47,24 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String? validateUsername(String value) {
-    if (value.length < 3) {
+    if (!GetUtils.isUsername(value)) {
       return "Provide a valid Username";
     }
     return null;
   }
 
   String? validatePassword(String value) {
-    if (value.length < 4) {
-      return "Password must be at least 4 characters";
+    RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{4,}$');
+    if (value.isEmpty) {
+      return 'Please enter password';
+    } else {
+      if (!regex.hasMatch(value)) {
+        return 'Enter a valid password';
+      } else {
+        return null;
+      }
     }
-    return null;
   }
 
   String? validateConfirmPassword(String value) {
