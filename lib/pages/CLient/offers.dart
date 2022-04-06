@@ -12,11 +12,7 @@ class Offers extends StatefulWidget {
 }
 
 class _OffersState extends State<Offers> {
-  // List<OffreModel> offre = [];
 
-  // void main() async {
-  //   offre = await APIOffre.getOffers(Name);
-  // }
 
   @override
   void initState() {
@@ -24,7 +20,6 @@ class _OffersState extends State<Offers> {
     WidgetsBinding.instance
         ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
 
-    //  main();
   }
 
   @override
