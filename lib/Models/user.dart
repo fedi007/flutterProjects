@@ -1,17 +1,21 @@
 class User {
   User({
-    required this.username,
-    required this.useremail,
-   
-  
+    this.username,
+    this.email,
   });
-  late final String useremail;
-  late final String username;
-
+  late final String? username;
+  late final String? email;
 
   User.fromJson(Map<String, dynamic> json) {
-    username = json["username"];
-    useremail = json["useremail"];
-  
+    username = json['username'];
+    email = json['email'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['username'] = username;
+    _data['email'] = email;
+    return _data;
   }
 }
+

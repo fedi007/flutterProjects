@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../Widgets/button_widget.dart';
 import '../../../services/conductorServices/Register_Login.dart';
 import '../ConductorPages/cond.dart';
+import 'RegisterConductorPage2.dart';
 
 class RegisterConductorPage extends StatefulWidget {
   const RegisterConductorPage({Key? key}) : super(key: key);
@@ -97,7 +99,7 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                     ButtonWidget(
                         text: "Next",
                         onClicked: () {
-                         // Get.to(RegisterConductorSecondPage());
+                          Get.to(RegisterConductorSecondPage());
                         }),
                   ],
                 ),

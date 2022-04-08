@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:iblaze/pages/Login_page.dart';
 
 import '../SideBar/NaviagtionDrawer.dart';
 import 'HomePage.dart';
@@ -14,6 +17,7 @@ class ClientPage extends StatefulWidget {
 
 class _ClientPageState extends State<ClientPage> {
   int index = 0;
+ // final userData = GetStorage();
   final screens = [HomePage(), Offers()];
 
   @override
@@ -52,6 +56,28 @@ class _ClientPageState extends State<ClientPage> {
           ),
           drawer: const NavigationDrawer(),
           appBar: AppBar(
+            actions: [
+              PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                      child: Text(
+                        "Logout",
+                        style: TextStyle(color: Color(0xFF005b71)),
+                      ),
+                      //onTap: () {
+                        // userData.write("isLogged", false);
+                        // userData.remove("username");
+
+                        // WidgetsBinding.instance!.addPostFrameCallback(
+                        //   (_) {
+                        //     Get.offAll(LoginPage());
+                         // },
+                       // );
+                     // }
+                      )
+                ],
+              )
+            ],
             backgroundColor: Color(0xFF005b71),
           ),
         ),

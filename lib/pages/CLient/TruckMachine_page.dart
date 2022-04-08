@@ -19,6 +19,7 @@ class _TruckMachineState extends State<TruckMachine> {
   @override
   void initState() {
     super.initState();
+    
     WidgetsBinding.instance
         ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
     dropDownBtnItem.add("other");
@@ -59,13 +60,7 @@ class _TruckMachineState extends State<TruckMachine> {
                           height: MediaQuery.of(context).size.height / 2,
                           decoration: BoxDecoration(
                             color: Color(0xFF005b71),
-                            /* gradient: LinearGradient(
-                                begin: Alignment.centerRight,
-                                end: Alignment.centerLeft,
-                                colors: [
-                                  Color(0xFF005b71),
-                                  Color(0xFFFFFFFF),
-                                ]),*/
+                         
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(75),
                                 bottomRight: Radius.circular(75)),
@@ -81,12 +76,7 @@ class _TruckMachineState extends State<TruckMachine> {
                                     top: 30.h,
                                     bottom: 30.h,
                                   ),
-                                  /* margin: EdgeInsets.only(
-                                    left: 20.w,
-                                    right: 20.w,
-                                    top: 20.h, 
-                                    bottom: 20.h,
-                                  ),*/
+                              
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     /*borderRadius:
@@ -141,14 +131,7 @@ class _TruckMachineState extends State<TruckMachine> {
                                   bottom: 20.h,
                                 ),
                                 decoration: BoxDecoration(
-                                  /*color: Color(0xFF005b71),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color(0xFF005b71),
-                                        Color(0xFFFFFFFF),
-                                      ]),*/
+                                 
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.asset(

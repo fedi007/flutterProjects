@@ -30,25 +30,23 @@ class NavigationDrawer extends StatelessWidget {
             child: Column(
               children: [
                 headerWidget(
-                  onClicked: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => User(
-                          name: Name,
-                          email: Email,
-                          picture: Image.asset(
-                            "images/Lg.png",
-                            height: 100,
-                            width: 100,
-                          ),
-                          Date: creationDate),
-                    ),
+                  onClicked: () => Get.to(
+                    () => User(
+                        name: Name,
+                        email: Email,
+                        picture: Image.asset(
+                          "images/Lg.png",
+                          height: 100,
+                          width: 100,
+                        ),
+                        Date: creationDate),
                   ),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
                 const Divider(
-                  thickness: 1,
+                  thickness: 2,
                   height: 10,
                   color: Colors.grey,
                 ),
@@ -149,13 +147,32 @@ class NavigationDrawer extends StatelessWidget {
           children: [
             Container(
               height: 60.h,
-              width: 120.w,
-              child: Center(
-                  child: Text("Become a driver",
-                      style:
-                          TextStyle(fontSize: 15, color: Color(0xFF005b71)))),
+              width: 180.w,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Become a driver  ",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xFF005b71),
+                      )),
+                  SizedBox(height: 10),
+                  Text(" earn money on your schedule ",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xFF005b71),
+                      )),
+                ],
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(125, 0, 90, 113),
+                      Color.fromARGB(126, 255, 255, 255),
+                    ]),
                 border: Border.all(
                   color: Color(0xFF005b71),
                   width: 1.5,

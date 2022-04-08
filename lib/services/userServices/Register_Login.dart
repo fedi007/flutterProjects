@@ -19,11 +19,11 @@ class APIService {
 
     if (response.statusCode == 200) {
       test = true;
-      var listclientdata = json.decode(await response.stream.bytesToString());
-      Email = listclientdata["data"]["email"];
-      Name = listclientdata["data"]["username"];
+      var Data = json.decode(await response.stream.bytesToString());
+      Email = Data["data"]["email"];
+      Name = Data["data"]["username"];
 
-      var d = listclientdata["data"]["date"];
+      var d = Data["data"]["date"];
       for (var i = 0; i < 10; i++) creationDate = creationDate + d[i];
     } else {
       print(response.reasonPhrase);

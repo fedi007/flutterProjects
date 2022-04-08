@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:iblaze/pages/Sidebar_pages/user_profile.dart';
 
 import '../../Widgets/button_widget.dart';
@@ -14,13 +15,29 @@ class ChangeName extends StatefulWidget {
 }
 
 class _ChangeNameState extends State<ChangeName> {
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  late TextEditingController usernameController;
+  @override
+  void initState() {
+    super.initState();
+
+    usernameController = TextEditingController();
+  }
+
+  String? validateUsername(String value) {
+    if (!GetUtils.isUsername(value)) {
+      return "Provide a valid Username";
+    }
+    return null;
+  }
+
   bool isvisible = false;
   var userName;
   var LastuserName;
   Image pic = Image.asset(
     "images/Lg.png",
-    height: 100.h,
-    width: 100.w,
+    height: 100,
+    width: 100,
   );
 
   String? NewName;
@@ -32,8 +49,10 @@ class _ChangeNameState extends State<ChangeName> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            child: TextField(
+          Form(
+            key: loginFormKey,
+            child: Container(
+              child: TextFormField(
                 cursorColor: Color(0xFF005b71),
                 decoration: InputDecoration(
                   icon: Icon(
@@ -45,60 +64,58 @@ class _ChangeNameState extends State<ChangeName> {
                   focusedBorder: InputBorder.none,
                 ),
                 onChanged: (text) {
-                  setState(() {
-                    NewName = text;
-                    isvisible = true;
-                  });
-                }),
+                  NewName = text;
+                  isvisible = true;
+                },
+                controller: usernameController,
+                onSaved: (value) {
+                  userName = value!;
+                },
+                validator: (value) {
+                  return validateUsername(value!);
+                },
+              ),
+            ),
           ),
-          Visibility(
-            //visible: isvisible,
-            child: Container(
-              margin: EdgeInsets.only(top: 50.h),
-              padding: EdgeInsets.only(left: 20.w, right: 20.w),
-              height: 40.h,
-              width: 600.h,
+          SizedBox(height: 100),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
               child: ButtonWidget(
                   text: "Save",
                   onClicked: () async {
                     await APIService.Update(Name, NewName);
-
+                    var x = checkLogin();
                     if (test) {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => User(
-                                name: Name,
-                                email: Email,
-                                picture: pic,
-                                Date: creationDate),
-                          ));
-                    } else if (NewName == null) {
-                      Fluttertoast.showToast(
-                        msg: "Invalid Username",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16,
-                      );
-                    } else {
-                      Fluttertoast.showToast(
-                        msg: "Invalid Username",
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16,
-                      );
+                      Get.off(() => User(
+                          name: Name,
+                          email: Email,
+                          picture: pic,
+                          Date: creationDate));
+                    } else if (x && test == false) {
+                      Get.defaultDialog(
+                          title: "Error",
+                          titleStyle: TextStyle(fontSize: 30),
+                          middleText: "Username is taken",
+                          middleTextStyle: TextStyle(
+                              color: Color(0xFF005b71), fontSize: 20));
                     }
+                    ;
                   }),
             ),
           ),
         ],
       )),
     );
+  }
+
+  bool checkLogin() {
+    final isValid = loginFormKey.currentState!.validate();
+    if (!isValid) {
+      return false;
+    } else {
+      loginFormKey.currentState!.save();
+      return true;
+    }
   }
 }

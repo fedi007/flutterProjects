@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../services/userServices/Register_Login.dart';
 import 'changeName.dart';
@@ -51,12 +52,12 @@ class _UserState extends State<User> {
                   SizedBox(height: 80),
                   Image.asset(
                     "images/Lg.png",
-                    height: 100.h,
-                    width: 100.w,
+                    height: 100,
+                    width: 100,
                   ),
                   Padding(
                     padding:
-                        EdgeInsets.only(left: 30.w, right: 30.w, top: 15.h),
+                        EdgeInsets.only(left: 30, right: 30, top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -68,11 +69,9 @@ class _UserState extends State<User> {
                                 fontWeight: FontWeight.bold)),
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChangeName(),
-                                  ));
+                             Get.off(
+                                () => ChangeName(),
+                              );
                             },
                             child:
                                 Icon(Icons.edit, color: Colors.grey, size: 20))
@@ -80,15 +79,15 @@ class _UserState extends State<User> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 30.w, right: 30.w, top: 5.h),
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 5),
                     child: Text(email,
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20, color: Colors.grey)),
                   ),
-                  SizedBox(height: 220.h),
+                  SizedBox(height: 220),
                   Padding(
                     padding:
-                        EdgeInsets.only(left: 30.w, right: 30.w, top: 15.h),
+                        EdgeInsets.only(left: 30, right: 30, top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

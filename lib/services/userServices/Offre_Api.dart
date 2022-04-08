@@ -7,7 +7,7 @@ import '../../Models/offre.dart';
 
 bool offreCheck = false;
 bool deletedOffre = false;
-var name = Name;
+
 var items;
 List<String> dropDownBtnItem = [];
 var offre = <OffreModel>[];

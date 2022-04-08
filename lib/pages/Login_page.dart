@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/Widgets/button_widget.dart';
 import 'package:iblaze/pages/Register_page.dart';
@@ -17,14 +18,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool passwordObscured = true;
   late TextEditingController emailController, passwordController;
+  // final userData = GetStorage();
   var password;
   var userName;
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
-  }
 
   Widget build(BuildContext context) {
     return SafeArea(
@@ -125,10 +122,9 @@ class _LoginPageState extends State<LoginPage> {
                       await APIService.login(userName, password);
 
                       if (test) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TruckMachine()));
+                        Get.off(() => TruckMachine());
+                        // userData.write("isLogged", true);
+                        // userData.write("username", Name);
                       } else {
                         Get.defaultDialog(
                             title: "Error",

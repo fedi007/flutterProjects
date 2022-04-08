@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../services/userServices/Offre_Api.dart';
+import 'CLient/TruckMachine_page.dart';
 import 'Login_page.dart';
-
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key, required this.title}) : super(key: key);
@@ -17,6 +20,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _isVisible = false;
+  final userData = GetStorage();
 
   _SplashScreenState() {
     new Timer(const Duration(milliseconds: 3500), () {
@@ -32,6 +36,11 @@ class _SplashScreenState extends State<SplashScreen> {
         _isVisible = true;
       });
     });
+  }
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
   }
 
   @override
@@ -50,9 +59,8 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 160.0.w,
               child: Center(
                 child: ClipOval(
-                  child: Hero (
-                    tag : "blaze",
-                    child: Image.asset('images/Lg.png')),
+                  child:
+                      Hero(tag: "blaze", child: Image.asset('images/Lg.png')),
                 ),
               ),
               decoration: BoxDecoration(),
@@ -62,5 +70,10 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-}
 
+  void checkIfLogged() {
+    userData.read("isLogged")
+        ? Get.to(() => TruckMachine())
+        : Get.to(() => LoginPage());
+  }
+}
