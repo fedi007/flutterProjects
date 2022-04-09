@@ -13,8 +13,8 @@ import '../Sidebar_pages/support.dart';
 import '../Sidebar_pages/user_profile.dart';
 import 'drawer_items.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+class NavigationDrawerConduct extends StatelessWidget {
+  const NavigationDrawerConduct({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +42,7 @@ class NavigationDrawer extends StatelessWidget {
                 const SizedBox(
                   height: 40,
                 ),
-                DrawerItem(
-                  name: 'Promotion',
-                  icon: FontAwesomeIcons.tag,
-                  onPressed: () => onItemPressed(context, index: 0),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
+               
                 DrawerItem(
                     name: 'Rent history',
                     icon: Icons.lock_clock,
@@ -71,9 +64,7 @@ class NavigationDrawer extends StatelessWidget {
                 SizedBox(
                   height: 100,
                 ),
-                BecomeDriver(onClicked: () {
-                  Get.to(() => RegisterConductorPage());
-                })
+               
               ],
             ),
           ),
@@ -86,17 +77,15 @@ class NavigationDrawer extends StatelessWidget {
     Navigator.pop(context);
 
     switch (index) {
+     
       case 0:
-        Get.to(() => Promotion());
+     Get.to(() => RentHistory());
         break;
       case 1:
-       Get.to(() => RentHistory());
-        break;
-      case 2:
         Get.to(() => Support());
         break;
-      case 3:
-       Get.to(() => About());
+      case 2:
+     Get.to(() => About());
         break;
     }
   }
@@ -109,7 +98,7 @@ class NavigationDrawer extends StatelessWidget {
           onTap: onClicked,
           child: Column(
             children: [
-              Text('${currentUser?.username}',
+              Text('${currentConductor?.conductorName}',
                   style: GoogleFonts.roboto(
                       fontSize: 25,
                       color: Color(0xFF005b71),
@@ -122,57 +111,5 @@ class NavigationDrawer extends StatelessWidget {
             ],
           ));
 
-  Widget BecomeDriver({
-    required VoidCallback onClicked,
-  }) =>
-      InkWell(
-        hoverColor: Colors.transparent,
-        onTap: onClicked,
-        child: Column(
-          children: [
-            Container(
-              height: 60.h,
-              width: 180.w,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Become a driver  ",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xFF005b71),
-                      )),
-                  SizedBox(height: 10),
-                  Text(" earn money on your schedule ",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xFF005b71),
-                      )),
-                ],
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(125, 0, 90, 113),
-                      Color.fromARGB(126, 255, 255, 255),
-                    ]),
-                border: Border.all(
-                  color: Color(0xFF005b71),
-                  width: 1.5,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: Offset(1, 3),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+  
 }

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:iblaze/pages/Sidebar_pages/user_profile.dart';
 
 import '../../Widgets/button_widget.dart';
+import '../../data/globals.dart';
 import '../../services/userServices/register_login.dart';
 
 class ChangeName extends StatefulWidget {
@@ -84,15 +85,11 @@ class _ChangeNameState extends State<ChangeName> {
               child: ButtonWidget(
                   text: "Save",
                   onClicked: () async {
-                    await APIService.Update(Name, NewName);
+                    await APIService.Update(currentUser?.username, NewName);
                     var x = checkLogin();
-                    if (test) {
-                      Get.off(() => User(
-                          name: Name,
-                          email: Email,
-                          picture: pic,
-                          Date: creationDate));
-                    } else if (x && test == false) {
+                    if (checkUpdate) {
+                      Get.off(() => User());
+                    } else if (x && checkUpdate == false) {
                       Get.defaultDialog(
                           title: "Error",
                           titleStyle: TextStyle(fontSize: 30),

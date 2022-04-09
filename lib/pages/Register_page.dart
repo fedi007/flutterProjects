@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Widgets/button_widget.dart';
+import '../data/globals.dart';
 import '../services/userServices/register_login.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Login_page.dart';
@@ -248,10 +249,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         onClicked: () async {
                           await APIService.Register(userName, email, password);
                           var x = checkLogin();
-                          if (test) {
+                          if (checkRegister) {
                             Get.off(() => LoginPage(),
                                 transition: Transition.zoom);
-                          } else if (x && test == false) {
+                          } else if (x && checkRegister == false) {
                             Get.defaultDialog(
                                 title: "Error",
                                 titleStyle: TextStyle(fontSize: 30),

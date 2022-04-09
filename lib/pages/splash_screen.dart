@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../data/globals.dart';
+import '../services/userServices/register_login.dart';
 import '../services/userServices/Offre_Api.dart';
 import 'CLient/TruckMachine_page.dart';
 import 'Login_page.dart';
@@ -20,15 +22,12 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _isVisible = false;
-  final userData = GetStorage();
 
   _SplashScreenState() {
     new Timer(const Duration(milliseconds: 3500), () {
-      setState(() {
-        Navigator.of(context).pushAndRemoveUntil(
+      /* Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => LoginPage()),
-            (route) => false);
-      });
+            (route) => false);*/
     });
 
     new Timer(Duration(milliseconds: 10), () {
@@ -40,7 +39,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
+    Future.delayed(Duration.zero, () async {
+      checkIfLogged();
+    });
   }
 
   @override
@@ -71,9 +74,17 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void checkIfLogged() {
-    userData.read("isLogged")
-        ? Get.to(() => TruckMachine())
-        : Get.to(() => LoginPage());
+  void checkIfLogged() async {
+    await APIService.login(
+        userData.read("username"), userData.read("password"));
+         print(userData.read("username"));
+    print(userData.read("password"));
+    print(checkLogin);
+    if (checkLogin) {
+      Get.to(() => TruckMachine());
+    } else {
+      Get.to(() => LoginPage());
+    }
+    ;
   }
 }

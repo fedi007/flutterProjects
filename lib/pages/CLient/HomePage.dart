@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/pages/CLient/offers.dart';
 
 import '../../Widgets/button_widget.dart';
+import '../../data/globals.dart';
 import '../../services/userServices/register_login.dart';
 import '../../services/userServices/Offre_Api.dart';
 
@@ -292,13 +293,13 @@ class _HomePageState extends State<HomePage> {
                     buttonColor: Color(0xff007097),
                     onConfirm: () async {
                       await APIOffre.RegisterOffre(depart, arrivee, response,
-                          deliveryTime, freightType, quantity, Name);
+                          deliveryTime, freightType, quantity, currentUser?.username);
                       setState(() {
                         offre = [];
                       });
 
                       WidgetsBinding.instance?.addPostFrameCallback(
-                          (_) => APIOffre.getOffers(Name));
+                          (_) => APIOffre.getOffers(currentUser?.username));
 
                       if (offreCheck) {
                         Get.back();

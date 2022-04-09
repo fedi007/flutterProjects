@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/Widgets/button_widget.dart';
 import 'package:iblaze/pages/Register_page.dart';
+import '../data/globals.dart';
 import '../services/userServices/Offre_Api.dart';
 import '../services/userServices/register_login.dart';
 import 'Client/TruckMachine_page.dart';
@@ -18,10 +19,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool passwordObscured = true;
   late TextEditingController emailController, passwordController;
-  // final userData = GetStorage();
+  //final userData = GetStorage();
   var password;
   var userName;
 
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
     return SafeArea(
@@ -121,10 +126,13 @@ class _LoginPageState extends State<LoginPage> {
                     onClicked: () async {
                       await APIService.login(userName, password);
 
-                      if (test) {
+                      if (checkLogin) {
                         Get.off(() => TruckMachine());
-                        // userData.write("isLogged", true);
-                        // userData.write("username", Name);
+
+                        userData.write("password", '${password}');
+                        userData.write("username", '${userName}');
+
+                       
                       } else {
                         Get.defaultDialog(
                             title: "Error",

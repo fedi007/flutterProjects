@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:iblaze/Models/offre.dart';
+import 'package:iblaze/data/globals.dart';
 import '../../services/userServices/Offre_Api.dart';
 import '../../services/userServices/Register_Login.dart';
 
@@ -17,8 +18,9 @@ class _OffersState extends State<Offers> {
   @override
   void initState() {
     super.initState();
+    print(currentUser?.username);
     WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
+        ?.addPostFrameCallback((_) => APIOffre.getOffers(currentUser?.username));
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:iblaze/data/globals.dart';
 
 import '../../services/userServices/Offre_Api.dart';
 import '../../services/userServices/register_login.dart';
@@ -19,9 +20,9 @@ class _TruckMachineState extends State<TruckMachine> {
   @override
   void initState() {
     super.initState();
-    
-    WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => APIOffre.getOffers(Name));
+
+    WidgetsBinding.instance?.addPostFrameCallback(
+        (_) => APIOffre.getOffers(currentUser?.username));
     dropDownBtnItem.add("other");
   }
 
@@ -54,13 +55,12 @@ class _TruckMachineState extends State<TruckMachine> {
                           context,
                           MaterialPageRoute(builder: (context) => ClientPage()),
                         );
-                        print(Name);
+                        
                       },
                       child: Container(
                           height: MediaQuery.of(context).size.height / 2,
                           decoration: BoxDecoration(
                             color: Color(0xFF005b71),
-                         
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(75),
                                 bottomRight: Radius.circular(75)),
@@ -76,7 +76,6 @@ class _TruckMachineState extends State<TruckMachine> {
                                     top: 30.h,
                                     bottom: 30.h,
                                   ),
-                              
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     /*borderRadius:
@@ -131,7 +130,6 @@ class _TruckMachineState extends State<TruckMachine> {
                                   bottom: 20.h,
                                 ),
                                 decoration: BoxDecoration(
-                                 
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.asset(

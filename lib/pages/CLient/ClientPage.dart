@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:iblaze/pages/Login_page.dart';
 
+import '../../data/globals.dart';
 import '../SideBar/NaviagtionDrawer.dart';
 import 'HomePage.dart';
 import 'offers.dart';
@@ -64,16 +65,16 @@ class _ClientPageState extends State<ClientPage> {
                         "Logout",
                         style: TextStyle(color: Color(0xFF005b71)),
                       ),
-                      //onTap: () {
-                        // userData.write("isLogged", false);
-                        // userData.remove("username");
+                      onTap: () {
+                         userData.remove("password");
+                         userData.remove("username");
 
-                        // WidgetsBinding.instance!.addPostFrameCallback(
-                        //   (_) {
-                        //     Get.offAll(LoginPage());
-                         // },
-                       // );
-                     // }
+                         WidgetsBinding.instance!.addPostFrameCallback(
+                           (_) {
+                            Get.offAll(LoginPage());
+                          },
+                        );
+                      }
                       )
                 ],
               )

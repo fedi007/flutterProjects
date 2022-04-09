@@ -1,15 +1,17 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:iblaze/Models/user.dart';
+import 'package:iblaze/data/globals.dart';
 
 bool test = false;
- String Email = "";
-String Name = "";
+
 var items;
 String creationDate = "";
 
 class APIService {
-  static login(username, password) async {
+  static Future<void> login(username, password) async {
+    print('login');
     var headers = {'Content-Type': 'application/json'};
     var request =
         http.Request('POST', Uri.parse('http://10.0.2.2:4000/users/login'));
@@ -18,16 +20,16 @@ class APIService {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      test = true;
+      checkLogin = true;
       var Data = json.decode(await response.stream.bytesToString());
-      Email = Data["data"]["email"];
-      Name = Data["data"]["username"];
-
+    
       var d = Data["data"]["date"];
       for (var i = 0; i < 10; i++) creationDate = creationDate + d[i];
+      currentUser = new User(Data["data"]["username"], Data["data"]["email"],
+          Data["data"]["password"], creationDate);
     } else {
       print(response.reasonPhrase);
-      test = false;
+      checkLogin = false;
     }
   }
 
@@ -41,11 +43,11 @@ class APIService {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      test = true;
+      checkRegister = true;
       print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
-      test = false;
+      checkRegister = false;
     }
   }
 
@@ -60,14 +62,16 @@ class APIService {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      test = true;
-      var data = await response.stream.bytesToString();
+      checkUpdate = true;
+     var data = await response.stream.bytesToString();
       var l = data.split('"');
 
-      Name = l[1];
+       currentUser = new User(l[1], currentUser?.email,
+          currentUser?.password, currentUser?.creationDate);
+        
     } else {
       print(response.reasonPhrase);
-      test = false;
+      checkUpdate = false;
     }
   }
 }

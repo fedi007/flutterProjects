@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../Widgets/button_widget.dart';
-import '../../../services/conductorServices/Register_Login.dart';
+import '../../../services/conductorServices/Register_Login_Conductor.dart';
 import '../ConductorPages/cond.dart';
 import 'RegisterConductorPage2.dart';
 

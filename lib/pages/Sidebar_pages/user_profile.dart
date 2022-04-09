@@ -2,32 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../data/globals.dart';
 import '../../services/userServices/Register_Login.dart';
 import 'changeName.dart';
 
 class User extends StatefulWidget {
-  final String name;
-  final String email;
-  final Image picture;
-  final String Date;
-  const User({
-    Key? key,
-    required this.name,
-    required this.email,
-    required this.picture,
-    required this.Date,
-  }) : super(key: key);
+  const User({Key? key}) : super(key: key);
 
   @override
-  State<User> createState() => _UserState(name, email, Date);
+  State<User> createState() => _UserState();
 }
 
 class _UserState extends State<User> {
-  bool isvisible = false;
-  String name;
-  String email;
-  String date;
-  _UserState(this.name, this.email, this.date);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,12 +42,11 @@ class _UserState extends State<User> {
                     width: 100,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.only(left: 30, right: 30, top: 15),
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(name,
+                        Text("${currentUser?.username}",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 30,
@@ -69,7 +54,7 @@ class _UserState extends State<User> {
                                 fontWeight: FontWeight.bold)),
                         GestureDetector(
                             onTap: () {
-                             Get.off(
+                              Get.off(
                                 () => ChangeName(),
                               );
                             },
@@ -80,14 +65,13 @@ class _UserState extends State<User> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 30, right: 30, top: 5),
-                    child: Text(email,
+                    child: Text("${currentUser?.email}",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20, color: Colors.grey)),
                   ),
                   SizedBox(height: 220),
                   Padding(
-                    padding:
-                        EdgeInsets.only(left: 30, right: 30, top: 15),
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -97,7 +81,7 @@ class _UserState extends State<User> {
                                 color: Color.fromARGB(255, 126, 124, 124),
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold)),
-                        Text(date,
+                        Text("${currentUser?.creationDate}",
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.grey, fontSize: 20)),
                       ],

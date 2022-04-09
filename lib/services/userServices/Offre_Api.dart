@@ -52,7 +52,7 @@ class APIOffre {
 
     if (response.statusCode == 200) {
       items = json.decode(await response.stream.bytesToString());
-      
+
       for (var offreJson in items) {
         offre.add(OffreModel.fromJson(offreJson));
       }
