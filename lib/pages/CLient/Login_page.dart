@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/Widgets/button_widget.dart';
-import 'package:iblaze/pages/Register_page.dart';
-import '../data/globals.dart';
-import '../services/userServices/Offre_Api.dart';
-import '../services/userServices/register_login.dart';
-import 'Client/TruckMachine_page.dart';
+import 'package:iblaze/pages/CLient/Register_page.dart';
+import 'package:iblaze/pages/Conductor/VanConductor/LoginPage.dart';
+import '../../data/globals.dart';
+import '../../services/userServices/Register_Login.dart';
+import 'TruckMachine_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -124,19 +123,17 @@ class _LoginPageState extends State<LoginPage> {
                 ButtonWidget(
                     text: "LOGIN",
                     onClicked: () async {
-                      await APIService.login(userName, password);
+                      await APIServiceUser.login(userName, password);
 
                       if (checkLogin) {
                         Get.off(() => TruckMachine());
 
                         userData.write("password", '${password}');
                         userData.write("username", '${userName}');
-
-                       
                       } else {
                         Get.defaultDialog(
                             title: "Error",
-                            titleStyle: TextStyle(fontSize: 30),
+                            titleStyle: TextStyle(fontSize: 30, color: Colors.red),
                             middleText: "Invalid Username/Email !",
                             middleTextStyle: TextStyle(
                                 color: Color(0xFF005b71), fontSize: 20));
@@ -163,6 +160,21 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       )
                     ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 40),
+                  child: GestureDetector(
+                    child: Text("Sign in as a Driver",
+                        style: TextStyle(
+                          color: Color(0xFF005b71),
+                          fontSize: 17.5,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    onTap: () {
+                      Get.off(() => LoginPageConductor(),
+                          transition: Transition.fadeIn);
+                    },
                   ),
                 ),
               ],

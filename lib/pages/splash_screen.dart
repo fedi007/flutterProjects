@@ -1,15 +1,15 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../data/globals.dart';
-import '../services/userServices/register_login.dart';
+import '../services/conductorServices/Register_Login_Conductor.dart';
 import '../services/userServices/Offre_Api.dart';
+import '../services/userServices/Register_Login.dart';
 import 'CLient/TruckMachine_page.dart';
-import 'Login_page.dart';
+import 'CLient/Login_page.dart';
+import 'Conductor/VanConductor/LoginPage.dart';
+import 'Conductor/VanConductor/conductorPage.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key, required this.title}) : super(key: key);
@@ -42,8 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
     Future.delayed(Duration.zero, () async {
-      checkIfLogged();
+      checkIfLoggedUser();
     });
+
   }
 
   @override
@@ -74,10 +75,10 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void checkIfLogged() async {
-    await APIService.login(
+  void checkIfLoggedUser() async {
+    await APIServiceUser.login(
         userData.read("username"), userData.read("password"));
-         print(userData.read("username"));
+    print(userData.read("username"));
     print(userData.read("password"));
     print(checkLogin);
     if (checkLogin) {
@@ -87,4 +88,18 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     ;
   }
+
+  // void checkIfLoggedConductor() async {
+  //   await APIServiceConductor.LoginConductor(
+  //       userData.read("CondcutorUsername"), userData.read("CondcutorPassword"));
+  //   print(ConductorData.read("CondcutorPassword"));
+  //   print(userData.read("CondcutorUsername"));
+  //   print(checkLogin);
+  //   if (checkLoginCondcuctor) {
+  //     Get.to(() => VanConductor());
+  //   } else {
+  //     Get.to(() => LoginPageConductor());
+  //   }
+  //   ;
+  // }
 }

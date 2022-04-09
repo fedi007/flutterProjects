@@ -9,7 +9,7 @@ bool test = false;
 var items;
 String creationDate = "";
 
-class APIService {
+class APIServiceUser {
   static Future<void> login(username, password) async {
     print('login');
     var headers = {'Content-Type': 'application/json'};
@@ -22,7 +22,7 @@ class APIService {
     if (response.statusCode == 200) {
       checkLogin = true;
       var Data = json.decode(await response.stream.bytesToString());
-    
+
       var d = Data["data"]["date"];
       for (var i = 0; i < 10; i++) creationDate = creationDate + d[i];
       currentUser = new User(Data["data"]["username"], Data["data"]["email"],
@@ -63,12 +63,11 @@ class APIService {
 
     if (response.statusCode == 200) {
       checkUpdate = true;
-     var data = await response.stream.bytesToString();
+      var data = await response.stream.bytesToString();
       var l = data.split('"');
 
-       currentUser = new User(l[1], currentUser?.email,
-          currentUser?.password, currentUser?.creationDate);
-        
+      currentUser = new User(l[1], currentUser?.email, currentUser?.password,
+          currentUser?.creationDate);
     } else {
       print(response.reasonPhrase);
       checkUpdate = false;

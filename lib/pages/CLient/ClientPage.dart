@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:iblaze/pages/Login_page.dart';
+import 'package:iblaze/pages/CLient/Login_page.dart';
 
 import '../../data/globals.dart';
-import '../SideBar/NaviagtionDrawer.dart';
+
 import 'HomePage.dart';
+import 'SideBar/NaviagtionDrawer.dart';
+import 'SideBar/Sidebar_pages/UserAccpetedOffers.dart';
 import 'offers.dart';
 
 class ClientPage extends StatefulWidget {
@@ -18,8 +20,7 @@ class ClientPage extends StatefulWidget {
 
 class _ClientPageState extends State<ClientPage> {
   int index = 0;
- // final userData = GetStorage();
-  final screens = [HomePage(), Offers()];
+  final screens = [HomePage(), Offers(), UserAcceptedOffers()];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,11 @@ class _ClientPageState extends State<ClientPage> {
                   NavigationDestination(
                     icon: Icon(Icons.email, color: Colors.white, size: 25),
                     label: 'Your offers',
-                  )
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.check, color: Colors.white, size: 25),
+                    label: 'Accepted Offers',
+                  ),
                 ]),
           ),
           drawer: const NavigationDrawer(),
@@ -66,16 +71,15 @@ class _ClientPageState extends State<ClientPage> {
                         style: TextStyle(color: Color(0xFF005b71)),
                       ),
                       onTap: () {
-                         userData.remove("password");
-                         userData.remove("username");
+                        userData.remove("password");
+                        userData.remove("username");
 
-                         WidgetsBinding.instance!.addPostFrameCallback(
-                           (_) {
+                        WidgetsBinding.instance!.addPostFrameCallback(
+                          (_) {
                             Get.offAll(LoginPage());
                           },
                         );
-                      }
-                      )
+                      })
                 ],
               )
             ],

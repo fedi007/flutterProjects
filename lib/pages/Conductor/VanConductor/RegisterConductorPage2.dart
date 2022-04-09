@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iblaze/data/globals.dart';
+import 'package:iblaze/pages/Conductor/VanConductor/conductorPage.dart';
+import 'package:iblaze/services/conductorServices/Register_Login_Conductor.dart';
 
 import '../../../Widgets/button_widget.dart';
-import '../ConductorPages/cond.dart';
 
 class RegisterConductorSecondPage extends StatefulWidget {
-  const RegisterConductorSecondPage({Key? key}) : super(key: key);
+  String LicensePlate;
+  String TruckModel;
+  RegisterConductorSecondPage(
+      {required this.LicensePlate, required this.TruckModel});
+  //const ({Key? key}) : super(key: key);
 
   @override
-  State<RegisterConductorSecondPage> createState() =>
-      _RegisterConductorSecondPageState();
+  _RegisterConductorSecondPageState createState() =>
+      _RegisterConductorSecondPageState(LicensePlate, TruckModel);
 }
 
 class _RegisterConductorSecondPageState
     extends State<RegisterConductorSecondPage> {
+  String LicensePlate;
+  String TruckModel;
+  _RegisterConductorSecondPageState(this.LicensePlate, this.TruckModel);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(25.0),
-              child: Column(
+        child: Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(25.0),
+            child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -134,17 +144,38 @@ class _RegisterConductorSecondPageState
                   SizedBox(height: 50),
                   ButtonWidget(
                       text: "Register",
-                      onClicked: () {
-                        Get.to(
-                          () => Conduct(),
-                        );
+                      onClicked: () async {
+                        print(currentUser?.username);
+                        print("${currentUser?.email}" + " this is email");
+                        print(userData.read("password"));
+                        print(this.TruckModel);
+                        print(this.LicensePlate);
+
+                        await APIServiceConductor.RegisterConductor(
+                            currentUser?.username,
+                             currentUser?.email,
+                            userData.read("password"),
+                            TruckModel,
+                            LicensePlate);
+                        // await APIServiceConductor.RegisterConductor("fedi", "fedi",
+                        //     "fedi", "TruckModel", "LicensePlate");
+
+                        if (checkRegisterCondcuctor) {
+                          Get.off(() => VanConductor(),
+                              transition: Transition.zoom);
+                        } else {
+                          Get.defaultDialog(
+                              title: "Error",
+                              titleStyle: TextStyle(fontSize: 30),
+                              middleText: "Something went wrong ",
+                              middleTextStyle: TextStyle(
+                                  color: Color(0xFF005b71), fontSize: 20));
+                        }
                       }),
-                ],
-              ),
-            ),
+                ]),
           ),
         ),
       ),
-    );
+    ));
   }
 }

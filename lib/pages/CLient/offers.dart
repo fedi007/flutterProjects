@@ -15,12 +15,13 @@ class Offers extends StatefulWidget {
 }
 
 class _OffersState extends State<Offers> {
+
   @override
   void initState() {
     super.initState();
-    print(currentUser?.username);
-    WidgetsBinding.instance
-        ?.addPostFrameCallback((_) => APIOffre.getOffers(currentUser?.username));
+
+   // APIOffre.getOffers(currentUser?.username);
+    //dropDownBtnItem.add("other");
   }
 
   @override
@@ -111,14 +112,14 @@ class _OffersState extends State<Offers> {
                           });
                           Get.defaultDialog(
                               title: "Done",
-                              titleStyle: TextStyle(fontSize: 30),
+                              titleStyle: TextStyle(fontSize: 30, color: Colors.green),
                               middleText: "Your offer has been deleted !",
                               middleTextStyle: TextStyle(
                                   color: Color(0xFF005b71), fontSize: 20));
                         } else {
                           Get.defaultDialog(
                               title: "Error",
-                              titleStyle: TextStyle(fontSize: 30),
+                              titleStyle: TextStyle(fontSize: 30, color: Colors.red),
                               middleText: "Something went wrong !",
                               middleTextStyle: TextStyle(
                                   color: Color(0xFF005b71), fontSize: 20));

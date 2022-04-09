@@ -5,12 +5,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/data/globals.dart';
-import 'package:iblaze/pages/Conductor/VanConductorRegister/RegisterConductorPage1.dart';
-import '../Sidebar_pages/RentHistory.dart';
-import '../Sidebar_pages/about.dart';
-import '../Sidebar_pages/promotions.dart';
-import '../Sidebar_pages/support.dart';
-import '../Sidebar_pages/user_profile.dart';
+import 'package:iblaze/pages/CLient/SideBar/Sidebar_pages/user_profile.dart';
+import '../../Conductor/VanConductor/RegisterConductorPage1.dart';
+import 'Sidebar_pages/RentHistory.dart';
+import 'Sidebar_pages/about.dart';
+import 'Sidebar_pages/promotions.dart';
+import 'Sidebar_pages/support.dart';
 import 'drawer_items.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -27,19 +27,17 @@ class NavigationDrawer extends StatelessWidget {
             child: Column(
               children: [
                 headerWidget(
-                  onClicked: () => Get.to(
-                    () => User(),
-                  ),
+                  onClicked: () => onItemPressed(context, index: 4),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 40,
                 ),
-                const Divider(
+                Divider(
                   thickness: 2,
-                  height: 10,
+                  //height: 10,
                   color: Colors.grey,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 40,
                 ),
                 DrawerItem(
@@ -47,33 +45,33 @@ class NavigationDrawer extends StatelessWidget {
                   icon: FontAwesomeIcons.tag,
                   onPressed: () => onItemPressed(context, index: 0),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 30,
                 ),
                 DrawerItem(
                     name: 'Rent history',
                     icon: Icons.lock_clock,
                     onPressed: () => onItemPressed(context, index: 1)),
-                const SizedBox(
+                SizedBox(
                   height: 30,
                 ),
                 DrawerItem(
                     name: 'Support',
                     icon: FontAwesomeIcons.user,
                     onPressed: () => onItemPressed(context, index: 2)),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: 30.h,
                 ),
                 DrawerItem(
                     name: 'About',
                     icon: FontAwesomeIcons.exclamation,
                     onPressed: () => onItemPressed(context, index: 3)),
                 SizedBox(
-                  height: 100,
+                  height: 100.h,
                 ),
-                BecomeDriver(onClicked: () {
-                  Get.to(() => RegisterConductorPage());
-                })
+                BecomeDriver(
+                  onClicked: () => onItemPressed(context, index: 5),
+                )
               ],
             ),
           ),
@@ -90,13 +88,19 @@ class NavigationDrawer extends StatelessWidget {
         Get.to(() => Promotion());
         break;
       case 1:
-       Get.to(() => RentHistory());
+        Get.to(() => RentHistory());
         break;
       case 2:
         Get.to(() => Support());
         break;
       case 3:
-       Get.to(() => About());
+        Get.to(() => About());
+        break;
+      case 4:
+        Get.to(() => User());
+        break;
+      case 5:
+        Get.to(() => RegisterConductorPage());
         break;
     }
   }
@@ -132,7 +136,7 @@ class NavigationDrawer extends StatelessWidget {
           children: [
             Container(
               height: 60.h,
-              width: 180.w,
+              width: 200.w,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -155,8 +159,8 @@ class NavigationDrawer extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color.fromARGB(125, 0, 90, 113),
-                      Color.fromARGB(126, 255, 255, 255),
+                      Color.fromARGB(62, 0, 90, 113),
+                      Color.fromARGB(62, 255, 255, 255),
                     ]),
                 border: Border.all(
                   color: Color(0xFF005b71),

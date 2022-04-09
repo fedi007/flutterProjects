@@ -18,13 +18,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TimeOfDay? Time = const TimeOfDay(hour: 12, minute: 12);
+  TimeOfDay? Time = const TimeOfDay(hour: 19, minute: 12);
   String? dropdownvalue;
   bool isVisible = false;
   String? depart;
   String? arrivee;
   String? response;
-  String? deliveryTime = "12:12";
+  String? deliveryTime;
   String? freightType;
   String? quantity;
   @override
@@ -292,8 +292,14 @@ class _HomePageState extends State<HomePage> {
                     textConfirm: "Confirm",
                     buttonColor: Color(0xff007097),
                     onConfirm: () async {
-                      await APIOffre.RegisterOffre(depart, arrivee, response,
-                          deliveryTime, freightType, quantity, currentUser?.username);
+                      await APIOffre.RegisterOffre(
+                          depart,
+                          arrivee,
+                          response,
+                          deliveryTime,
+                          freightType,
+                          quantity,
+                          currentUser?.username);
                       setState(() {
                         offre = [];
                       });
@@ -303,10 +309,10 @@ class _HomePageState extends State<HomePage> {
 
                       if (offreCheck) {
                         Get.back();
-                         Get.defaultDialog(
+                        Get.defaultDialog(
                             title: "Success",
                             titleStyle:
-                                TextStyle(fontSize: 30, color: Colors.red),
+                                TextStyle(fontSize: 30, color: Colors.green),
                             middleText: "Your offer has been posted",
                             middleTextStyle: TextStyle(
                                 color: Color(0xFF005b71), fontSize: 20));
@@ -323,7 +329,6 @@ class _HomePageState extends State<HomePage> {
                       ;
                     });
               })
-              
         ],
       ),
     ));

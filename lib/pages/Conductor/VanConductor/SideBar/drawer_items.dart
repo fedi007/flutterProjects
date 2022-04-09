@@ -23,15 +23,15 @@ class DrawerItem extends StatelessWidget {
           children: [
             Icon(
               icon,
-              size: 20,
-              color: Color(0xFF005b71),
+              size: 22,
+              color: Color(0xff007097),
             ),
             const SizedBox(
               width: 20,
             ),
             Text(
               name,
-              style: const TextStyle(fontSize: 20, color: Color(0xFF005b71)),
+              style: const TextStyle(fontSize: 22, color: Color(0xff007097)),
             )
           ],
         ),

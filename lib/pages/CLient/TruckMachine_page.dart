@@ -21,8 +21,7 @@ class _TruckMachineState extends State<TruckMachine> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance?.addPostFrameCallback(
-        (_) => APIOffre.getOffers(currentUser?.username));
+    APIOffre.getOffers(currentUser?.username);
     dropDownBtnItem.add("other");
   }
 
@@ -55,7 +54,6 @@ class _TruckMachineState extends State<TruckMachine> {
                           context,
                           MaterialPageRoute(builder: (context) => ClientPage()),
                         );
-                        
                       },
                       child: Container(
                           height: MediaQuery.of(context).size.height / 2,

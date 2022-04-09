@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../Widgets/button_widget.dart';
 import '../../../services/conductorServices/Register_Login_Conductor.dart';
-import '../ConductorPages/cond.dart';
 import 'RegisterConductorPage2.dart';
 
 class RegisterConductorPage extends StatefulWidget {
@@ -16,8 +15,8 @@ class RegisterConductorPage extends StatefulWidget {
 }
 
 class _RegisterConductorPageState extends State<RegisterConductorPage> {
-  var TruckLicense;
-  var TruckModel;
+  String TruckLicense = "";
+  String TruckModel = "";
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +90,7 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                       ),
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) {
-                        TruckModel = value;
+                        TruckLicense = value;
                         ;
                       },
                     ),
@@ -99,7 +98,11 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                     ButtonWidget(
                         text: "Next",
                         onClicked: () {
-                          Get.to(RegisterConductorSecondPage());
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => RegisterConductorSecondPage(
+                                    TruckModel: TruckModel,
+                                    LicensePlate: TruckLicense,
+                                  )));
                         }),
                   ],
                 ),

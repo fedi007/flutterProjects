@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:iblaze/pages/Sidebar_pages/user_profile.dart';
+import 'package:iblaze/data/globals.dart';
+import 'package:iblaze/pages/CLient/SideBar/Sidebar_pages/user_profile.dart';
 
-import '../../Widgets/button_widget.dart';
-import '../../data/globals.dart';
-import '../../services/userServices/register_login.dart';
+import '../../../../Widgets/button_widget.dart';
+import '../../../../services/userServices/Register_Login.dart';
+
 
 class ChangeName extends StatefulWidget {
   const ChangeName({Key? key}) : super(key: key);
@@ -85,7 +86,7 @@ class _ChangeNameState extends State<ChangeName> {
               child: ButtonWidget(
                   text: "Save",
                   onClicked: () async {
-                    await APIService.Update(currentUser?.username, NewName);
+                    await APIServiceUser.Update(currentUser?.username, NewName);
                     var x = checkLogin();
                     if (checkUpdate) {
                       Get.off(() => User());

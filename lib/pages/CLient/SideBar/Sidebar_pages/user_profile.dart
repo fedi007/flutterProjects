@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../data/globals.dart';
-import '../../services/userServices/Register_Login.dart';
+import 'package:iblaze/data/globals.dart';
 import 'changeName.dart';
 
 class User extends StatefulWidget {
@@ -30,36 +27,40 @@ class _UserState extends State<User> {
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(height: 80),
                   Image.asset(
                     "images/Lg.png",
-                    height: 100,
-                    width: 100,
+                    height: 120,
+                    width: 120,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 30, right: 30, top: 15),
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("${currentUser?.username}",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                        GestureDetector(
-                            onTap: () {
-                              Get.off(
-                                () => ChangeName(),
-                              );
-                            },
-                            child:
-                                Icon(Icons.edit, color: Colors.grey, size: 20))
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Text("${currentUser?.username}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 40,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: GestureDetector(
+                              onTap: () {
+                                Get.off(
+                                  () => ChangeName(),
+                                );
+                              },
+                              child: Icon(Icons.edit,
+                                  color: Colors.grey, size: 20)),
+                        )
                       ],
                     ),
                   ),

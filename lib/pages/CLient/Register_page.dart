@@ -1,13 +1,11 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Widgets/button_widget.dart';
-import '../data/globals.dart';
-import '../services/userServices/register_login.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../Widgets/button_widget.dart';
+import '../../data/globals.dart';
+import '../../services/userServices/Register_Login.dart';
 import 'Login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -247,7 +245,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     ButtonWidget(
                         text: "REGISTER",
                         onClicked: () async {
-                          await APIService.Register(userName, email, password);
+                          await APIServiceUser.Register(
+                              userName, email, password);
                           var x = checkLogin();
                           if (checkRegister) {
                             Get.off(() => LoginPage(),
@@ -255,7 +254,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           } else if (x && checkRegister == false) {
                             Get.defaultDialog(
                                 title: "Error",
-                                titleStyle: TextStyle(fontSize: 30),
+                                titleStyle:
+                                    TextStyle(fontSize: 30, color: Colors.red),
                                 middleText: "Username is Taken",
                                 middleTextStyle: TextStyle(
                                     color: Color(0xFF005b71), fontSize: 20));
