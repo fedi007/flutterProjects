@@ -45,5 +45,5 @@ ConducteurSchema.set("toJSON", {
 
 ConducteurSchema.plugin(uniqueValidator, { message: "Email already in use." });
 
-const Conducteur = mongoose.model("conductors", ConducteurSchema);
+const Conducteur = mongoose.model("conductor", ConducteurSchema);
 module.exports = Conducteur;

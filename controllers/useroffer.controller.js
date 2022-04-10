@@ -1,9 +1,9 @@
-const offerServices = require("../services/offer.services");
+const userofferServices = require("../services/useroffer.services");
 const Offer = require("../models/offer.model");
 
-// Creating one
+// Creating one 
 exports.register = (req, res, next) => {
-   offerServices.register(req.body, (error, results) => {
+   userofferServices.register(req.body, (error, results) => {
       if (error) {
         return next(error);
       }
@@ -13,6 +13,7 @@ exports.register = (req, res, next) => {
       });
     });
   };
+
   // Deleting One
   exports.delete=( async (req, res) => {
     try {
@@ -24,15 +25,7 @@ exports.register = (req, res, next) => {
     }
   })
 
-  // Getting all
-  exports.getAll=( async (req, res) => {
-    try {
-      const offer = await Offer.find()
-      res.json(offer)
-    } catch (err) {
-      res.status(500).json({ message: err.message })
-    }
-  })
+
 
   // Get by user
   exports.getByuser=( async (req, res) => {

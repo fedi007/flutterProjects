@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 
 
 
-const multer =require("multer");
-const ImageModel=require('./models/image.model');
+//const multer =require("multer");
+//const ImageModel=require('./models/image.model');
 
 const dbConfig = require("./config/db.config");
 
@@ -69,6 +69,10 @@ app.use(
         methods: ["GET"]
       },
       {
+        url: "/conducteur/offer/register",
+        methods: ["POST"]
+      },
+      {
         url: "/users/offer/delete",
         methods: ["DELETE"]
       },
@@ -105,9 +109,9 @@ app.use("/users", require("./routes/users.routes"));
 
 app.use("/conducteur", require("./routes/conducteur.routes"));
 
-app.use("/users/offer", require("./routes/offer.routes"));
+app.use("/users/offer", require("./routes/useroffer.routes"));
 
-app.use("/conducteur/offer", require("./routes/offer.routes"));
+app.use("/conducteur/offer", require("./routes/conducteuroffer.routes"));
 
 app.use("/users/deliveryType", require("./routes/deliveryType.routes"));
 
