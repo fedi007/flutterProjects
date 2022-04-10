@@ -15,13 +15,10 @@ class Offers extends StatefulWidget {
 }
 
 class _OffersState extends State<Offers> {
-
   @override
   void initState() {
     super.initState();
-
-   // APIOffre.getOffers(currentUser?.username);
-    //dropDownBtnItem.add("other");
+    // APIOffre.getOffers(currentUser?.username);
   }
 
   @override
@@ -30,11 +27,10 @@ class _OffersState extends State<Offers> {
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 197, 188, 188),
         body: ListView.builder(
-            itemCount: offre.length,
+            itemCount: currentOffre.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
                 child: ExpansionTile(
-               
                   title: new RichText(
                       text: new TextSpan(
                     children: <TextSpan>[
@@ -44,7 +40,7 @@ class _OffersState extends State<Offers> {
                           ),
                           text: 'From '),
                       new TextSpan(
-                          text: offre[index].getArrivee,
+                          text: currentOffre[index].getArrivee,
                           style: new TextStyle(
                               fontSize: 18, color: Color(0xFF005b71))),
                       new TextSpan(
@@ -53,7 +49,7 @@ class _OffersState extends State<Offers> {
                           ),
                           text: ' To '),
                       new TextSpan(
-                          text: offre[index].getDepart,
+                          text: currentOffre[index].getDepart,
                           style: new TextStyle(
                               fontSize: 18, color: Color(0xFF005b71))),
                     ],
@@ -62,40 +58,41 @@ class _OffersState extends State<Offers> {
                     Container(
                       height: 20,
                       child: ListTile(
-                        title: Text(
-                            "Departure Location : " + offre[index].getDepart),
+                        title: Text("Departure Location : " +
+                            currentOffre[index].getDepart),
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      child: ListTile(
+                        title: Text("Arrival Location : " +
+                            currentOffre[index].getArrivee),
+                      ),
+                    ),
+                    Container(
+                      height: 20,
+                      child: ListTile(
+                        title: Text("Freight Type : " +
+                            currentOffre[index].getFreightType),
                       ),
                     ),
                     Container(
                       height: 20,
                       child: ListTile(
                         title: Text(
-                            "Arrival Location : " + offre[index].getArrivee),
+                            "Quantity : " + currentOffre[index].getQuantity),
                       ),
                     ),
                     Container(
                       height: 20,
                       child: ListTile(
-                        title: Text(
-                            "Freight Type : " + offre[index].getFreightType),
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: ListTile(
-                        title: Text("Quantity : " + offre[index].getQuantity),
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: ListTile(
-                        title: Text(
-                            "delivery time : " + offre[index].getDeliveryTime),
+                        title: Text("delivery time : " +
+                            currentOffre[index].getDeliveryTime),
                       ),
                     ),
                     Container(
                       child: ListTile(
-                        title: Text(offre[index].getResponse),
+                        title: Text(currentOffre[index].getResponse),
                       ),
                     ),
                     // ListTile(
@@ -105,21 +102,24 @@ class _OffersState extends State<Offers> {
                     // ),
                     ListTile(
                       onTap: () async {
-                        await APIOffre.deleteOffre(offre[index].getId);
+                        await APIOffre.deleteOffre(currentOffre[index].getId);
                         if (deletedOffre) {
                           setState(() {
-                            offre.remove(offre[index]);
+                            currentOffre.remove(currentOffre[index]);
                           });
                           Get.defaultDialog(
                               title: "Done",
-                              titleStyle: TextStyle(fontSize: 30, color: Colors.green),
+                              titleStyle: TextStyle(
+                                  fontSize: 30,
+                                  color: Color.fromARGB(255, 10, 101, 13)),
                               middleText: "Your offer has been deleted !",
                               middleTextStyle: TextStyle(
                                   color: Color(0xFF005b71), fontSize: 20));
                         } else {
                           Get.defaultDialog(
                               title: "Error",
-                              titleStyle: TextStyle(fontSize: 30, color: Colors.red),
+                              titleStyle:
+                                  TextStyle(fontSize: 30, color: Colors.red),
                               middleText: "Something went wrong !",
                               middleTextStyle: TextStyle(
                                   color: Color(0xFF005b71), fontSize: 20));

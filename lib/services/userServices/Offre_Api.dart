@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:iblaze/services/userServices/Register_Login.dart';
 
 import '../../Models/offre.dart';
+import '../../data/globals.dart';
 
 bool offreCheck = false;
 bool deletedOffre = false;
@@ -51,16 +52,24 @@ class APIOffre {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      items = json.decode(await response.stream.bytesToString());
+      var Data = json.decode(await response.stream.bytesToString());
 
-      for (var offreJson in items) {
-        offre.add(OffreModel.fromJson(offreJson));
+      for (var offreJson in Data) {
+        currentOffre.add(new OffreModel(
+            getArrivee: offreJson["arrivee"],
+            getDeliveryTime: offreJson["time"],
+            getDepart: offreJson["depart"],
+            getFreightType: offreJson["deliveryType"],
+            getId: offreJson["id"],
+            getQuantity: offreJson["quantity"],
+            getResponse: offreJson["load"]));
+
+        print(currentOffre);
       }
     } else {
       print(response.reasonPhrase);
     }
-
-    return offre;
+    return currentOffre;
   }
 
   static GetFreight() async {

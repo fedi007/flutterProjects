@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iblaze/pages/CLient/offers.dart';
-
 import '../../Widgets/button_widget.dart';
 import '../../data/globals.dart';
-import '../../services/userServices/register_login.dart';
 import '../../services/userServices/Offre_Api.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,10 +24,11 @@ class _HomePageState extends State<HomePage> {
   String? quantity;
   @override
   void initState() {
+    super.initState();
+    print(currentOffre);
     setState(() {
       response = "Only Delivering";
     });
-    super.initState();
   }
 
   @override
@@ -300,13 +296,11 @@ class _HomePageState extends State<HomePage> {
                           freightType,
                           quantity,
                           currentUser?.username);
+
                       setState(() {
-                        offre = [];
+                        currentOffre = [];
+                        APIOffre.getOffers(currentUser?.username);
                       });
-
-                      WidgetsBinding.instance?.addPostFrameCallback(
-                          (_) => APIOffre.getOffers(currentUser?.username));
-
                       if (offreCheck) {
                         Get.back();
                         Get.defaultDialog(

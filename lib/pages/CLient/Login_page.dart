@@ -133,7 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                       } else {
                         Get.defaultDialog(
                             title: "Error",
-                            titleStyle: TextStyle(fontSize: 30, color: Colors.red),
+                            titleStyle:
+                                TextStyle(fontSize: 30, color: Colors.red),
                             middleText: "Invalid Username/Email !",
                             middleTextStyle: TextStyle(
                                 color: Color(0xFF005b71), fontSize: 20));
@@ -157,6 +158,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           Get.to(() => RegisterPage(),
                               transition: Transition.leftToRight);
+                          duration:
+                          Duration(seconds: 2);
                         },
                       )
                     ],

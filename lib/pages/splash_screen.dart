@@ -25,6 +25,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _SplashScreenState() {
     new Timer(const Duration(milliseconds: 3500), () {
+      setState(() {
+        Future.delayed(Duration.zero, () async {
+          checkIfLoggedUser();
+        });
+      });
       /* Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => LoginPage()),
             (route) => false);*/
@@ -39,12 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
-    Future.delayed(Duration.zero, () async {
-      checkIfLoggedUser();
-    });
-
   }
 
   @override
