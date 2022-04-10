@@ -1,6 +1,12 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+
+
+
+const multer =require("multer");
+const ImageModel=require('./models/image.model');
+
 const dbConfig = require("./config/db.config");
 
 const auth = require("./middlewares/auth.js");
@@ -23,6 +29,8 @@ mongoose
       console.log("Database can't be connected: " + error);
     }
   );
+
+
 
 //  authenticating token 
 auth.authenticateToken.unless = unless;
@@ -80,9 +88,15 @@ app.use(
         url: "/users/deliveryType/register",
         methods: ["POST"]
       },
+      {
+        url: "/upload",
+        methods: ["POST"]
+      },
     ],
   })
 );
+
+
 
 app.use(express.json());
 

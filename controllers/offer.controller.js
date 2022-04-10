@@ -37,8 +37,7 @@ exports.register = (req, res, next) => {
   // Get by user
   exports.getByuser=( async (req, res) => {
     try {
-      const offer = await Offer.find({ username:req.body.username });
-      console.log(offer)
+      const offer = await Offer.find({ user:req.body.user }).populate('user');
       res.json(offer)
     } catch (err) {
       res.status(500).json({ message: err.message })

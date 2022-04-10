@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const { default: mongooseDeepPopulate } = require("mongoose-deep-populate");
 const { Schema } = mongoose;
 const uniqueValidator = require("mongoose-unique-validator");
+
 
 const OfferSchema = new Schema({
   depart: {
@@ -15,10 +17,10 @@ const OfferSchema = new Schema({
     type: String,
     required: true,
   },
-  username: {
-    type: String,
+  user: {
+    type: Schema.Types.ObjectId,
     required: true,
-    
+    ref:'user',
   },
    quantity: {
        type: String,
@@ -50,7 +52,11 @@ OfferSchema.set("toJSON", {
   },
 });
 
+
+//OfferSchema.plugin(uniqueValidator, { message: "Email already in use." });
 OfferSchema.plugin(uniqueValidator, { message: "Email already in use." });
+
+
 
 const Offer = mongoose.model("offer", OfferSchema);
 module.exports = Offer;
