@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    print(currentOffre);
+    print(offreByName);
     setState(() {
       response = "Only Delivering";
     });
@@ -288,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                     textConfirm: "Confirm",
                     buttonColor: Color(0xff007097),
                     onConfirm: () async {
-                      await APIOffre.RegisterOffre(
+                      await APIOffreUser.RegisterOffre(
                           depart,
                           arrivee,
                           response,
@@ -298,8 +298,8 @@ class _HomePageState extends State<HomePage> {
                           currentUser?.username);
 
                       setState(() {
-                        currentOffre = [];
-                        APIOffre.getOffers(currentUser?.username);
+                        offreByName = [];
+                        APIOffreUser.getOffers(currentUser?.username);
                       });
                       if (offreCheck) {
                         Get.back();

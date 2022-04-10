@@ -21,8 +21,8 @@ class _TruckMachineState extends State<TruckMachine> {
   void initState() {
     super.initState();
 
-    APIOffre.getOffers(currentUser?.username);
-    //print(currentOffre);
+    APIOffreUser.getOffers(currentUser?.username);
+    //print(offreByName);
     dropDownBtnItem.add("other");
   }
 

@@ -8,6 +8,7 @@ class OffreModel {
     required this.getFreightType,
     required this.getQuantity,
     required this.getId,
+    required this.getName,
   });
   late final String getDepart;
   late final String getArrivee;
@@ -16,6 +17,7 @@ class OffreModel {
   late final String getFreightType;
   late final String getQuantity;
   late final String getId;
+  late final String getName;
 
   OffreModel.fromJson(Map<String, dynamic> json) {
     getDepart = json["depart"];
@@ -25,5 +27,6 @@ class OffreModel {
     getFreightType = json["deliveryType"];
     getQuantity = json["quantity"];
     getId = json["id"];
+    getName = json["username"];
   }
 }

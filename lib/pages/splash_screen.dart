@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffre.GetFreight());
+    WidgetsBinding.instance?.addPostFrameCallback((_) => APIOffreUser.GetFreight());
   }
 
   @override

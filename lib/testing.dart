@@ -27,7 +27,7 @@ class _testState extends State<test> {
                  ButtonWidget(
                     text: "LOGIN",
                     onClicked: () async {
-                      await APIOffre.GetFreight();
+                      await APIOffreUser.GetFreight();
                     }),
               
             ]))),

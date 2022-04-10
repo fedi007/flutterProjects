@@ -13,7 +13,7 @@ var items;
 List<String> dropDownBtnItem = [];
 var offre = <OffreModel>[];
 
-class APIOffre {
+class APIOffreUser {
   static RegisterOffre(depart, arrivee, Response, deliveryTime, freightType,
       quantity, name) async {
     var headers = {'Content-Type': 'application/json'};
@@ -55,21 +55,23 @@ class APIOffre {
       var Data = json.decode(await response.stream.bytesToString());
 
       for (var offreJson in Data) {
-        currentOffre.add(new OffreModel(
+        offreByName.add(new OffreModel(
             getArrivee: offreJson["arrivee"],
             getDeliveryTime: offreJson["time"],
             getDepart: offreJson["depart"],
             getFreightType: offreJson["deliveryType"],
             getId: offreJson["id"],
             getQuantity: offreJson["quantity"],
-            getResponse: offreJson["load"]));
+            getResponse: offreJson["load"],
+            getName : offreJson["username"]
+            ));
 
-        print(currentOffre);
+        print(offreByName);
       }
     } else {
       print(response.reasonPhrase);
     }
-    return currentOffre;
+    return offreByName;
   }
 
   static GetFreight() async {

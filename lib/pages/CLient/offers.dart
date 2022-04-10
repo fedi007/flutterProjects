@@ -27,109 +27,113 @@ class _OffersState extends State<Offers> {
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 197, 188, 188),
         body: ListView.builder(
-            itemCount: currentOffre.length,
+            itemCount: offreByName.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
-                child: ExpansionTile(
-                  title: new RichText(
-                      text: new TextSpan(
-                    children: <TextSpan>[
-                      new TextSpan(
-                          style: new TextStyle(
-                            color: Colors.black,
-                          ),
-                          text: 'From '),
-                      new TextSpan(
-                          text: currentOffre[index].getArrivee,
-                          style: new TextStyle(
-                              fontSize: 18, color: Color(0xFF005b71))),
-                      new TextSpan(
-                          style: new TextStyle(
-                            color: Colors.black,
-                          ),
-                          text: ' To '),
-                      new TextSpan(
-                          text: currentOffre[index].getDepart,
-                          style: new TextStyle(
-                              fontSize: 18, color: Color(0xFF005b71))),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: ExpansionTile(
+                    title: new RichText(
+                        text: new TextSpan(
+                      children: <TextSpan>[
+                        new TextSpan(
+                            style: new TextStyle(
+                              color: Colors.black,
+                            ),
+                            text: 'From '),
+                        new TextSpan(
+                            text: offreByName[index].getArrivee,
+                            style: new TextStyle(
+                                fontSize: 18, color: Color(0xFF005b71))),
+                        new TextSpan(
+                            style: new TextStyle(
+                              color: Colors.black,
+                            ),
+                            text: ' To '),
+                        new TextSpan(
+                            text: offreByName[index].getDepart,
+                            style: new TextStyle(
+                                fontSize: 18, color: Color(0xFF005b71))),
+                      ],
+                    )),
+                    children: [
+                      Container(
+                        height: 20,
+                        child: ListTile(
+                          title: Text("Departure Location : " +
+                              offreByName[index].getDepart),
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                        child: ListTile(
+                          title: Text("Arrival Location : " +
+                              offreByName[index].getArrivee),
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                        child: ListTile(
+                          title: Text("Freight Type : " +
+                              offreByName[index].getFreightType),
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                        child: ListTile(
+                          title: Text(
+                              "Quantity : " + offreByName[index].getQuantity),
+                        ),
+                      ),
+                      Container(
+                        height: 20,
+                        child: ListTile(
+                          title: Text("delivery time : " +
+                              offreByName[index].getDeliveryTime),
+                        ),
+                      ),
+                      Container(
+                        child: ListTile(
+                          title: Text(offreByName[index].getResponse),
+                        ),
+                      ),
+                      // ListTile(
+                      //   title: Text("Edit",
+                      //       style: TextStyle(color: Color(0xFF005b71))),
+                      //   trailing: Icon(Icons.edit, color: Color(0xFF005b71)),
+                      // ),
+                      ListTile(
+                        onTap: () async {
+                          await APIOffreUser.deleteOffre(
+                              offreByName[index].getId);
+                          if (deletedOffre) {
+                            setState(() {
+                              offreByName.remove(offreByName[index]);
+                            });
+                            Get.defaultDialog(
+                                title: "Done",
+                                titleStyle: TextStyle(
+                                    fontSize: 30,
+                                    color: Color.fromARGB(255, 10, 101, 13)),
+                                middleText: "Your offer has been deleted !",
+                                middleTextStyle: TextStyle(
+                                    color: Color(0xFF005b71), fontSize: 20));
+                          } else {
+                            Get.defaultDialog(
+                                title: "Error",
+                                titleStyle:
+                                    TextStyle(fontSize: 30, color: Colors.red),
+                                middleText: "Something went wrong !",
+                                middleTextStyle: TextStyle(
+                                    color: Color(0xFF005b71), fontSize: 20));
+                          }
+                        },
+                        title:
+                            Text("Delete", style: TextStyle(color: Colors.red)),
+                        trailing: Icon(Icons.delete, color: Colors.red),
+                      ),
                     ],
-                  )),
-                  children: [
-                    Container(
-                      height: 20,
-                      child: ListTile(
-                        title: Text("Departure Location : " +
-                            currentOffre[index].getDepart),
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: ListTile(
-                        title: Text("Arrival Location : " +
-                            currentOffre[index].getArrivee),
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: ListTile(
-                        title: Text("Freight Type : " +
-                            currentOffre[index].getFreightType),
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: ListTile(
-                        title: Text(
-                            "Quantity : " + currentOffre[index].getQuantity),
-                      ),
-                    ),
-                    Container(
-                      height: 20,
-                      child: ListTile(
-                        title: Text("delivery time : " +
-                            currentOffre[index].getDeliveryTime),
-                      ),
-                    ),
-                    Container(
-                      child: ListTile(
-                        title: Text(currentOffre[index].getResponse),
-                      ),
-                    ),
-                    // ListTile(
-                    //   title: Text("Edit",
-                    //       style: TextStyle(color: Color(0xFF005b71))),
-                    //   trailing: Icon(Icons.edit, color: Color(0xFF005b71)),
-                    // ),
-                    ListTile(
-                      onTap: () async {
-                        await APIOffre.deleteOffre(currentOffre[index].getId);
-                        if (deletedOffre) {
-                          setState(() {
-                            currentOffre.remove(currentOffre[index]);
-                          });
-                          Get.defaultDialog(
-                              title: "Done",
-                              titleStyle: TextStyle(
-                                  fontSize: 30,
-                                  color: Color.fromARGB(255, 10, 101, 13)),
-                              middleText: "Your offer has been deleted !",
-                              middleTextStyle: TextStyle(
-                                  color: Color(0xFF005b71), fontSize: 20));
-                        } else {
-                          Get.defaultDialog(
-                              title: "Error",
-                              titleStyle:
-                                  TextStyle(fontSize: 30, color: Colors.red),
-                              middleText: "Something went wrong !",
-                              middleTextStyle: TextStyle(
-                                  color: Color(0xFF005b71), fontSize: 20));
-                        }
-                      },
-                      title:
-                          Text("Delete", style: TextStyle(color: Colors.red)),
-                      trailing: Icon(Icons.delete, color: Colors.red),
-                    ),
-                  ],
+                  ),
                 ),
               );
             }),

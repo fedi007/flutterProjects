@@ -31,27 +31,30 @@ class _ConductorProfileState extends State<ConductorProfile> {
                 SizedBox(height: 80),
                 Image.asset(
                   "images/Lg.png",
-                  height: 100,
-                  width: 100,
+                  height: 120,
+                  width: 120,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 30, right: 30, top: 15),
+                  padding: EdgeInsets.only(left: 30, right: 30, top: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("${currentConductor?.conductorName}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      GestureDetector(
-                          onTap: () {
-                            // Get.off(
-                            //   () => ChangeName(),
-                            // );
-                          },
-                          child: Icon(Icons.edit, color: Colors.grey, size: 20))
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Text("${currentConductor?.conductorName}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 40,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: GestureDetector(
+                            onTap: () {},
+                            child:
+                                Icon(Icons.edit, color: Colors.grey, size: 20)),
+                      )
                     ],
                   ),
                 ),
@@ -61,11 +64,22 @@ class _ConductorProfileState extends State<ConductorProfile> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 20, color: Colors.grey)),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30, right: 30, top: 5),
-                  child: Text("${currentConductor?.TruckModel}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, color: Colors.grey)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 30, top: 5),
+                      child: Text("${currentConductor?.TruckModel} :",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20, color: Colors.grey)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 2),
+                      child: Text("${currentConductor?.TruckLicensePlate}  ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20, color: Colors.grey)),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 220),
                 Padding(

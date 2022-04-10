@@ -7,7 +7,8 @@ import 'package:iblaze/Models/user.dart';
 
 User? currentUser = null;
 
-List<OffreModel> currentOffre = <OffreModel>[];
+List<OffreModel> offreByName = <OffreModel>[];
+List<OffreModel> AllOffres = <OffreModel>[];
 Conductor? currentConductor = null;
 final userData = GetStorage();
 final ConductorData = GetStorage();

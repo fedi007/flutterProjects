@@ -9,6 +9,8 @@ import 'package:iblaze/pages/Conductor/VanConductor/conductorPage.dart';
 import 'package:iblaze/services/conductorServices/Register_Login_Conductor.dart';
 
 import '../../../data/globals.dart';
+import '../../../services/conductorServices/conductorOffreAPI.dart';
+import '../../../services/userServices/Offre_Api.dart';
 
 class LoginPageConductor extends StatefulWidget {
   const LoginPageConductor({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class _LoginPageConductorState extends State<LoginPageConductor> {
   @override
   void initState() {
     super.initState();
+   // APIOffreUser.getOffers(currentUser?.username);
   }
 
   Widget build(BuildContext context) {
@@ -129,6 +132,7 @@ class _LoginPageConductorState extends State<LoginPageConductor> {
 
                       if (checkLoginCondcuctor) {
                         Get.off(() => VanConductor());
+                        APIOffreConductor.getAllOffers();
 
                         ConductorData.write(
                             "CondcutorPassword", '${ConductorPassword}');

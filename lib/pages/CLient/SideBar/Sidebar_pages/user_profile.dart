@@ -20,8 +20,8 @@ class _UserState extends State<User> {
   }
 
   String? validateUsername(String value) {
-    if (value.isEmpty) {
-      return " Username Can't be empty ";
+    if (!GetUtils.isLengthBetween(value, 4, 10)) {
+      return " Username must be 4 caracters at least  ";
     }
     return null;
   }
@@ -53,8 +53,8 @@ class _UserState extends State<User> {
                     ),
                     focusedBorder: InputBorder.none,
                   ),
-                  onChanged: (text) {
-                    NewName = text;
+                  onChanged: (value) {
+                    NewName = value;
                   },
                   controller: usernameController,
                   onSaved: (value) {
@@ -72,7 +72,7 @@ class _UserState extends State<User> {
                       style: TextStyle(color: Color(0xFF005b71))),
                   onPressed: () async {
                     await APIServiceUser.Update(currentUser?.username, NewName);
-                    checkLogin();
+
                     var x = checkLogin();
                     if (checkUpdate) {
                       Get.back();
