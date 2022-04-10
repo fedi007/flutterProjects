@@ -13,6 +13,10 @@ const ConducteurofferSchema = new Schema({
     required: true,
     ref:'conducteur',
   },
+  price:{
+    type: Number,
+    required:true,
+  },
   date: {
     type: Date,
     default: Date.now(),
