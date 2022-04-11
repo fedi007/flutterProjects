@@ -30,6 +30,10 @@ const OfferSchema = new Schema({
     type: String,
     required: true,
   },
+  daytime: {
+    type: String,
+    required: true,
+  },
 
   load: {
     type: String,
