@@ -1,10 +1,12 @@
-const offerController = require("../controllers/useroffer.controller");
+const userofferController = require("../controllers/useroffer.controller");
 const express = require("express");
 const router = express.Router();
 
-router.post("/register", offerController.register);
-router.delete("/delete",offerController.delete);
-router.post("/getbyuser",offerController.getByuser);
-router.patch('/update',offerController.update);
+router.post("/register", userofferController.register);
+router.delete("/delete",userofferController.delete);
+router.post("/getbyuser",userofferController.getByuser);
+router.patch('/update',userofferController.update);
+router.post("/getacceptedoffersbyuser",userofferController.getacceptedoffersbyuser);
+
 
 module.exports = router;

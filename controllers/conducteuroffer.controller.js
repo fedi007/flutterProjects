@@ -1,4 +1,5 @@
 const conducteurofferServices = require("../services/conducteuroffer.services");
+const Offer=require("../models/offer.model")
 
 // Creating one 
 exports.register = (req, res, next) => {
@@ -16,7 +17,7 @@ exports.register = (req, res, next) => {
   // Getting all
   exports.getAll=( async (req, res) => {
     try {
-      const offer = await Offer.find()
+      const offer = await Offer.find().populate('user')
       res.json(offer)
     } catch (err) {
       res.status(500).json({ message: err.message })

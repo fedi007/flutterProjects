@@ -81,6 +81,10 @@ app.use(
         methods: ["POST"]
       },
       {
+        url: "/users/offer/getacceptedoffersbyuser",
+        methods: ["POST"]
+      },
+      {
         url: "/users/offer/update",
         methods: ["PATCH"]
       },
@@ -88,6 +92,7 @@ app.use(
         url: "/users/deliveryType/getall",
         methods: ["GET"]
       },
+
       {
         url: "/users/deliveryType/register",
         methods: ["POST"]

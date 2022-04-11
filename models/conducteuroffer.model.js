@@ -11,7 +11,7 @@ const ConducteurofferSchema = new Schema({
   conducteur: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref:'conducteur',
+    ref:'conductor',
   },
   price:{
     type: Number,

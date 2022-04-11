@@ -1,5 +1,6 @@
 const userofferServices = require("../services/useroffer.services");
 const Offer = require("../models/offer.model");
+const Conducteuroffer = require("../models/conducteuroffer.model");
 
 // Creating one 
 exports.register = (req, res, next) => {
@@ -49,3 +50,18 @@ exports.register = (req, res, next) => {
       res.status(400).json({ message: err.message })
     }
   });
+  // Get accepted offers by user
+  exports.getacceptedoffersbyuser=( async (req, res) => {
+    const userlist=[];
+    try {
+      const conducteuroffer = await Conducteuroffer.find({}).populate('conducteur').populate('offer')
+      conducteuroffer.forEach((function(e)
+      {
+              if(e["offer"]["user"]==req.body.user)
+              userlist.push(e);
+      }));
+      res.json(userlist)
+    } catch (err) {
+      res.status(500).json({ message: err.message })
+    }
+  })
