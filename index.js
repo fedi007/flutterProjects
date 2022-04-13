@@ -61,6 +61,14 @@ app.use(
         methods: ["PATCH"]
       },
       {
+        url: "/conducteur/update/addtruck",
+        methods: ["PATCH"]
+      },
+      {
+        url: "/conducteur/update/deletetruck",
+        methods: ["PATCH"]
+      },
+      {
         url: "/users/offer/register",
         methods: ["POST"]
       },
@@ -98,6 +106,10 @@ app.use(
         methods: ["POST"]
       },
       {
+        url: "/conducteur/truck/register",
+        methods: ["POST"]
+      },
+      {
         url: "/upload",
         methods: ["POST"]
       },
@@ -119,6 +131,8 @@ app.use("/users/offer", require("./routes/useroffer.routes"));
 app.use("/conducteur/offer", require("./routes/conducteuroffer.routes"));
 
 app.use("/users/deliveryType", require("./routes/deliveryType.routes"));
+
+app.use("/conducteur/truck", require("./routes/truck.routes"));
 
 
 // middleware for error responses

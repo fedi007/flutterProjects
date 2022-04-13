@@ -52,7 +52,6 @@ exports.update=(async (req, res) => {
   res.status(200).json(req.body)
   else
   res.status(300).json("can't update")
-
     }
   } catch (err) {
     res.status(400).json({ message: err.message })

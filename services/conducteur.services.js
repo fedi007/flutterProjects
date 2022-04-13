@@ -6,8 +6,7 @@ const auth = require("../middlewares/auth.js");
 
 // Login
 async function login({ username, password }, callback) {
-  const conducteur = await Conducteur.findOne({ username });
-
+  const conducteur = await (await Conducteur.findOne({ username }).populate('truck'));
   if (conducteur != null) {
     if (bcrypt.compareSync(password, conducteur.password)) {
       const token = auth.generateAccessToken(username);
@@ -34,6 +33,10 @@ async function register(params, callback) {
         ""
       );
     }
+    const truck =[];
+    truck.push(params['truck']);
+     params['truck']=truck;
+     console.log(params);
     const conducteur = new Conducteur(params);
     conducteur
       .save()

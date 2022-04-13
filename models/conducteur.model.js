@@ -17,20 +17,15 @@ const ConducteurSchema = new Schema({
     type: String,
     required: true,
   },
-  TruckModel: {
-    type: String,
-    required: true,
- },
-   TruckLicense: {
-     type: String,
-     required: true,
-   },
+  truck:{
+    type: [Schema.Types.ObjectId],
+    ref:"truck",
+  },
   date: {
     type: Date,
     default: Date.now(),
   },
 });
-
 
 ConducteurSchema.set("toJSON", {
   transform: (document, returnedObject) => {
