@@ -4,79 +4,115 @@ const Conducteuroffer = require("../models/conducteuroffer.model");
 
 // Creating one 
 exports.register = (req, res, next) => {
-   userofferServices.register(req.body, (error, results) => {
-      if (error) {
-        return next(error);
-      }
-      return res.status(200).send({
+  userofferServices.register(req.body, (error, results) => {
+    if (error) {
+      return next(error);
+    }
+    return res.status(200).send({
 
-        data: results,
-      });
+      data: results,
     });
-  };
-
-  // Deleting One
-  exports.delete=( async (req, res) => {
-    try {
-      offer = await Offer.findById(req.body.id)
-      await offer.remove()
-      res.json({ message: 'Deleted Offer' })
-    } catch (err) {
-      res.status(500).json({ message: err.message })
-    }
-  })
-
-
-
-  // Get by user
-  exports.getByuser=( async (req, res) => {
-    try {
-      const offer = await Offer.find({ user:req.body.user }).populate('user');
-      res.json(offer)
-    } catch (err) {
-      res.status(500).json({ message: err.message })
-    }
-  })
-  // Updating One
-  exports.update=(async (req, res) => {
-    try{
-      const upoffer=await Offer.updateOne(
-        {_id:req.body.id},{deliveryType:req.body.deliveryType,depart:req.body.depart,arrivee:req.body.arrivee,load:req.body.load})
-        const offer=await Offer.findById(req.body.id);
-      if (upoffer.modifiedCount==1)
-      res.json(offer)
-      else 
-      res.status(300).json("can't update")
-    } catch (err) {
-      res.status(400).json({ message: err.message })
-    }
   });
-  // Get accepted offers by user
-  exports.getacceptedoffersbyuser=( async (req, res) => {
-    const userlist=[];
-    try {
-      const conducteuroffer = await Conducteuroffer.find({completeoffer:req.body.completeoffer}).populate('conducteur').populate('offer').populate('truck')
-      conducteuroffer.forEach((function(e)
+};
+
+// Deleting One
+exports.delete = (async (req, res) => {
+  try {
+    offer = await Offer.findById(req.body.id)
+    await offer.remove()
+    res.json({
+      message: 'Deleted Offer'
+    })
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    })
+  }
+})
+
+
+
+// Get by user
+exports.getByuser = (async (req, res) => {
+  try {
+    const offer = await Offer.find({
+      user: req.body.user
+    }).populate('user');
+    res.json(offer)
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    })
+  }
+})
+// Updating One
+exports.update = (async (req, res) => {
+  try {
+    var emptyvalue =true;
+
+    for(var i in req.body)
+    {
+     if(req.body[i]=="" || req.body[i]==null)
+      emptyvalue=false
+    }
+    if(emptyvalue)
+    {
+    const upoffer = await Offer.updateOne(
+
       {
-              if(e["offer"]["user"]==req.body.user)
-              userlist.push(e);
-      }));
-      res.json(userlist)
-    } catch (err) {
-      res.status(500).json({ message: err.message })
-    }
-  })
-  // user accepte offer
-  exports.useraccepteoffer=(async (req, res) => {
-    try{
-      const upconducteuroffer=await Conducteuroffer.updateOne(
-        {_id:req.body.id},{completeoffer:true})
-      if (upconducteuroffer.modifiedCount==1)
-      res.status(200).json("success update")
-      else 
+        _id: req.body.id
+      }, {
+        deliveryType: req.body.deliveryType,
+        depart: req.body.depart,
+        arrivee: req.body.arrivee,
+        load: req.body.load
+      })
+    const offer = await Offer.findById(req.body.id);
+    if (upoffer.modifiedCount == 1)
+      res.json(offer)
+    else
       res.status(300).json("can't update")
-    } catch (err) {
-      res.status(400).json({ message: err.message })
-    }
-  });
-
+    }else
+    res.status(300).json("values can't be empty")
+  } catch (err) {
+    res.status(400).json({
+      message: err.message
+    })
+  }
+});
+// Get accepted offers by user
+exports.getacceptedoffersbyuser = (async (req, res) => {
+  const userlist = [];
+  try {
+    const conducteuroffer = await Conducteuroffer.find({
+      completeoffer: req.body.completeoffer
+    }).populate('conducteur').populate('offer').populate('truck')
+    conducteuroffer.forEach((function (e) {
+      if (e["offer"]["user"] == req.body.user)
+        userlist.push(e);
+    }));
+    res.json(userlist)
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    })
+  }
+})
+// user accepte offer
+exports.useraccepteoffer = (async (req, res) => {
+  try {
+    const upconducteuroffer = await Conducteuroffer.updateOne({
+      _id: req.body.id
+    }, {
+      completeoffer: true
+    })
+    if (upconducteuroffer.modifiedCount == 1)
+      res.status(200).json("success update")
+    else
+      res.status(300).json("can't update")
+  } catch (err) {
+    res.status(400).json({
+      message: err.message
+    })
+  }
+});
