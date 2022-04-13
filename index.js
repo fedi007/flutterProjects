@@ -81,6 +81,10 @@ app.use(
         methods: ["POST"]
       },
       {
+        url: "/conducteur/offer/getacceptedoffersbyconducteur",
+        methods: ["POST"]
+      },
+      {
         url: "/users/offer/delete",
         methods: ["DELETE"]
       },
@@ -91,6 +95,10 @@ app.use(
       {
         url: "/users/offer/getacceptedoffersbyuser",
         methods: ["POST"]
+      },
+      {
+        url: "/users/offer/useraccepteoffer",
+        methods: ["PATCH"]
       },
       {
         url: "/users/offer/update",

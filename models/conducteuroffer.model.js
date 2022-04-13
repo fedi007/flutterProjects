@@ -13,9 +13,18 @@ const ConducteurofferSchema = new Schema({
     required: true,
     ref:'conductor',
   },
+  truck:{
+    type:Schema.Types.ObjectId,
+    required:true,
+    ref:'truck',
+  },
   price:{
     type: Number,
     required:true,
+  },
+  completeoffer:{
+    type: Boolean,
+    default:false,
   },
   date: {
     type: Date,
