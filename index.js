@@ -74,11 +74,15 @@ app.use(
       },
       {
         url: "/conducteur/offer/getall",
-        methods: ["GET"]
+        methods: ["POST"]
       },
       {
         url: "/conducteur/offer/register",
         methods: ["POST"]
+      },
+      {
+        url: "/conducteur/offer/delete",
+        methods: ["DELETE"]
       },
       {
         url: "/conducteur/offer/getacceptedoffersbyconducteur",
@@ -116,6 +120,18 @@ app.use(
       {
         url: "/conducteur/truck/register",
         methods: ["POST"]
+      },
+      {
+        url: "/conducteur/truck/gettrucksbyconducteur",
+        methods: ["POST"]
+      },
+      {
+        url: "/conducteur/truck/addtruck",
+        methods: ["PATCH"]
+      },
+      {
+        url: "/conducteur/truck/deletetruck",
+        methods: ["PATCH"]
       },
       {
         url: "/upload",

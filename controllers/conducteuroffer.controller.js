@@ -18,7 +18,7 @@ exports.register = (req, res, next) => {
   // Getting all
   exports.getAll=( async (req, res) => {
     try {
-      const offer = await Offer.find().populate('user')
+      const offer = await Offer.find({ user: {$nin:[req.body.user]}}).populate('user')
       res.json(offer)
     } catch (err) {
       res.status(500).json({ message: err.message })
@@ -32,4 +32,14 @@ exports.register = (req, res, next) => {
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
+  })
+  //Delete conducteur offer
+  exports.delete=(async (req,res)=> {
+  try{
+  const conducteuroffer = await Conducteuroffer.findById(req.body.conducteuroffer)
+  conducteuroffer.remove();
+  res.status(200).json({"resultat" : "success delete"});
+  }catch(err){
+   res.status(300).json({message:err.message})
+  }
   })
