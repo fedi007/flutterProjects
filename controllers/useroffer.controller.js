@@ -63,9 +63,12 @@ exports.update = (async (req, res) => {
         _id: req.body.id
       }, {
         deliveryType: req.body.deliveryType,
-        depart: req.body.depart,
-        arrivee: req.body.arrivee,
-        load: req.body.load
+       depart: req.body.depart,
+       arrivee: req.body.arrivee,
+       load: req.body.load,
+       quantity: req.body.quantity,
+       time: req.body.time,
+       daytime: req.body.daytime,
       })
     const offer = await Offer.findById(req.body.id);
     if (upoffer.modifiedCount == 1)
