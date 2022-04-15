@@ -61,14 +61,6 @@ app.use(
         methods: ["PATCH"]
       },
       {
-        url: "/conducteur/update/addtruck",
-        methods: ["PATCH"]
-      },
-      {
-        url: "/conducteur/update/deletetruck",
-        methods: ["PATCH"]
-      },
-      {
         url: "/users/offer/register",
         methods: ["POST"]
       },

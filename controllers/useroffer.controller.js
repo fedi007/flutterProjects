@@ -38,7 +38,11 @@ exports.getByuser = (async (req, res) => {
     const offer = await Offer.find({
       user: req.body.user
     }).populate('user');
-    res.json(offer)
+    var listoffer=[];
+    for(var i=0;i<offer.length;i++)
+     if(await Conducteuroffer.findOne({offer:offer[i]["id"]})==null)
+     listoffer.push(offer[i]);
+    res.json(listoffer)
   } catch (err) {
     res.status(500).json({
       message: err.message
