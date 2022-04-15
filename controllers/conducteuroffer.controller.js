@@ -19,7 +19,21 @@ exports.register = (req, res, next) => {
   exports.getAll=( async (req, res) => {
     try {
       const offer = await Offer.find({ user: {$nin:[req.body.user]}}).populate('user')
-      res.json(offer)
+      var listoffer=[];
+      var conducteuroffer;
+    for(var i=0;i<offer.length;i++)
+    {
+      conducteuroffer=await Conducteuroffer.find({offer:offer[i]["id"]});
+      if(conducteuroffer.length===0)
+      listoffer.push(offer[i])
+      else
+      {
+      for(var j=0; j<conducteuroffer.length;j++ )
+      if(conducteuroffer[j]["conducteur"]!=req.body.conducteur)
+      listoffer.push(offer[i])
+      }
+    }
+    res.status(200).json(listoffer)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }

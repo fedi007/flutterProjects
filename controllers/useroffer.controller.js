@@ -42,7 +42,7 @@ exports.getByuser = (async (req, res) => {
     for(var i=0;i<offer.length;i++)
      if(await Conducteuroffer.findOne({offer:offer[i]["id"]})==null)
      listoffer.push(offer[i]);
-    res.json(listoffer)
+    res.status(200).json(listoffer)
   } catch (err) {
     res.status(500).json({
       message: err.message
