@@ -36,7 +36,6 @@ async function register(params, callback) {
     const truck =[];
     truck.push(params['truck']);
      params['truck']=truck;
-     console.log(params);
     const conducteur = new Conducteur(params);
     conducteur
       .save()

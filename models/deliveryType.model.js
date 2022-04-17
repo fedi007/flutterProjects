@@ -6,6 +6,11 @@ const DeliveryTypeSchema = new Schema({
   deliveryType: {
     type: String,
     required: true,
+    unique:true,
+  },
+  date: {
+    type: Date,
+    default: Date.now(),
   },
 });
 
