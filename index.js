@@ -153,7 +153,7 @@ app.use("/users/deliveryType", require("./routes/deliveryType.routes"));
 
 app.use("/conducteur/truck", require("./routes/truck.routes"));
 
-refreshcontroller.deletebydate();
+//refreshcontroller.deletebydate();
 
 //schedule.scheduleJob('* * * * *',refreshcontroller.deletebydate);
 
