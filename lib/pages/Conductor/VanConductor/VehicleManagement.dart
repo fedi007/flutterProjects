@@ -1,0 +1,212 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iblaze/data/globals.dart';
+import 'package:iblaze/pages/Conductor/AddVehiclePage.dart';
+import 'package:iblaze/pages/Conductor/VanConductor/conductorPage.dart';
+import 'package:iblaze/services/conductorServices/truckAPI.dart';
+
+import '../../../Models/truck.dart';
+
+class VehicleManagement extends StatefulWidget {
+  const VehicleManagement({Key? key}) : super(key: key);
+
+  @override
+  State<VehicleManagement> createState() => _VehicleManagementState();
+}
+
+class _VehicleManagementState extends State<VehicleManagement> {
+  List<Truck> vehicles = [];
+  @override
+  void initState() {
+    super.initState();
+
+    init();
+  }
+
+  void init() async {
+    final trucks =
+        await APITruckServices.getAllTrucks(currentConductor?.conductorId);
+    if (trucks != null) {
+      setState(() {
+        vehicles = trucks;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new WillPopScope(
+      onWillPop: () async {
+        Get.to(() => VanConductor());
+        return true;
+      },
+      child: SafeArea(
+        child: Scaffold(
+          //appBar: AppBar(),
+          // backgroundColor: Color.fromARGB(255, 197, 188, 188),
+          body: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(62, 0, 90, 113),
+                      Color.fromARGB(62, 255, 255, 255),
+                    ]),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Text("Your Vehicles ",
+                        style: TextStyle(
+                            color: Color(0xFF005b71),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30)),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: ListView.builder(
+                          itemCount: vehicles.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 30.0, right: 30),
+                              child: Container(
+                                child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    child: ExpansionTile(
+                                        leading: Icon(FontAwesomeIcons.truck,
+                                            color: Color(0xFF005b71)),
+                                        title: Text(
+                                            "${vehicles[index].TruckModel} " +
+                                                " ${vehicles[index].TruckLicense}",
+                                            style: TextStyle(
+                                                color: Color(0xFF005b71))),
+                                        children: [
+                                          ListTile(
+                                            title: Text("Delete",
+                                                style: TextStyle(
+                                                    color: Colors.red)),
+                                            trailing: Icon(Icons.delete,
+                                                color: Colors.red),
+                                            onTap: () async {
+                                              Get.defaultDialog(
+                                                  title: "!",
+                                                  titleStyle: TextStyle(
+                                                      fontSize: 30,
+                                                      color: Colors.red,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                  middleText:
+                                                      "Are you sure you want to remove this truck ! \n ",
+                                                  middleTextStyle:
+                                                      TextStyle(fontSize: 20),
+                                                  textCancel: "Cancel",
+                                                  cancelTextColor: Colors.black,
+                                                  textConfirm: "Confirm",
+                                                  confirmTextColor:
+                                                      Colors.white,
+                                                  buttonColor: Colors.red,
+                                                  onConfirm: () async {
+                                                    await APITruckServices
+                                                        .DeleteTruck(
+                                                            vehicles[index]
+                                                                .TruckId,
+                                                            currentConductor
+                                                                ?.conductorId);
+
+                                                    if (truckDeletedCheck) {
+                                                      Get.back();
+                                                      setState(() {
+                                                        vehicles.remove(
+                                                            vehicles[index]);
+                                                      });
+                                                      Get.defaultDialog(
+                                                        title: "Done",
+                                                        titleStyle: TextStyle(
+                                                            fontSize: 30,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    10,
+                                                                    101,
+                                                                    13)),
+                                                        middleText:
+                                                            "Your truck has been removed",
+                                                        middleTextStyle:
+                                                            TextStyle(
+                                                                color: Color(
+                                                                    0xFF005b71),
+                                                                fontSize: 20),
+                                                      );
+                                                    } else {
+                                                      Get.defaultDialog(
+                                                          title: "!",
+                                                          titleStyle: TextStyle(
+                                                              fontSize: 30,
+                                                              color: Colors.red,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                          middleText:
+                                                              "Something went wrong !",
+                                                          middleTextStyle:
+                                                              TextStyle(
+                                                                  color: Color(
+                                                                      0xFF005b71),
+                                                                  fontSize:
+                                                                      20));
+                                                    }
+                                                  });
+                                            },
+                                          ),
+                                        ])),
+                              ),
+                            );
+                          }),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  Get.to(() => AddVehicle());
+                                },
+                                label: Text(
+                                  "Add Vehicle",
+                                  style: GoogleFonts.roboto(
+                                      color: Colors.white, fontSize: 17.5),
+                                ),
+                                icon: Icon(Icons.add),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Color(0xFF005b71),
+                                  ),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0))),
+                                ),
+                              ))),
+                    ),
+                  ],
+                ),
+              )),
+        ),
+      ),
+    );
+  }
+}
