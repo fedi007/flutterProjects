@@ -8,7 +8,7 @@ exports.register = (req, res, next) => {
     if (error) {
       return next(error);
     }
-    return res.status(200).send({
+    return res.status(201).send({
 
       data: results,
     });
@@ -20,7 +20,7 @@ exports.delete = (async (req, res) => {
   try {
     offer = await Offer.findById(req.body.id)
     await offer.remove()
-    res.json({
+    res.status(200).json({
       message: 'Deleted Offer'
     })
   } catch (err) {
@@ -76,13 +76,13 @@ exports.update = (async (req, res) => {
       })
     const offer = await Offer.findById(req.body.id);
     if (upoffer.modifiedCount == 1)
-      res.json(offer)
+      res.status(200).json(offer)
     else
-      res.status(300).json("can't update")
+      res.status(400).json("can't update")
     }else
-    res.status(300).json("values can't be empty")
+    res.status(400).json("values can't be empty")
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       message: err.message
     })
   }
@@ -98,7 +98,7 @@ exports.getacceptedoffersbyuser = (async (req, res) => {
       if (e["offer"]["user"] == req.body.user)
         userlist.push(e);
     }));
-    res.json(userlist)
+    res.status(200).json(userlist)
   } catch (err) {
     res.status(500).json({
       message: err.message
@@ -116,9 +116,9 @@ exports.useraccepteoffer = (async (req, res) => {
     if (upconducteuroffer.modifiedCount == 1)
       res.status(200).json("success update")
     else
-      res.status(300).json("can't update")
+      res.status(400).json("can't update")
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       message: err.message
     })
   }

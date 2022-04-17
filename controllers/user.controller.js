@@ -20,7 +20,7 @@ exports.register = (req, res, next) => {
     if (error) {
       return next(error);
     }
-    return res.status(200).send({
+    return res.status(201).send({
       message: "Success",
       data: results,
     });
@@ -45,17 +45,16 @@ exports.update=(async (req, res) => {
 
   try{
     if((req.body.username=="" || req.body.username==null) && req.body.isdriver!=true){
-    res.status(300).json(" caan't update");
+    res.status(300).json(" can't update");
     }else{
     const upuser=await User.updateOne({username:req.body.lastusername},{username: req.body.username ,isdriver:req.body.isdriver})
     if(upuser.modifiedCount==1)
   res.status(200).json(req.body)
   else
-  res.status(300).json("can't update")
+  res.status(400).json("can't update")
     }
   } catch (err) {
-    res.status(400).json({ message: err.message })
+    res.status(500).json({ message: err.message })
   }
 });
-//became a driver
 

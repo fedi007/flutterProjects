@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const schedule= require("node-schedule");
+const refreshcontroller=require("./controllers/refresh.controller")
 
 
 
@@ -135,6 +137,7 @@ app.use(
 
 
 
+
 app.use(express.json());
 
 // initialize routes
@@ -149,6 +152,10 @@ app.use("/conducteur/offer", require("./routes/conducteuroffer.routes"));
 app.use("/users/deliveryType", require("./routes/deliveryType.routes"));
 
 app.use("/conducteur/truck", require("./routes/truck.routes"));
+
+refreshcontroller.deletebydate();
+
+//schedule.scheduleJob('* * * * *',refreshcontroller.deletebydate);
 
 
 // middleware for error responses

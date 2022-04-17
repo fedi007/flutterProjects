@@ -9,7 +9,7 @@ exports.register = (req, res, next) => {
       if (error) {
         return next(error);
       }
-      return res.status(200).send({
+      return res.status(201).send({
         data: results,
       });
     });
@@ -20,7 +20,7 @@ exports.register = (req, res, next) => {
         const idList=[];
       const deliveryType = await DeliveryType.find();
       deliveryType.forEach(e => idList.push(e.deliveryType));
-      res.json(idList)
+      res.status(200).json(idList)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
