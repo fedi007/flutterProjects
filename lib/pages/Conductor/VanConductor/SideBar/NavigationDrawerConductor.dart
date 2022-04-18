@@ -98,6 +98,17 @@ class NavigationDrawerConduct extends StatelessWidget {
     }
   }
 }
+String textEditing({required String Text}) {
+  String newText = "";
+  if (Text.length > 5) {
+    for (var i = 0; i < 5; i++) {
+      newText = newText + Text[i];
+    }
+    newText = newText + "..";
+  } else
+    newText = Text;
+  return newText;
+}
 
 Widget headerWidget({
   required VoidCallback onClicked,
@@ -123,7 +134,7 @@ Widget headerWidget({
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${currentConductor?.conductorName}',
+                Text(textEditing(Text:('${currentConductor?.conductorName}')),
                     style: GoogleFonts.roboto(
                         fontSize: 30,
                         color: Color(0xFF005b71),

@@ -60,8 +60,7 @@ class _updateOffreState extends State<updateOffre> {
         deliveryDay = offer[index].getDeliveryDay;
         depart = offer[index].getDepart;
         arrivee = offer[index].getArrivee;
-        // others = offer[index].getFreightType;
-        quantity = offer[index].getQuantity;
+
         // print(response);
         // print(deliveryTime);
         // print(deliveryDay);
@@ -205,8 +204,7 @@ class _updateOffreState extends State<updateOffre> {
                           borderSide:
                               BorderSide(width: 3, color: Color(0xFF005b71)),
                         ),
-                        hintText:
-                            'Weight  ( ex : 10kg ) / Quantity ( ex :10 ) ',
+                        hintText: 'Weight / Quantity',
                         hintStyle: TextStyle(
                             //   fontSize: 20,
                             ),
@@ -238,7 +236,7 @@ class _updateOffreState extends State<updateOffre> {
                               location.text = "${depart}";
                             }
                           },
-                          icon: Icon(FontAwesomeIcons.location,
+                          icon: Icon(FontAwesomeIcons.locationDot,
                               color: Color(0xFF005b71)),
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -408,61 +406,72 @@ class _updateOffreState extends State<updateOffre> {
                 ButtonWidget(
                     text: "Update your offers",
                     onClicked: () async {
-                      Get.defaultDialog(
-                          title: "Check",
-                          titleStyle:
-                              TextStyle(fontSize: 30, color: Color(0xFF005b71)),
-                          middleText:
-                              "Freight Type : ${freightType} \n \n Quantity/Weight : ${quantity}  \n \n Departure Location : ${depart} \n \n Arrival Location : ${arrivee} \n \n  ${deliveryTime} , ${deliveryDay}  \n \n  ${response}  \n ",
-                          textCancel: "Cancel",
-                          cancelTextColor: Color(0xFF005b71),
-                          textConfirm: "Confirm",
-                          confirmTextColor: Colors.white,
-                          buttonColor: Color(0xFF005b71),
-                          onConfirm: () async {
-                            await APIOffreUser.UpdateOffre(
-                              offer[index].getOffreId,
-                              depart,
-                              arrivee,
-                              response,
-                              deliveryTime,
-                              deliveryDay,
-                              freightType,
-                              quantity,
-                            );
-
-                            if (UpdatedOffre) {
-                              Get.back();
-                              Get.defaultDialog(
-                                title: "Success",
-                                titleStyle: TextStyle(
-                                    fontSize: 30, color: Colors.green),
-                                middleText: "Your offer has been updated",
-                                middleTextStyle: TextStyle(
-                                    color: Color(0xFF005b71), fontSize: 20),
-                                textConfirm: "Get Back",
-                                confirmTextColor: Colors.white,
-                                buttonColor: Color(0xFF005b71),
-                                onConfirm: () {
-                                  Get.off(() => ClientPage());
-                                },
+                      if (freightType == null) {
+                        Get.defaultDialog(
+                          title: "!",
+                          titleStyle: TextStyle(
+                              fontSize: 30,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                          middleText: "Check your offer",
+                          middleTextStyle:
+                              TextStyle(color: Color(0xFF005b71), fontSize: 20),
+                        );
+                      } else {
+                        Get.defaultDialog(
+                            title: "Check",
+                            titleStyle: TextStyle(
+                                fontSize: 30, color: Color(0xFF005b71)),
+                            middleText:
+                                "Freight Type : ${freightType} \n \n Quantity/Weight : ${quantity}  \n \n Departure Location : ${depart} \n \n Arrival Location : ${arrivee} \n \n  ${deliveryTime} , ${deliveryDay}  \n \n  ${response}  \n ",
+                            textCancel: "Cancel",
+                            cancelTextColor: Color(0xFF005b71),
+                            textConfirm: "Confirm",
+                            confirmTextColor: Colors.white,
+                            buttonColor: Color(0xFF005b71),
+                            onConfirm: () async {
+                              await APIOffreUser.UpdateOffre(
+                                offer[index].getOffreId,
+                                depart,
+                                arrivee,
+                                response,
+                                deliveryTime,
+                                deliveryDay,
+                                freightType,
+                                quantity,
                               );
-                            } else {
-                              Get.back();
-                              Get.defaultDialog(
-                                title: "!",
-                                titleStyle: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                                middleText: "Check your offer",
-                                middleTextStyle: TextStyle(
-                                    color: Color(0xFF005b71), fontSize: 20),
-                              );
-                            }
 
-                            ;
-                          });
+                              if (UpdatedOffre) {
+                                Get.back();
+                                Get.defaultDialog(
+                                  title: "Success",
+                                  titleStyle: TextStyle(
+                                      fontSize: 30, color: Colors.green),
+                                  middleText: "Your offer has been updated",
+                                  middleTextStyle: TextStyle(
+                                      color: Color(0xFF005b71), fontSize: 20),
+                                  textConfirm: "Get Back",
+                                  confirmTextColor: Colors.white,
+                                  buttonColor: Color(0xFF005b71),
+                                  onConfirm: () {
+                                    Get.off(() => ClientPage());
+                                  },
+                                );
+                              } else {
+                                Get.back();
+                                Get.defaultDialog(
+                                  title: "!",
+                                  titleStyle: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                  middleText: "Check your offer",
+                                  middleTextStyle: TextStyle(
+                                      color: Color(0xFF005b71), fontSize: 20),
+                                );
+                              }
+                            });
+                      }
                     }),
                 SizedBox(height: 20)
               ],

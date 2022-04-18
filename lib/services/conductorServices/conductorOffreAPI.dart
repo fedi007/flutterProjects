@@ -9,7 +9,7 @@ class APIOffreConductor {
   static Future<List<AllOffers>> getAllOffers(userId, conductorId) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.8:4000/conducteur/offer/getall'));
+        'POST', Uri.parse('http://192.168.1.46:4000/conducteur/offer/getall'));
     request.body = json.encode({
       "user": userId,
       "conducteur": conductorId,
@@ -44,8 +44,8 @@ class APIOffreConductor {
   static RegisterOffre(
       offreID, ConductorId, TruckID, Price, Description) async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.8:4000/conducteur/offer/register'));
+    var request = http.Request('POST',
+        Uri.parse('http://192.168.1.46:4000/conducteur/offer/register'));
     request.body = json.encode({
       "offer": offreID,
       "conducteur": ConductorId,
@@ -66,14 +66,15 @@ class APIOffreConductor {
     }
   }
 
-  static Future<List<RegisteredOffers>> allRegisteredOffers(ConductorId,CompletedOffer) async {
+  static Future<List<RegisteredOffers>> allRegisteredOffers(
+      ConductorId, CompletedOffer) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
         'POST',
         Uri.parse(
-            'http://192.168.1.8:4000/conducteur/offer/getacceptedoffersbyconducteur'));
-    request.body =
-        json.encode({"conducteur": ConductorId, "completeoffer": CompletedOffer});
+            'http://192.168.1.46:4000/conducteur/offer/getacceptedoffersbyconducteur'));
+    request.body = json
+        .encode({"conducteur": ConductorId, "completeoffer": CompletedOffer});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -105,8 +106,8 @@ class APIOffreConductor {
 
   static DeleteOffre(offreID) async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'DELETE', Uri.parse('http://192.168.1.8:4000/conducteur/offer/delete'));
+    var request = http.Request('DELETE',
+        Uri.parse('http://192.168.1.46:4000/conducteur/offer/delete'));
     request.body = json.encode({"conducteuroffer": offreID});
     request.headers.addAll(headers);
 
@@ -120,14 +121,14 @@ class APIOffreConductor {
     }
   }
 
-  static Future offreCompleted (ConductorID) async {
+  static Future offreCompleted(ConductorID) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
         'POST',
         Uri.parse(
-            'http://192.168.1.8:4000/conducteur/offer/getacceptedoffersbyconducteur'));
-    request.body = json.encode(
-        {"conducteur": ConductorID , "completeoffer": true});
+            'http://192.168.1.46:4000/conducteur/offer/getacceptedoffersbyconducteur'));
+    request.body =
+        json.encode({"conducteur": ConductorID, "completeoffer": true});
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

@@ -53,18 +53,17 @@ class _RegisterPageState extends State<RegisterPage> {
     return null;
   }
 
-  String? validatePassword(String value) {
-    RegExp regex =
-        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ ]).{4,}$');
-    if (value.isEmpty) {
-      return 'Please enter password';
-    } else {
-      if (!regex.hasMatch(value)) {
-        return 'Enter a Strong password';
-      } else {
-        return null;
-      }
-    }
+  String? validatePassword(String password) {
+    if (password.length < 4) return "password must be at least 4 characters ";
+    if (!password.contains(RegExp(r"[a-z]")))
+      return "password must contains letters";
+    if (!password.contains(RegExp(r"[A-Z]")))
+      return "password must contains an uppercase character";
+    if (!password.contains(RegExp(r"[0-9]")))
+      return "password must contains a digit number";
+    if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')))
+      return "password must contains special characters ";
+    return null;
   }
 
   String? validateConfirmPassword(String value) {

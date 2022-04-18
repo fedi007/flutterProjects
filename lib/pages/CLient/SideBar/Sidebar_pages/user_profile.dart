@@ -49,7 +49,6 @@ class _UserState extends State<User> {
               child: Form(
                 key: loginFormKey,
                 child: TextFormField(
-                  maxLength: 10,
                   cursorColor: Color(0xFF005b71),
                   decoration: InputDecoration(
                     icon: Icon(

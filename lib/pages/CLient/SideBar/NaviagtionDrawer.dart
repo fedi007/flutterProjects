@@ -106,6 +106,18 @@ class NavigationDrawer extends StatelessWidget {
     }
   }
 
+  String textEditing({required String Text}) {
+    String newText = "";
+    if (Text.length > 5) {
+      for (var i = 0; i < 5; i++) {
+        newText = newText + Text[i];
+      }
+      newText = newText + "..";
+    } else
+      newText = Text;
+    return newText;
+  }
+
   Widget headerWidget({
     required VoidCallback onClicked,
   }) =>
@@ -132,7 +144,7 @@ class NavigationDrawer extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('${currentUser?.username}',
+                      Text(textEditing(Text: '${currentUser?.username}'),
                           style: GoogleFonts.roboto(
                               fontSize: 30,
                               color: Color(0xFF005b71),

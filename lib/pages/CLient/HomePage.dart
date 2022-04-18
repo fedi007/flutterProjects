@@ -18,6 +18,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController location = TextEditingController();
+  TextEditingController weight = TextEditingController();
+  TextEditingController arrival = TextEditingController();
+  TextEditingController other = TextEditingController();
+
   TimeOfDay? Time = TimeOfDay.now();
   DateTime? Date = DateTime.now();
   String? dropdownvalue;
@@ -117,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   width: double.infinity,
                   child: TextField(
+                    controller: other,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -145,6 +150,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 width: double.infinity,
                 child: TextField(
+                  controller: weight,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
@@ -152,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                         borderSide:
                             BorderSide(width: 3, color: Color(0xFF005b71)),
                       ),
-                      hintText: 'Weight  ( ex : 10kg ) / Quantity ( ex :10 ) ',
+                      hintText: 'Weight / Quantity',
                       hintStyle: TextStyle(
                           //   fontSize: 20,
                           ),
@@ -184,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                             location.text = "${depart}";
                           }
                         },
-                        icon: Icon(FontAwesomeIcons.location,
+                        icon: Icon(FontAwesomeIcons.locationDot,
                             color: Color(0xFF005b71)),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -192,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                         borderSide:
                             BorderSide(width: 3, color: Color(0xFF005b71)),
                       ),
-                      hintText: 'Departure Location',
+                      hintText: '           Departure Location',
                       hintStyle: TextStyle(
                           //   fontSize: 20,
                           ),
@@ -212,6 +218,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 width: double.infinity,
                 child: TextField(
+                  controller: arrival,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
@@ -263,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                             setState(() {
                               Time = newTime;
                               deliveryTime =
-                                  "${Time!.hour.toString()}: ${Time!.minute.toString()}";
+                                  "${Time!.hour.toString()}:${Time!.minute.toString()}";
                             });
                           }
                         },
@@ -340,51 +347,69 @@ class _HomePageState extends State<HomePage> {
               ButtonWidget(
                   text: "Look For Offers",
                   onClicked: () async {
-                    Get.defaultDialog(
-                        title: "Check",
-                        titleStyle:
-                            TextStyle(fontSize: 30, color: Color(0xFF005b71)),
-                        middleText:
-                            "Freight Type : ${freightType} \n \n Quantity/Weight : ${quantity}  \n \n Departure Location : ${depart} \n \n Arrival Location : ${arrivee} \n \n  ${deliveryTime} , ${deliveryDay}  \n \n  ${response}  \n \n   ",
-                        textCancel: "Cancel",
-                        cancelTextColor: Color(0xFF005b71),
-                        textConfirm: "Confirm",
-                        confirmTextColor: Colors.white,
-                        buttonColor: Color(0xFF005b71),
-                        onConfirm: () async {
-                          await APIOffreUser.RegisterOffre(
-                              depart,
-                              arrivee,
-                              response,
-                              deliveryTime,
-                              deliveryDay,
-                              freightType,
-                              quantity,
-                              currentUser?.id);
+                    if (freightType == null ||
+                        quantity == null ||
+                        depart == null ||
+                        arrivee == null) {
+                      Get.defaultDialog(
+                          title: "!",
+                          titleStyle: TextStyle(
+                              fontSize: 30,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                          middleText: "Check your offer",
+                          middleTextStyle: TextStyle(
+                              color: Color(0xFF005b71), fontSize: 20));
+                    } else {
+                      Get.defaultDialog(
+                          title: "Check",
+                          titleStyle:
+                              TextStyle(fontSize: 30, color: Color(0xFF005b71)),
+                          middleText:
+                              "Freight Type : ${freightType} \n \n Quantity/Weight : ${quantity}  \n \n Departure Location : ${depart} \n \n Arrival Location : ${arrivee} \n \n  ${deliveryTime} , ${deliveryDay}  \n \n  ${response}  \n \n   ",
+                          textCancel: "Cancel",
+                          cancelTextColor: Color(0xFF005b71),
+                          textConfirm: "Confirm",
+                          confirmTextColor: Colors.white,
+                          buttonColor: Color(0xFF005b71),
+                          onConfirm: () async {
+                            await APIOffreUser.RegisterOffre(
+                                depart,
+                                arrivee,
+                                response,
+                                deliveryTime,
+                                deliveryDay,
+                                freightType,
+                                quantity,
+                                currentUser?.id);
 
-                          if (offreCheck) {
-                            Get.back();
-                            Get.defaultDialog(
-                                title: "Success",
-                                titleStyle: TextStyle(
-                                    fontSize: 25, color: Colors.green),
-                                middleText: "Your offer has been posted",
-                                middleTextStyle: TextStyle(
-                                    color: Color(0xFF005b71), fontSize: 20));
-                          } else {
-                            Get.back();
-                            Get.defaultDialog(
-                                title: "!",
-                                titleStyle: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
-                                middleText: "Check your offer",
-                                middleTextStyle: TextStyle(
-                                    color: Color(0xFF005b71), fontSize: 20));
-                          }
-                          ;
-                        });
+                            if (offreCheck) {
+                              location.clear();
+                              other.clear();
+                              arrival.clear();
+                              weight.clear();
+                              Get.back();
+                              Get.defaultDialog(
+                                  title: "Success",
+                                  titleStyle: TextStyle(
+                                      fontSize: 25, color: Colors.green),
+                                  middleText: "Your offer has been posted",
+                                  middleTextStyle: TextStyle(
+                                      color: Color(0xFF005b71), fontSize: 20));
+                            } else {
+                              Get.back();
+                              Get.defaultDialog(
+                                  title: "!",
+                                  titleStyle: TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                  middleText: "Check your offer",
+                                  middleTextStyle: TextStyle(
+                                      color: Color(0xFF005b71), fontSize: 20));
+                            }
+                          });
+                    }
                   })
             ],
           ),

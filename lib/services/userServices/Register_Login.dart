@@ -14,7 +14,7 @@ class APIServiceUser {
   static Future<void> login(username, password) async {
     var headers = {'Content-Type': 'application/json'};
     var request =
-        http.Request('POST', Uri.parse('http://192.168.1.8:4000/users/login'));
+        http.Request('POST', Uri.parse('http://192.168.1.46:4000/users/login'));
     request.body = json.encode({"username": username, "password": password});
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
@@ -23,8 +23,11 @@ class APIServiceUser {
       checkLogin = true;
       var Data = json.decode(await response.stream.bytesToString());
 
-      var date = Data["data"]["date"];
-      for (var i = 0; i < 10; i++) creationDate = creationDate + date[i];
+      for (var i = 0; i < 10; i++) {
+        var date = Data["data"]["date"];
+        creationDate = creationDate + date[i];
+      }
+
       currentUser = new User(
           Data["data"]["username"],
           Data["data"]["email"],
@@ -43,7 +46,7 @@ class APIServiceUser {
   static Register(username, email, password) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.8:4000/users/register'));
+        'POST', Uri.parse('http://192.168.1.46:4000/users/register'));
     request.body = json
         .encode({"username": username, "email": email, "password": password});
     request.headers.addAll(headers);
@@ -61,7 +64,7 @@ class APIServiceUser {
   static Update(Lastusername, Username) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'PATCH', Uri.parse('http://192.168.1.8:4000/users/update'));
+        'PATCH', Uri.parse('http://192.168.1.46:4000/users/update'));
     request.body = json.encode({
       "username": Username,
       "lastusername": Lastusername,
@@ -92,7 +95,7 @@ class APIServiceUser {
   static UpdateStatus(Lastusername) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'PATCH', Uri.parse('http://192.168.1.8:4000/users/update'));
+        'PATCH', Uri.parse('http://192.168.1.46:4000/users/update'));
     request.body =
         json.encode({"lastusername": Lastusername, "isdriver": true});
     // currentUser?.isdriver = true;
