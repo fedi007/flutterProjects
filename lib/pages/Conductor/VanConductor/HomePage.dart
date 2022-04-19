@@ -28,13 +28,16 @@ class _HomePageState extends State<HomePage> {
   String? dropdownvalue;
   var indexValue = null;
   String query = '';
+
   List<AllOffers> offers = [];
+  List<AllOffers> searchingList = [];
   List<String> ChosenTruck = [];
   List<String> ChosenTruckId = [];
 
   @override
   void initState() {
     super.initState();
+
     PriceController = TextEditingController();
 
     init();
@@ -43,18 +46,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   void init() async {
-    final offersp = await APIOffreConductor.getAllOffers(
-        "${currentUser?.id}", "${currentConductor?.conductorId}");
-    setState(() {
-      offers = offersp;
+    APIOffreConductor.getAllOffers(
+            "${currentUser?.id}", "${currentConductor?.conductorId}")
+        .then((value) {
+      setState(() {
+        offers.addAll(value);
+        searchingList = offers;
+      });
     });
   }
 
   void initial() async {
+    final offersp = await APIOffreConductor.getAllOffers(
+        "${currentUser?.id}", "${currentConductor?.conductorId}");
     final trucks =
         await APITruckServices.getTrucksName(currentConductor?.conductorId);
     if (trucks != null) {
       setState(() {
+        offers = offersp;
         this.ChosenTruck = trucks;
       });
     }
@@ -222,10 +231,10 @@ class _HomePageState extends State<HomePage> {
                                         fontSize: 20.0);
                                   } else {
                                     Get.defaultDialog(
-                                        title: "!",
+                                        title: "Error",
                                         titleStyle: TextStyle(
                                             fontSize: 30,
-                                            color: Colors.red,
+                                            color: Color(0xFFE40613),
                                             fontWeight: FontWeight.bold),
                                         middleText:
                                             "Your offer can't be submitted !",
@@ -235,10 +244,10 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 } else {
                                   Get.defaultDialog(
-                                      title: "!",
+                                      title: "Error",
                                       titleStyle: TextStyle(
                                           fontSize: 30,
-                                          color: Colors.red,
+                                          color: Color(0xFFE40613),
                                           fontWeight: FontWeight.bold),
                                       middleText:
                                           "Your offer can't be submitted !",
@@ -272,9 +281,12 @@ class _HomePageState extends State<HomePage> {
       },
       child: RefreshIndicator(
         onRefresh: () async {
-          init();
+          color:
+          Color(0xFF005b71);
           initial();
-          initialize();
+          setState(() {
+            searchingList = offers;
+          });
         },
         child: Scaffold(
           body: Container(
@@ -294,7 +306,7 @@ class _HomePageState extends State<HomePage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: ListView.builder(
-                        itemCount: offers.length,
+                        itemCount: searchingList.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding:
@@ -302,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               child: Card(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
+                                  borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 child: ExpansionTile(
                                   title: new RichText(
@@ -314,7 +326,7 @@ class _HomePageState extends State<HomePage> {
                                       //     ),
                                       //     text: 'From '),
                                       new TextSpan(
-                                          text: offers[index].getDepart,
+                                          text: searchingList[index].getDepart,
                                           style: GoogleFonts.roboto(
                                             fontSize: 18,
                                             color: Color(0xFF005b71),
@@ -327,7 +339,7 @@ class _HomePageState extends State<HomePage> {
                                               fontWeight: FontWeight.bold),
                                           text: '    To     '),
                                       new TextSpan(
-                                          text: offers[index].getArrivee,
+                                          text: searchingList[index].getArrivee,
                                           style: GoogleFonts.roboto(
                                             fontSize: 18,
                                             color: Color(0xFF005b71),
@@ -340,48 +352,50 @@ class _HomePageState extends State<HomePage> {
                                       // height: 20,
                                       child: ListTile(
                                         title: Text("Departure Location : " +
-                                            offers[index].getDepart),
+                                            searchingList[index].getDepart),
                                       ),
                                     ),
                                     Container(
                                       // height: 20,
                                       child: ListTile(
                                         title: Text("Arrival Location : " +
-                                            offers[index].getArrivee),
+                                            searchingList[index].getArrivee),
                                       ),
                                     ),
                                     Container(
                                       //  height: 20,
                                       child: ListTile(
                                         title: Text("Freight Type : " +
-                                            offers[index].getFreightType),
+                                            searchingList[index]
+                                                .getFreightType),
                                       ),
                                     ),
                                     Container(
                                       //  height: 20,
                                       child: ListTile(
                                         title: Text("Quantity : " +
-                                            offers[index].getQuantity),
+                                            searchingList[index].getQuantity),
                                       ),
                                     ),
                                     Container(
                                       // height: 20,
                                       child: ListTile(
                                         title: Text("delivery time : " +
-                                            "${offers[index].getDeliveryTime}" +
-                                            "  ${offers[index].getDeliveryDay}"),
+                                            "${searchingList[index].getDeliveryTime}" +
+                                            "  ${searchingList[index].getDeliveryDay}"),
                                       ),
                                     ),
                                     Container(
                                       // height: 20,
                                       child: ListTile(
-                                        title: Text(offers[index].getResponse),
+                                        title: Text(
+                                            searchingList[index].getResponse),
                                       ),
                                     ),
                                     Container(
                                       child: ListTile(
                                         title: Text("Client Name : "
-                                            "${offers[index].getUsername}"),
+                                            "${searchingList[index].getUsername}"),
                                       ),
                                     ),
                                     ListTile(
@@ -399,41 +413,6 @@ class _HomePageState extends State<HomePage> {
                                           FontAwesomeIcons.handPointUp,
                                           color: Colors.green),
                                     ),
-                                    // ListTile(
-                                    //   onTap: () async {
-                                    //     await APIOffreUser.deleteOffre(
-                                    //         offers[index].getId);
-                                    //     if (deletedOffre) {
-                                    //       setState(() {
-                                    //         offers.remove(offers[index]);
-                                    //       });
-                                    //       Get.defaultDialog(
-                                    //           title: "Done",
-                                    //           titleStyle: TextStyle(
-                                    //               fontSize: 30,
-                                    //               color: Color.fromARGB(
-                                    //                   255, 10, 101, 13)),
-                                    //           middleText:
-                                    //               "Your offer has been deleted !",
-                                    //           middleTextStyle: TextStyle(
-                                    //               color: Color(0xFF005b71),
-                                    //               fontSize: 20));
-                                    //     } else {
-                                    //       Get.defaultDialog(
-                                    //           title: "Error",
-                                    //           titleStyle: TextStyle(
-                                    //               fontSize: 30, color: Colors.red),
-                                    //           middleText: "Something went wrong !",
-                                    //           middleTextStyle: TextStyle(
-                                    //               color: Color(0xFF005b71),
-                                    //               fontSize: 20));
-                                    //     }
-                                    //   },
-                                    //   title: Text("Delete",
-                                    //       style: TextStyle(color: Colors.red)),
-                                    //   trailing:
-                                    //       Icon(Icons.delete, color: Colors.red),
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -470,21 +449,22 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Search by Loation',
+        hintText: 'Search by Location',
         onChanged: searchOffre,
       );
   void searchOffre(String query) async {
-    final Offre = await offers.where((Offres) {
-      final depart = Offres.getDepart.toLowerCase();
-      final arrive = Offres.getArrivee.toLowerCase();
-      final search = query.toLowerCase();
+    searchingList = await offers.where((offers) {
+      final depart = offers.getDepart.toLowerCase();
+      final arrive = offers.getArrivee.toLowerCase();
+      final search = query.toLowerCase().removeAllWhitespace;
 
-      return depart.contains(depart) || arrive.contains(arrive);
+      return depart.contains(search) || arrive.contains(search);
     }).toList();
 
     setState(() {
-      this.query = query;
-      this.offers = Offre;
+      //init();
+      // this.query = query;
+      // this.offers = searchingList;
     });
   }
 }

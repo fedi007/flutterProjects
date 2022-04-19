@@ -4,14 +4,15 @@ class SearchWidget extends StatefulWidget {
   final String text;
   final ValueChanged<String> onChanged;
   final String hintText;
-  
 
-  const SearchWidget({
-    Key? key,
-    required this.text,
-    required this.onChanged,
-    required this.hintText,
-  }) : super(key: key);
+
+  const SearchWidget(
+      {Key? key,
+      required this.text,
+      required this.onChanged,
+      required this.hintText,
+      })
+      : super(key: key);
 
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -19,7 +20,6 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   final controller = TextEditingController();
-   
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                   child: Icon(Icons.close, color: style.color),
                   onTap: () {
                     controller.clear();
+
                     widget.onChanged('');
+
+                    ;
+
                     FocusScope.of(context).requestFocus(FocusNode());
                   },
                 )

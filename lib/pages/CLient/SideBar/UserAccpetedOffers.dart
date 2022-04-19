@@ -191,10 +191,10 @@ class _UserAcceptedOffersState extends State<UserAcceptedOffers> {
                                                   fontSize: 20));
                                         } else {
                                           Get.defaultDialog(
-                                              title: "!",
+                                              title: "Error",
                                               titleStyle: TextStyle(
                                                   fontSize: 30,
-                                                  color: Colors.red,
+                                                  color: Color(0xFFE40613),
                                                   fontWeight: FontWeight.bold),
                                               middleText:
                                                   "You can't Take this offer!",

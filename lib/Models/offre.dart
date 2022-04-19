@@ -152,4 +152,19 @@ class UserOffers {
     getDescription = json["description"];
     getDate = getDate;
   }
+    Map<String, dynamic> toJson() => {
+      "offer"'arrivee': getArrivee,
+      "offer" 'depart': getDepart,
+      "offer" 'deliveryType': getFreightType,
+      "conducteur" 'username': getConductorName,
+      "offer" 'quantity': getQuantity,
+      "offer" 'time': getDeliveryTime,
+      "offer" 'daytime': getDeliveryTime,
+      "offer" 'load': getResponse,
+      'id':getOffreId,
+      "truck" 'truckModel': getTruckName,
+      'price' : getPrice ,
+      'description': getPrice,
+    
+      };
 }

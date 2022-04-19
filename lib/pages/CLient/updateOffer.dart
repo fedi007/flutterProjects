@@ -25,10 +25,10 @@ class updateOffre extends StatefulWidget {
 class _updateOffreState extends State<updateOffre> {
   int index;
   _updateOffreState(this.index);
-  TextEditingController location = TextEditingController();
   TextEditingController Quantity = TextEditingController();
   TextEditingController Arrival = TextEditingController();
   TextEditingController other = TextEditingController();
+  TextEditingController Depart = TextEditingController();
 
   TimeOfDay? Time = TimeOfDay.now();
   DateTime? Date = DateTime.now();
@@ -42,6 +42,7 @@ class _updateOffreState extends State<updateOffre> {
   String? freightType;
   String? quantity;
   String? others;
+  String? DropdownValue;
   List<OffreModel> offer = [];
   @override
   void initState() {
@@ -55,18 +56,12 @@ class _updateOffreState extends State<updateOffre> {
     if (offersp != null) {
       setState(() {
         offer = offersp;
+        quantity = offer[index].getQuantity;
         response = offer[index].getResponse;
         deliveryTime = offer[index].getDeliveryTime;
         deliveryDay = offer[index].getDeliveryDay;
         depart = offer[index].getDepart;
         arrivee = offer[index].getArrivee;
-
-        // print(response);
-        // print(deliveryTime);
-        // print(deliveryDay);
-        // print(depart);
-        // print(arrivee);
-        // print(quantity);
       });
     }
   }
@@ -75,6 +70,9 @@ class _updateOffreState extends State<updateOffre> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(0xFF005b71),
+        ),
         body: Center(
             child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -224,19 +222,28 @@ class _updateOffreState extends State<updateOffre> {
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   width: double.infinity,
                   child: TextFormField(
-                    controller: location,
+                    controller: Depart,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
-                        suffixIcon: IconButton(
+                        prefixIcon: IconButton(
                           onPressed: () async {
                             Position position = await _getGeoLocationPosition();
 
-                            GetAddressFromLatLong(position);
+                            await GetAddressFromLatLong(position);
                             if (depart != null) {
-                              location.text = "${depart}";
+                              Depart.text = "${depart}";
                             }
                           },
                           icon: Icon(FontAwesomeIcons.locationDot,
+                              color: Color(0xFF005b71)),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            if (depart != null) {
+                              Depart.text = "${depart}";
+                            }
+                          },
+                          icon: Icon(FontAwesomeIcons.arrowRotateLeft,
                               color: Color(0xFF005b71)),
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -269,7 +276,7 @@ class _updateOffreState extends State<updateOffre> {
                     decoration: InputDecoration(
                         suffixIcon: IconButton(
                           onPressed: () {
-                            if (Arrival != null) {
+                            if (arrivee != null) {
                               Arrival.text = "${arrivee}";
                             }
                           },
@@ -408,10 +415,10 @@ class _updateOffreState extends State<updateOffre> {
                     onClicked: () async {
                       if (freightType == null) {
                         Get.defaultDialog(
-                          title: "!",
+                          title: "Error",
                           titleStyle: TextStyle(
                               fontSize: 30,
-                              color: Colors.red,
+                              color: Color(0xFFE40613),
                               fontWeight: FontWeight.bold),
                           middleText: "Check your offer",
                           middleTextStyle:
@@ -460,10 +467,10 @@ class _updateOffreState extends State<updateOffre> {
                               } else {
                                 Get.back();
                                 Get.defaultDialog(
-                                  title: "!",
+                                  title: "Error",
                                   titleStyle: TextStyle(
                                       fontSize: 30,
-                                      color: Colors.red,
+                                      color: Color(0xFFE40613),
                                       fontWeight: FontWeight.bold),
                                   middleText: "Check your offer",
                                   middleTextStyle: TextStyle(

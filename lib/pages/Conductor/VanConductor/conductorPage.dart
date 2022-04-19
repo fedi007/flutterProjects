@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iblaze/data/globals.dart';
 import 'package:iblaze/pages/CLient/Login_page.dart';
-import 'package:iblaze/pages/Conductor/VanConductor/RegisteredOffers.dart';
+import 'package:iblaze/pages/Conductor/VanConductor/SubmittedOffers.dart';
 import 'package:iblaze/pages/Conductor/VanConductor/HomePage.dart';
 
 import '../../../Models/truck.dart';
@@ -74,7 +74,7 @@ class _VanConductorState extends State<VanConductor> {
                   PopupMenuItem(
                       child: Text(
                         "Logout",
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Color(0xFF005b71)),
                       ),
                       onTap: () {
                         userData.remove("password");

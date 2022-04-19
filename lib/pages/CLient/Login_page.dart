@@ -138,10 +138,10 @@ class _LoginPageState extends State<LoginPage> {
                         userData.write("username", '${userName}');
                       } else {
                         Get.defaultDialog(
-                            title: "!",
+                            title: "Error",
                             titleStyle: TextStyle(
                                 fontSize: 30,
-                                color: Colors.red,
+                                color: Color(0xFFE40613),
                                 fontWeight: FontWeight.bold),
                             middleText: "Invalid Username/Email !",
                             middleTextStyle: TextStyle(

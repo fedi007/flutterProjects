@@ -91,15 +91,15 @@ class _VehicleManagementState extends State<VehicleManagement> {
                                           ListTile(
                                             title: Text("Delete",
                                                 style: TextStyle(
-                                                    color: Colors.red)),
+                                                    color: Color(0xFFE40613))),
                                             trailing: Icon(Icons.delete,
-                                                color: Colors.red),
+                                                color: Color(0xFFE40613)),
                                             onTap: () async {
                                               Get.defaultDialog(
-                                                  title: "!",
+                                                  title: "Error",
                                                   titleStyle: TextStyle(
                                                       fontSize: 30,
-                                                      color: Colors.red,
+                                                      color: Color(0xFFE40613),
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   middleText:
@@ -111,7 +111,8 @@ class _VehicleManagementState extends State<VehicleManagement> {
                                                   textConfirm: "Confirm",
                                                   confirmTextColor:
                                                       Colors.white,
-                                                  buttonColor: Colors.red,
+                                                  buttonColor:
+                                                      Color(0xFFE40613),
                                                   onConfirm: () async {
                                                     await APITruckServices
                                                         .DeleteTruck(
@@ -146,10 +147,11 @@ class _VehicleManagementState extends State<VehicleManagement> {
                                                       );
                                                     } else {
                                                       Get.defaultDialog(
-                                                          title: "!",
+                                                          title: "Error",
                                                           titleStyle: TextStyle(
                                                               fontSize: 30,
-                                                              color: Colors.red,
+                                                              color: Color(
+                                                                  0xFFE40613),
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),

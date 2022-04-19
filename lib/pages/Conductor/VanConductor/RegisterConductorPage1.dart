@@ -68,7 +68,7 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                               alignment: Alignment.topRight,
                               child: Text("Required *",
                                   style: GoogleFonts.roboto(
-                                      fontSize: 16, color: Colors.red)),
+                                      fontSize: 16, color: Color(0xFFE40613))),
                             ),
                           ]),
                           SizedBox(height: 27),
@@ -126,7 +126,7 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                               alignment: Alignment.topRight,
                               child: Text("Required *",
                                   style: GoogleFonts.roboto(
-                                      fontSize: 16, color: Colors.red)),
+                                      fontSize: 16, color: Color(0xFFE40613))),
                             ),
                           ]),
                           SizedBox(height: 27),
@@ -240,19 +240,20 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.BOTTOM,
                                   timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 33, 125, 56),
                                   textColor: Colors.white,
                                   fontSize: 20.0);
                               Get.off(() => LoginPage());
                             } else {
-                                await APITruckServices.DeleteTruck(
+                              await APITruckServices.DeleteTruck(
                                   currentTruck?.TruckId,
                                   currentConductor?.conductorId);
                               Get.defaultDialog(
-                                  title: "!",
+                                  title: "Error",
                                   titleStyle: TextStyle(
                                       fontSize: 30,
-                                      color: Colors.red,
+                                      color: Color(0xFFE40613),
                                       fontWeight: FontWeight.bold),
                                   middleText: "You can not registred ",
                                   middleTextStyle: TextStyle(
@@ -260,10 +261,10 @@ class _RegisterConductorPageState extends State<RegisterConductorPage> {
                             }
                           } else {
                             Get.defaultDialog(
-                                title: "!",
+                                title: "Error",
                                 titleStyle: TextStyle(
                                     fontSize: 30,
-                                    color: Colors.red,
+                                    color: Color(0xFFE40613),
                                     fontWeight: FontWeight.bold),
                                 middleText: "Truck can not be registred ",
                                 middleTextStyle: TextStyle(

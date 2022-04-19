@@ -27,11 +27,12 @@ class _UserState extends State<User> {
   }
 
   String? validateUsername(String value) {
-    if (value.isEmpty) {
-      return "Username can't be empty.";
+    if (value.isEmpty) return "Username can't be empty";
+    if (value.length < 3) {
+      return "Username must be at least 3";
     }
-    if (value.length < 4) {
-      return "Username must be at least 4 characters";
+    if (value.contains(RegExp('\\s+'))) {
+      return "Username must not contain spaces";
     }
     return null;
   }

@@ -15,7 +15,7 @@ class APIOffreUser {
       freightType, quantity, id) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.46:4000/users/offer/register'));
+        'POST', Uri.parse('http://192.168.1.8:4000/users/offer/register'));
     request.body = json.encode({
       "depart": depart,
       "arrivee": arrivee,
@@ -42,7 +42,7 @@ class APIOffreUser {
   static Future<List<OffreModel>> getOffers(id) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.46:4000/users/offer/getbyuser'));
+        'POST', Uri.parse('http://192.168.1.8:4000/users/offer/getbyuser'));
     request.body = json.encode({"user": id});
 
     request.headers.addAll(headers);
@@ -75,7 +75,7 @@ class APIOffreUser {
 
   static GetFreight() async {
     var request = http.Request(
-        'GET', Uri.parse('http://192.168.1.46:4000/users/deliveryType/getall'));
+        'GET', Uri.parse('http://192.168.1.8:4000/users/deliveryType/getall'));
 
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
@@ -93,7 +93,7 @@ class APIOffreUser {
   static deleteOffre(id) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'DELETE', Uri.parse('http://192.168.1.46:4000/users/offer/delete'));
+        'DELETE', Uri.parse('http://192.168.1.8:4000/users/offer/delete'));
     request.body = json.encode({"id": id});
     request.headers.addAll(headers);
 
@@ -120,7 +120,7 @@ class APIOffreUser {
   ) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'PATCH', Uri.parse('http://192.168.1.46:4000/users/offer/update'));
+        'PATCH', Uri.parse('http://192.168.1.8:4000/users/offer/update'));
     request.body = json.encode({
       "id": offreId,
       "depart": depart,
@@ -149,7 +149,7 @@ class APIOffreUser {
     var request = http.Request(
         'POST',
         Uri.parse(
-            'http://192.168.1.46:4000/users/offer/getacceptedoffersbyuser'));
+            'http://192.168.1.8:4000/users/offer/getacceptedoffersbyuser'));
     request.body = json.encode({"user": userId, "completeoffer": false});
     request.headers.addAll(headers);
 
@@ -185,7 +185,7 @@ class APIOffreUser {
   static Completeoffer(UserId) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('PATCH',
-        Uri.parse('http://192.168.1.46:4000/users/offer/useraccepteoffer'));
+        Uri.parse('http://192.168.1.8:4000/users/offer/useraccepteoffer'));
     request.body = json.encode({"id": UserId, "completeoffer": true});
     request.headers.addAll(headers);
 
@@ -204,7 +204,7 @@ class APIOffreUser {
     var request = http.Request(
         'POST',
         Uri.parse(
-            'http://192.168.1.46:4000/users/offer/getacceptedoffersbyuser'));
+            'http://192.168.1.8:4000/users/offer/getacceptedoffersbyuser'));
     request.body = json.encode({"user": UserID, "completeoffer": true});
     request.headers.addAll(headers);
 

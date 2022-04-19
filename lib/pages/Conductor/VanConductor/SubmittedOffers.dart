@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iblaze/Models/offre.dart';
 import 'package:iblaze/data/globals.dart';
 
 import '../../../services/conductorServices/conductorOffreAPI.dart';
 
-class AcceptedOffers extends StatefulWidget {
-  const AcceptedOffers({Key? key}) : super(key: key);
+class conductorRegisteredOffers extends StatefulWidget {
+  const conductorRegisteredOffers({Key? key}) : super(key: key);
 
   @override
-  State<AcceptedOffers> createState() => _AcceptedOffersState();
+  State<conductorRegisteredOffers> createState() =>
+      _conductorRegisteredOffersState();
 }
 
-class _AcceptedOffersState extends State<AcceptedOffers> {
-  List<UserOffers> offers = [];
+class _conductorRegisteredOffersState extends State<conductorRegisteredOffers> {
+  List<RegisteredOffers> offers = [];
   @override
   void initState() {
     super.initState();
@@ -22,8 +26,8 @@ class _AcceptedOffersState extends State<AcceptedOffers> {
   }
 
   void init() async {
-    final offersp =
-        await APIOffreConductor.offreCompleted(currentConductor?.conductorId);
+    final offersp = await APIOffreConductor.allRegisteredOffers(
+        currentConductor?.conductorId, false);
     if (offersp != null) {
       setState(() {
         offers = offersp;
@@ -35,10 +39,11 @@ class _AcceptedOffersState extends State<AcceptedOffers> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: RefreshIndicator(
-        onRefresh: () async {
+           onRefresh: () async {
           color:
           Color(0xFF005b71);
           init();
+        
         },
         child: Scaffold(
           body: Container(
@@ -56,7 +61,7 @@ class _AcceptedOffersState extends State<AcceptedOffers> {
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  Text("Accepted Offers ",
+                  Text("Submitted Offers ",
                       style: TextStyle(
                           color: Color(0xFF005b71),
                           fontWeight: FontWeight.bold,
@@ -67,8 +72,7 @@ class _AcceptedOffersState extends State<AcceptedOffers> {
                         itemCount: offers.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(left: 30.0, right: 30),
+                            padding: const EdgeInsets.only(left: 30.0, right: 30),
                             child: Container(
                               child: Card(
                                 shape: RoundedRectangleBorder(
@@ -82,8 +86,7 @@ class _AcceptedOffersState extends State<AcceptedOffers> {
                                           text: offers[index].getDepart,
                                           style: GoogleFonts.roboto(
                                             fontSize: 18,
-                                            color: Color.fromARGB(
-                                                255, 33, 125, 56),
+                                            color: Color(0xFF005b71),
                                           )),
                                       new TextSpan(
                                           style: GoogleFonts.roboto(
@@ -95,8 +98,7 @@ class _AcceptedOffersState extends State<AcceptedOffers> {
                                           text: offers[index].getArrivee,
                                           style: GoogleFonts.roboto(
                                             fontSize: 18,
-                                            color: Color.fromARGB(
-                                                255, 33, 125, 56),
+                                            color: Color(0xFF005b71),
                                           )),
                                     ],
                                   )),
@@ -163,17 +165,62 @@ class _AcceptedOffersState extends State<AcceptedOffers> {
                                             "  ${offers[index].getTruckName}"),
                                       ),
                                     ),
-                                    Container(
-                                      // height: 20,
-                                      child: ListTile(
-                                        title: Text(
-                                            "Your offer has been accepted ",
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 33, 125, 56),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold)),
-                                      ),
+                                    ListTile(
+                                      onTap: () async {
+                                        Get.defaultDialog(
+                                            title: "Error",
+                                            titleStyle: TextStyle(
+                                                fontSize: 30,
+                                                color: Color(0xFFE40613)),
+                                            middleText:
+                                                "Are you sure you want to delete this Offer ! \n ",
+                                            middleTextStyle:
+                                                TextStyle(fontSize: 20),
+                                            textCancel: "Cancel",
+                                            cancelTextColor: Colors.black,
+                                            textConfirm: "Confirm",
+                                            confirmTextColor: Colors.white,
+                                            buttonColor: Color(0xFFE40613),
+                                            onConfirm: () async {
+                                              await APIOffreConductor.DeleteOffre(
+                                                  offers[index].getOffreId);
+                                              if (DeletedOffreConductor) {
+                                                Get.back();
+                                                setState(() {
+                                                  offers.remove(offers[index]);
+                                                });
+                                                Get.defaultDialog(
+                                                    title: "Done",
+                                                    titleStyle: TextStyle(
+                                                        fontSize: 30,
+                                                        color: Color.fromARGB(
+                                                            255, 10, 101, 13)),
+                                                    middleText:
+                                                        "Your offer has been deleted !",
+                                                    middleTextStyle: TextStyle(
+                                                        color: Color(0xFF005b71),
+                                                        fontSize: 20));
+                                              } else {
+                                                Get.defaultDialog(
+                                                    title: "Error",
+                                                    titleStyle: TextStyle(
+                                                        fontSize: 30,
+                                                        color: Color(0xFFE40613),
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                    middleText:
+                                                        "Something went wrong !",
+                                                    middleTextStyle: TextStyle(
+                                                        color: Color(0xFF005b71),
+                                                        fontSize: 20));
+                                              }
+                                            });
+                                      },
+                                      title: Text("Delete",
+                                          style: TextStyle(
+                                              color: Color(0xFFE40613))),
+                                      trailing: Icon(Icons.delete,
+                                          color: Color(0xFFE40613)),
                                     ),
                                   ],
                                 ),

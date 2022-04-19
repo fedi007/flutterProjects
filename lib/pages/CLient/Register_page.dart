@@ -47,8 +47,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   String? validateUsername(String value) {
-    if (!GetUtils.isUsername(value)) {
-      return "Provide a valid Username";
+    if (value.isEmpty) return "Username can't be empty";
+    if (value.length < 3) {
+      return "Username must be at least 3";
+    }
+    if (value.contains(RegExp('\\s+'))) {
+      return "Username must not contain spaces";
     }
     return null;
   }
@@ -118,11 +122,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) {
-                        userName = value;
+                        userName = value.removeAllWhitespace;
                       },
                       controller: usernameController,
                       onSaved: (value) {
-                        userName = value!;
+                        userName = value!.removeAllWhitespace;
                       },
                       validator: (value) {
                         return validateUsername(value!);
@@ -256,17 +260,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.BOTTOM,
                                   timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 33, 125, 56),
                                   textColor: Colors.white,
                                   fontSize: 20.0);
                               Get.off(() => LoginPage(),
                                   transition: Transition.zoom);
                             } else if (x && !checkRegister) {
                               Get.defaultDialog(
-                                  title: "!",
+                                  title: "Error",
                                   titleStyle: TextStyle(
                                       fontSize: 30,
-                                      color: Colors.red,
+                                      color: Color(0xFFE40613),
                                       fontWeight: FontWeight.bold),
                                   middleText: "Username is Taken",
                                   middleTextStyle: TextStyle(

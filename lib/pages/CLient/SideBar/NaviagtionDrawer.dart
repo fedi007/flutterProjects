@@ -129,7 +129,7 @@ class NavigationDrawer extends StatelessWidget {
               children: <Widget>[
                 SizedBox(width: 30),
                 Container(
-                  // color: Colors.red,
+                  // color: Color(0xFFE40613),
                   child: Image.asset(
                     "images/userA.png",
                     height: 100,

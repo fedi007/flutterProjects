@@ -98,6 +98,7 @@ class NavigationDrawerConduct extends StatelessWidget {
     }
   }
 }
+
 String textEditing({required String Text}) {
   String newText = "";
   if (Text.length > 5) {
@@ -119,7 +120,7 @@ Widget headerWidget({
         child:
             Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           Container(
-            // color: Colors.red,
+            // color: Color(0xFFE40613),
             child: Image.asset(
               "images/conductor.png",
               height: 100,
@@ -134,7 +135,7 @@ Widget headerWidget({
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(textEditing(Text:('${currentConductor?.conductorName}')),
+                Text(textEditing(Text: ('${currentConductor?.conductorName}')),
                     style: GoogleFonts.roboto(
                         fontSize: 30,
                         color: Color(0xFF005b71),

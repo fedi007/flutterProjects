@@ -10,7 +10,7 @@ class APIServiceConductor {
   static RegisterConductor(username, email, password, truckid) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.46:4000/conducteur/register'));
+        'POST', Uri.parse('http://192.168.1.8:4000/conducteur/register'));
     request.body = json.encode({
       "username": username,
       "email": email,
@@ -31,7 +31,7 @@ class APIServiceConductor {
   static LoginConductor(username, password) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('http://192.168.1.46:4000/conducteur/login'));
+        'POST', Uri.parse('http://192.168.1.8:4000/conducteur/login'));
     request.body = json.encode({"username": username, "password": password});
     request.headers.addAll(headers);
 
@@ -60,7 +60,7 @@ class APIServiceConductor {
   static UpdateName(lastusername, username) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'PATCH', Uri.parse('http://192.168.1.46:4000/conducteur/update'));
+        'PATCH', Uri.parse('http://192.168.1.8:4000/conducteur/update'));
     request.body = request.body =
         json.encode({"username": username, "lastusername": lastusername});
     request.headers.addAll(headers);
