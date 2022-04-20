@@ -5,20 +5,25 @@ const auth = require("../middlewares/auth.js");
 
 
 // Login
-async function login({ username, password }, callback) {
-  const conducteur = await (await Conducteur.findOne({ username }).populate('truck'));
+async function login({ email, password }, callback) {
+  const conducteur = await (await Conducteur.findOne({ email:email }).populate('truck'));
   if (conducteur != null) {
-    if (bcrypt.compareSync(password, conducteur.password)) {
-      const token = auth.generateAccessToken(username);
+    if(password==undefined){
+      return callback({
+        message: "Invalid Email/Password!",
+      });
+    }
+     else if (bcrypt.compareSync(password, conducteur.password)) {
+      const token = auth.generateAccessToken(email);
       return callback(null, { ...conducteur.toJSON(), token });
     } else {
       return callback({
-        message: "Invalid Username/Password!",
+        message: "Invalid Email/Password!",
       });
     }
   } else {
     return callback({
-      message: "Invalid Username/Password!",
+      message: "Invalid Email/Password!",
     });
   }
 }

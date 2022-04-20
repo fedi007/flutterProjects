@@ -3,22 +3,27 @@ const bcrypt = require("bcryptjs");
 const auth = require("../middlewares/auth.js");
 
 // Login
-async function login({ username, password }, callback) {
-  const user = await User.findOne({ username });
+async function login({ email, password }, callback) {
+  const user = await User.findOne({ email });
 
   if (user != null) {
-    if (bcrypt.compareSync(password, user.password)) {
-      const token = auth.generateAccessToken(username);
+    if(password==undefined){
+      return callback({
+        message: "Invalid Email/Password!",
+      });
+    }
+     else if (bcrypt.compareSync(password, user.password)) {
+      const token = auth.generateAccessToken(email);
       // call toJSON method applied during model instantiation
       return callback(null, { ...user.toJSON(), token });
     } else {
       return callback({
-        message: "Invalid Username/Password!",
+        message: "Invalid Email/Password!",
       });
     }
   } else {
     return callback({
-      message: "Invalid Username/Password!",
+      message: "Invalid Email/Password!",
     });
   }
 }
@@ -43,6 +48,7 @@ async function register(params, callback) {
       return callback(error);
     });
 }
+
 
 
 

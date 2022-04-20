@@ -5,9 +5,9 @@ const Truck =require("../models/truck.model");
 
 //Login
 exports.login = (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  conducteurServices.login({ username, password }, (error, results) => {
+  conducteurServices.login({ email, password }, (error, results) => {
     if (error) {
       return next(error);
     }
@@ -30,7 +30,7 @@ exports.register = (req, res, next) => {
     if (error) {
       return next(error);
     }
-    return res.status(201).send({
+    return res.status(200).send({
       message: "Success",
       data: results,
     });
@@ -43,9 +43,9 @@ exports.update=(async (req, res) => {
     if (upconducteur.modifiedCount==1)
     res.json(req.body.username)
     else 
-    res.status(400).json("can't update")
+    res.status(300).json("can't update")
   } catch (err) {
-    res.status(500).json({ message: err.message })
+    res.status(400).json({ message: err.message })
   }
 });
 

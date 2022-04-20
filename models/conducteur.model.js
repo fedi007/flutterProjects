@@ -6,7 +6,7 @@ const ConducteurSchema = new Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
   },
   email: {
     type: String,

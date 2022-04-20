@@ -8,7 +8,7 @@ exports.register = (req, res, next) => {
       if (error) {
         return next(error);
       }
-      return res.status(201).send({
+      return res.status(200).send({
 
         data: results,
       });
@@ -42,7 +42,7 @@ exports.register = (req, res, next) => {
   exports.getacceptedoffersbyconducteur=(async (req, res) => {
     try {
       const conducteuroffer = await Conducteuroffer.find({conducteur:req.body.conducteur,completeoffer:req.body.completeoffer}).populate('conducteur').populate('offer').populate('truck')
-      res.status(200).json(conducteuroffer)
+      res.json(conducteuroffer)
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
@@ -54,6 +54,6 @@ exports.register = (req, res, next) => {
   conducteuroffer.remove();
   res.status(200).json({"resultat" : "success delete"});
   }catch(err){
-   res.status(500).json({message:err.message})
+   res.status(300).json({message:err.message})
   }
   })
