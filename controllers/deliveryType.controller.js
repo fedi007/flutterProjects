@@ -18,7 +18,7 @@ exports.register = (req, res, next) => {
   exports.getAll=( async (req, res) => {
     try {
         const idList=[];
-      const deliveryType = await DeliveryType.find();
+      const deliveryType = await DeliveryType.find({status:"active"});
       deliveryType.forEach(e => idList.push(e.deliveryType));
       res.json(idList)
     } catch (err) {

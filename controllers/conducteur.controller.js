@@ -11,10 +11,19 @@ exports.login = (req, res, next) => {
     if (error) {
       return next(error);
     }
+    if(results["status"]=="accepted"){
     return res.status(200).send({
       message: "Success",
       data: results,
     });
+  }
+    else if(results["status"]=="waiting")
+      return res.status(403).json("wait admin for answer")
+
+    else if (results["status"]=="deleted")
+      return res.status(403).json("your compte was deleted")
+    else
+    return res.status(500).json("server error")
   });
 };
 

@@ -21,6 +21,10 @@ const ConducteurSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref:"truck",
   },
+  status:{
+    type:String,
+    default:"accepted",
+  },
   date: {
     type: Date,
     default: Date.now(),

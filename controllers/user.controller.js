@@ -34,10 +34,15 @@ exports.login = (req, res, next) => {
     if (error) {
       return next(error);
     }
-    return res.status(200).send({
-      message: "Success",
-      data: results,
-    });
+    if (results["status"] == "active") {
+      return res.status(200).send({
+        message: "Success",
+        data: results,
+      });
+    } else if (results["status"] == "deleted")
+      return res.status(403).json("your compte was deleted")
+    else
+      return res.status(500).json("server error")
   });
 };
 // Updating One
@@ -57,5 +62,5 @@ exports.update=(async (req, res) => {
     res.status(400).json({ message: err.message })
   }
 });
-//became a driver
+
 
