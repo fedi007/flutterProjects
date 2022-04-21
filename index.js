@@ -123,12 +123,17 @@ app.use(
       },
       {
         url: "/conducteur/truck/deletetruck",
-        methods: ["PATCH"]
+        methods: ["POST"]
       },
       {
         url: "/upload",
         methods: ["POST"]
       },
+      {
+        url: "/conducteur/truck/test",
+        methods: ["POST"]
+      },
+      
     ],
   })
 );
