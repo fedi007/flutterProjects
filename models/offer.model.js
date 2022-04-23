@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
-const { default: mongooseDeepPopulate } = require("mongoose-deep-populate");
-const { Schema } = mongoose;
+const {
+  default: mongooseDeepPopulate
+} = require("mongoose-deep-populate");
+const {
+  Schema
+} = mongoose;
 const uniqueValidator = require("mongoose-unique-validator");
 
 
@@ -20,12 +24,12 @@ const OfferSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref:'user',
+    ref: 'user',
   },
-   quantity: {
-       type: String,
-     required: true,
-   },
+  quantity: {
+    type: String,
+    required: true,
+  },
   time: {
     type: String,
     required: true,
@@ -39,8 +43,12 @@ const OfferSchema = new Schema({
     type: String,
     required: true,
   },
-  description:{
-    type:String,
+  description: {
+    type: String,
+  },
+  status: {
+    type: String,
+    default: "active",
   },
   date: {
     type: Date,
@@ -57,12 +65,6 @@ OfferSchema.set("toJSON", {
     delete returnedObject.password;
   },
 });
-
-
-//OfferSchema.plugin(uniqueValidator, { message: "Email already in use." });
-OfferSchema.plugin(uniqueValidator, { message: "Email already in use." });
-
-
 
 const Offer = mongoose.model("offer", OfferSchema);
 module.exports = Offer;

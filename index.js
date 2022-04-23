@@ -130,7 +130,7 @@ app.use(
         methods: ["POST"]
       },
       {
-        url: "/conducteur/truck/test",
+        url: "/users/offer/test",
         methods: ["POST"]
       },
       

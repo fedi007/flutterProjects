@@ -13,9 +13,9 @@ const TruckSchema = new Schema({
     type: String,
     required: true,
   },
-  status:{
-    type:String,
-    default:"active",
+  status: {
+    type: String,
+    default: "active",
   },
   date: {
     type: Date,

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const {
+  Schema
+} = mongoose;
 const uniqueValidator = require("mongoose-unique-validator");
 
 const UserSchema = new Schema({
@@ -11,7 +13,7 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
-    unique:false,
+    unique: false,
   },
   password: {
     type: String,
@@ -19,11 +21,11 @@ const UserSchema = new Schema({
   },
   isdriver: {
     type: Boolean,
-    default:false,
+    default: false,
   },
-  status:{
-    type:String,
-    default:"active",
+  status: {
+    type: String,
+    default: "active",
   },
   date: {
     type: Date,
@@ -43,7 +45,9 @@ UserSchema.set("toJSON", {
 });
 
 
-UserSchema.plugin(uniqueValidator, { message: "Email already in use." });
+UserSchema.plugin(uniqueValidator, {
+  message: "Email already in use."
+});
 
 const User = mongoose.model("user", UserSchema);
 module.exports = User;
