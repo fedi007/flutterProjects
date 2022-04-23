@@ -130,7 +130,11 @@ app.use(
         methods: ["POST"]
       },
       {
-        url: "/users/offer/test",
+        url: "/users/deleteuserrnotregister",
+        methods: ["DELETE"]
+      },
+      {
+        url: "/users/test",
         methods: ["POST"]
       },
       
