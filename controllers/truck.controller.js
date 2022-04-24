@@ -38,19 +38,19 @@ exports.addtruck = (async (req, res) => {
 // delete truck 
 exports.deletetruck = (async (req, res) => {
   try {
-    const conducteuroffer=await ConducteurOffer.exists({truck:req.body.truck})
-    if(!conducteuroffer)
-    {
+    const conducteuroffer=await ConducteurOffer.findOne({truck:req.body.truck,status:"active"})
+    if(conducteuroffer==null)
+     {
     await Truck.findByIdAndUpdate(req.body.truck, {
-      status: "deleted"
-    })
-    res.status(200).json({"message":"truck deleted"});
-  }
-  res.status(400).json({"message":"this truck has offer"})
-  } catch (err) {
-    res.status(500).json({
-      message: err.message
-    })
+       status: "deleted"
+     })
+     res.status(200).json({"message":"truck deleted"});
+  }else
+   res.status(400).json({"message":"this truck has offer"})
+   } catch (err) {
+     res.status(500).json({
+       message: err.message
+     })
   }
 });
 

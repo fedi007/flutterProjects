@@ -123,15 +123,11 @@ app.use(
       },
       {
         url: "/conducteur/truck/deletetruck",
-        methods: ["POST"]
+        methods: ["DELETE"]
       },
       {
         url: "/upload",
         methods: ["POST"]
-      },
-      {
-        url: "/users/deleteuserrnotregister",
-        methods: ["DELETE"]
       },
       {
         url: "/users/test",
