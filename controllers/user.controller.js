@@ -6,7 +6,7 @@ const User = require("../models/user.model");
 
 // Creating one 
 exports.register = (async (req, res) => {
-  var registermethod = await this.registermethod(req);
+  var registermethod = await userServices.registermethod(req.body)
   if (registermethod["errtype"] == "1")
     res.status(400).json({
       "message": registermethod["message"]
@@ -16,39 +16,11 @@ exports.register = (async (req, res) => {
       "message": registermethod["message"]
     })
   else
-  res.status(200).json({"message": "Success","data":registermethod});
+    res.status(200).json({
+      "message": "Success",
+      "data": registermethod
+    });
 });
-
-
-exports.registermethod = (async (req) => {
-  var result = {};
-  try {
-    const {
-      password
-    } = req.body;
-
-    const salt = bcrypt.genSaltSync(10);
-
-    req.body.password = bcrypt.hashSync(password, salt);
-
-    const user = new User(req.body);
-    await user.save().then((response) => {
-        result = response
-      })
-      .catch((err) => {
-        result = {
-          "errtype": "1",
-          "message": err["message"]
-        }
-      });
-    return result
-  } catch (err) {
-    return {
-      "errtype": "2",
-      "message": err.message
-    }
-  }
-})
 
 
 //Login
@@ -76,38 +48,34 @@ exports.login = (req, res, next) => {
       return res.status(500).json("server error")
   });
 };
+
 // Updating One
 exports.update = (async (req, res) => {
-
   try {
-    if ((req.body.username == "" || req.body.username == null) && req.body.isdriver != true) {
-      res.status(300).json(" username can't be empty");
-    } else {
-      const upuser = await User.findByIdAndUpdate(req.body.user, {
-        username: req.body.username,
-        isdriver: req.body.isdriver
+
+    if (req.body.username != "" && req.body.username != null) {
+      const user = await User.findById(req.body.user)
+      const updateuser = await User.updateOne({
+        _id: req.body.user
+      }, {
+        $addToSet: {
+          usernamelist: req.body.username
+        },
+        username:req.body.username        
       })
-      res.status(200).json(upuser)
-    }
+      if (updateuser.modifiedCount == 1)
+        res.status(200).json({"message":"username updated","data":req.body.username});
+      else
+        res.status(300).json("there is no modification")
+
+    } else
+      res.status(400).json({
+        "message": "username can't be empty"
+      })
+
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       message: err.message
     })
-  }
-});
-
-
-// delete offer not register
-exports.deleteuserrnotregister = (async (req) => {
-  try {
-    const user = await User.findByIdAndDelete(req.body.user)
-    console.log(user)
-    if (user != null)
-      return user;
-    else
-      return null
-
-  } catch (err) {
-    return null;
   }
 });

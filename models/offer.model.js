@@ -34,11 +34,6 @@ const OfferSchema = new Schema({
     type: String,
     required: true,
   },
-  daytime: {
-    type: String,
-    required: true,
-  },
-
   load: {
     type: String,
     required: true,
@@ -49,6 +44,10 @@ const OfferSchema = new Schema({
   status: {
     type: String,
     default: "active",
+  },
+  originaloffer: {
+    type: Schema.Types.ObjectId,
+    ref:"offer",
   },
   date: {
     type: Date,

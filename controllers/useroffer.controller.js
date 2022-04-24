@@ -1,8 +1,29 @@
 const Offer = require("../models/offer.model");
 const Conducteuroffer = require("../models/conducteuroffer.model");
 
+
+
+
 // Creating one 
-exports.register = (async (params) => {
+exports.register = (async (req, res) => {
+  var registermethod = await this.registermethod(req.body);
+  if (registermethod["errtype"] == "1")
+    res.status(400).json({
+      "message": registermethod["message"]
+    })
+  else if (registermethod["errtype"] == "2")
+    res.status(500).json({
+      "message": registermethod["message"]
+    })
+  else
+  res.status(200).json({"message": "Success","data":registermethod});
+});
+
+
+
+
+// Creating one methode
+exports.registermethod = (async (params) => {
   var result;
   try {
     const offer = new Offer(params);
@@ -39,22 +60,22 @@ exports.update = (async (req, res) => {
 
       var offer = await Offer.findById(req.body.offer)
 
-      const register = await this.register({
+      const registermethod = await this.registermethod({
         "depart": offer["depart"],
         "arrivee": offer["arrivee"],
         "deliveryType": offer["deliveryType"],
-        "user": "6260906844e691322c31cada",
+        "user": offer["user"],
         "quantity": offer["quantity"],
         "time": offer["time"],
-        "daytime": offer["daytime"],
         "load": offer["load"],
-        "status": "deleted"
+        "status":"updated",
+        "originaloffer":offer["_id"],
       });
 
-      if (register["errtype"] == "1")
-        res.status(400).json(register["message"])
-      else if (register["errtype"] == "2")
-        res.status(500).json(register["message"])
+      if (registermethod["errtype"] == "1")
+        res.status(400).json(registermethod["message"])
+      else if (registermethod["errtype"] == "2")
+        res.status(500).json(registermethod["message"])
 
       const upoffer = await Offer.updateOne(
 
@@ -67,7 +88,6 @@ exports.update = (async (req, res) => {
           load: req.body.load,
           quantity: req.body.quantity,
           time: req.body.time,
-          daytime: req.body.daytime,
           load: req.body.load
         })
 
@@ -75,10 +95,10 @@ exports.update = (async (req, res) => {
         offer = await Offer.findById(req.body.offer)
         res.status(200).json(offer)
       } else {
-        const deleteoffernotregister = this.deleteoffernotregister(register["_id"])
+        const deleteoffernotregister = this.deleteoffernotregister(registermethod["_id"])
         if (deleteoffernotregister != null)
           return res.status(400).json({
-            "message": " can't update"
+            "message": " there is no modification"
           });
         else
           return res.status(500).json("error wrong offer in database need fix")
@@ -114,11 +134,6 @@ exports.delete = (async (req, res) => {
     })
   }
 })
-
-
-
-
-
 // Get offers by user
 exports.getByuser = (async (req, res) => {
   try {

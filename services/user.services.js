@@ -27,32 +27,40 @@ async function login({ email, password }, callback) {
     });
   }
 }
-// Creating one
-async function register(params, callback) {
-  if (params.username === undefined) {
-    return callback(
-      {
-        message: "Username Required",
-      },
-      ""
-    );
+
+
+// Creating one methode
+async function registermethod  (params) {
+  var result = {};
+  try {
+    const {
+      password
+    } = params;
+
+    const salt = bcrypt.genSaltSync(10);
+
+    params["password"] = bcrypt.hashSync(password, salt);
+    params["usernamelist"]=[params["username"]]
+    const user = new User(params);
+    await user.save().then((response) => {
+        result = response
+      })
+      .catch((err) => {
+        result = {
+          "errtype": "1",
+          "message": err["message"]
+        }
+      });
+    return result
+  } catch (err) {
+    return {
+      "errtype": "2",
+      "message": err.message
+    }
   }
-
-  const user = new User(params);
-  user
-    .save()
-    .then((response) => {
-      return callback(null, response);
-    })
-    .catch((error) => {
-      return callback(error);
-    });
 }
-
-
-
 
 module.exports = {
   login,
-  register,
+  registermethod,
 };

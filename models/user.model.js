@@ -27,6 +27,10 @@ const UserSchema = new Schema({
     type: String,
     default: "active",
   },
+  usernamelist: {
+    type: [String] ,
+    default:[],
+  },
   date: {
     type: Date,
     default: Date.now(),
