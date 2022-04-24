@@ -1,16 +1,28 @@
 const Conducteuroffer = require("../models/conducteuroffer.model");
-// Creating one
-async function register(params, callback) {
+
+  // Creating One
+async function register (params) {
+  var result;
+  try {
     const conducteuroffer = new Conducteuroffer(params);
-    conducteuroffer
-      .save()
-      .then((response) => {
-        return callback(null, response);
+    await conducteuroffer.save().then((response) => {
+        result = response
       })
-      .catch((error) => {
-        return callback(error);
+      .catch((err) => {
+        result = {
+          "errtype": "1",
+          "message": err["message"]
+        }
       });
+    return result
+  } catch (err) {
+    return {
+      "errtype": "2",
+      "message": err.message
+    }
   }
-  module.exports = {
-    register,
-  };
+};
+
+module.exports = {
+  register,
+};

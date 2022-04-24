@@ -6,19 +6,19 @@ const User = require("../models/user.model");
 
 // Creating one 
 exports.register = (async (req, res) => {
-  var registermethod = await userServices.registermethod(req.body)
-  if (registermethod["errtype"] == "1")
+  var register = await userServices.register(req.body)
+  if (register["errtype"] == "1")
     res.status(400).json({
-      "message": registermethod["message"]
+      "message": register["message"]
     })
-  else if (registermethod["errtype"] == "2")
+  else if (register["errtype"] == "2")
     res.status(500).json({
-      "message": registermethod["message"]
+      "message": register["message"]
     })
   else
     res.status(200).json({
       "message": "Success",
-      "data": registermethod
+      "data": register
     });
 });
 

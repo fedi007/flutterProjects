@@ -2,18 +2,24 @@ const conducteurofferServices = require("../services/conducteuroffer.services");
 const Offer = require("../models/offer.model");
 const Conducteuroffer = require('../models/conducteuroffer.model');
 
-// Creating one 
-exports.register = (req, res, next) => {
-  conducteurofferServices.register(req.body, (error, results) => {
-    if (error) {
-      return next(error);
-    }
-    return res.status(200).send({
 
-      data: results,
-    });
-  });
-};
+
+// Creating One 
+exports.register = (async (req, res) => {
+  var register = await conducteurofferServices.register(req.body);
+  if (register["errtype"] == "1")
+    res.status(400).json({
+      "message": register["message"]
+    })
+  else if (register["errtype"] == "2")
+    res.status(500).json({
+      "message": register["message"]
+    })
+  else
+  res.status(200).json({"message": "Success","data":register});
+});
+
+
 
 // Getting all
 exports.getAll = (async (req, res) => {

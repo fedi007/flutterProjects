@@ -1,50 +1,24 @@
 const Offer = require("../models/offer.model");
 const Conducteuroffer = require("../models/conducteuroffer.model");
+const offerServer=require('../services/useroffer.services')
 
 
 
 
 // Creating one 
 exports.register = (async (req, res) => {
-  var registermethod = await this.registermethod(req.body);
-  if (registermethod["errtype"] == "1")
+  var register = await offerServer.register(req.body);
+  if (register["errtype"] == "1")
     res.status(400).json({
-      "message": registermethod["message"]
+      "message": register["message"]
     })
-  else if (registermethod["errtype"] == "2")
+  else if (register["errtype"] == "2")
     res.status(500).json({
-      "message": registermethod["message"]
+      "message": register["message"]
     })
   else
-  res.status(200).json({"message": "Success","data":registermethod});
+  res.status(200).json({"message": "Success","data":register});
 });
-
-
-
-
-// Creating one methode
-exports.registermethod = (async (params) => {
-  var result;
-  try {
-    const offer = new Offer(params);
-    await offer.save().then((response) => {
-        result = response
-      })
-      .catch((err) => {
-        result = {
-          "errtype": "1",
-          "message": err["message"]
-        }
-      });
-    return result
-  } catch (err) {
-    return {
-      "errtype": "2",
-      "message": err.message
-    }
-  }
-});
-
 
 // Updating One
 exports.update = (async (req, res) => {
@@ -60,7 +34,7 @@ exports.update = (async (req, res) => {
 
       var offer = await Offer.findById(req.body.offer)
 
-      const registermethod = await this.registermethod({
+      const register = await offerServer.register({
         "depart": offer["depart"],
         "arrivee": offer["arrivee"],
         "deliveryType": offer["deliveryType"],
@@ -72,10 +46,10 @@ exports.update = (async (req, res) => {
         "originaloffer":offer["_id"],
       });
 
-      if (registermethod["errtype"] == "1")
-        res.status(400).json(registermethod["message"])
-      else if (registermethod["errtype"] == "2")
-        res.status(500).json(registermethod["message"])
+      if (register["errtype"] == "1")
+        res.status(400).json(register["message"])
+      else if (register["errtype"] == "2")
+        res.status(500).json(register["message"])
 
       const upoffer = await Offer.updateOne(
 
@@ -95,7 +69,7 @@ exports.update = (async (req, res) => {
         offer = await Offer.findById(req.body.offer)
         res.status(200).json(offer)
       } else {
-        const deleteoffernotregister = this.deleteoffernotregister(registermethod["_id"])
+        const deleteoffernotregister = offerServer.deleteoffernotregister(register["_id"])
         if (deleteoffernotregister != null)
           return res.status(400).json({
             "message": " there is no modification"
@@ -115,8 +89,6 @@ exports.update = (async (req, res) => {
     })
   }
 });
-
-
 
 
 // Deleting One
@@ -194,16 +166,3 @@ exports.useraccepteoffer = (async (req, res) => {
   }
 });
 
-// delete offer not register
-exports.deleteoffernotregister = (async (req) => {
-  try {
-    const offer = await Offer.findByIdAndDelete(req)
-    if (offer != null)
-      return offer;
-    else
-      return null
-
-  } catch (err) {
-    return null;
-  }
-});

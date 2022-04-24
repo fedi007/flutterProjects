@@ -29,8 +29,8 @@ async function login({ email, password }, callback) {
 }
 
 
-// Creating one methode
-async function registermethod  (params) {
+// Creating one 
+async function register  (params) {
   var result = {};
   try {
     const {
@@ -62,5 +62,5 @@ async function registermethod  (params) {
 
 module.exports = {
   login,
-  registermethod,
+  register,
 };
