@@ -51,7 +51,8 @@ exports.register = (req, res, next) => {
       "username": req.body.username,
       "email": req.body.email,
       "password": req.body.password,
-      "truck": register["id"]
+      "truck": register["id"],
+      "usernamelist": [req.body.username]
     }
     conducteurServices.register(params, (error, results) => {
       if (error) {
@@ -69,24 +70,35 @@ exports.register = (req, res, next) => {
   } else
   {
     return res.status(500).json({
-      message: "error"
+      message: "error fields"
     })
   }
 };
 // Updating One
 exports.update = (async (req, res) => {
   try {
-    const upconducteur = await Conducteur.updateOne({
-      username: req.body.lastusername
-    }, {
-      username: req.body.username
-    })
-    if (upconducteur.modifiedCount == 1)
-      res.json(req.body.username)
-    else
-      res.status(300).json("can't update")
+
+    if (req.body.username != "" && req.body.username != null) {
+      const updateconducteur = await Conducteur.updateOne({
+        _id: req.body.conducteur
+      }, {
+        $addToSet: {
+          usernamelist: req.body.username
+        },
+        username:req.body.username        
+      })
+      if (updateconducteur.modifiedCount == 1)
+        res.status(200).json({"message":"username updated","data":req.body.username});
+      else
+        res.status(300).json("there is no modification")
+
+    } else
+      res.status(400).json({
+        "message": "username can't be empty"
+      })
+
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       message: err.message
     })
   }

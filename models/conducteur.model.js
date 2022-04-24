@@ -25,6 +25,9 @@ const ConducteurSchema = new Schema({
     type:String,
     default:"accepted",
   },
+  usernamelist: {
+    type: [String] 
+  },
   date: {
     type: Date,
     default: Date.now(),
